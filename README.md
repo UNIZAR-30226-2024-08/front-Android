@@ -3,9 +3,11 @@ Repositorio con el front-end de la aplicación Web.
 
 ## Instrucciones de uso
 
-- Tener la extensión `Azure Static Web Apps` (ms-azuretools.vscode-azurestaticwebapps)
+- Extensiones:
+  - Prettier (esbenp.prettier-vscode) para formatear el código de forma estándar
+  - Angular Language Service (Angular.ng-template) para desarrollo general con angular
 
-## Credenciales para ver y cambiar los [servidores Azure](https://portal.azure.com/#home), **CUIDADO**
+- `npm start` para correr la aplicación en local. Se actualizará automáticamente cuando detecte cambios
+  - Pulsar h + Enter para mostrar los comandos disponibles, entre ellos q + Enter para parar el servidor
 
-- User:     839922@unizar.es
-- Password: `RobWill.8`
+- Al hacer push a la rama `maestra`, la aplicación se subirá a la url [agreeable-smoke-02d5a1e03.4.azurestaticapps.net](https://agreeable-smoke-02d5a1e03.4.azurestaticapps.net)
