@@ -1,25 +1,27 @@
-import { Component } from '@angular/core';
-import { MiApiService } from './mi-api.service';
+import { Component, OnInit } from '@angular/core';
+import { MiApiService } from './api/mi-api.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'frontend-lotus';
 
   constructor(private miApiService: MiApiService) { }
   ngOnInit(): void {
-    this.miApiService.getData().subscribe({
-      next: (data: any) => {
-        // Respuesta exitosa de la API
-        console.log(data);
+    this.miApiService.getHolaMundo().subscribe(
+      res => {
+        console.log(res);
       },
-      error: (error: any) => {
-        // Manejar errores
-        console.error('Error en la solicitud HTTP: ', error);
+      err => {
+        console.log(err);
       }
-    });
+    );
+  }
+
+  get_Hola_Mundo(){
+    
   }
 }
