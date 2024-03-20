@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MiApiService } from './api/mi-api.service';
 
 @Component({
@@ -6,22 +6,20 @@ import { MiApiService } from './api/mi-api.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   title = 'frontend-lotus';
 
-  constructor(private miApiService: MiApiService) { }
+  constructor(private miApiService: MiApiService) {}
   ngOnInit(): void {
-    this.miApiService.getHolaMundo().subscribe(
-      res => {
+    console.log('AppComponent ngOnInit()');
+    this.miApiService.getHolaMundo().subscribe({
+      next: (res: any) => {
         console.log(res);
       },
-      err => {
+      error: (err: any) => {
         console.log(err);
       }
-    );
+    });
   }
-
-  get_Hola_Mundo(){
-    
-  }
+  getHolaMundo() {}
 }
