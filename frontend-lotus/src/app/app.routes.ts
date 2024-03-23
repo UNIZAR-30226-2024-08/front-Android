@@ -1,8 +1,14 @@
 import { Routes } from '@angular/router';
+import { InicioSeleccionJuegoComponent } from './menu/inicio-seleccion-juego/inicio-seleccion-juego.component';
 
 export const routes: Routes = [
 {
     path: '',
+    component: InicioSeleccionJuegoComponent
+
+},
+{
+    path: 'login',
     loadChildren: ()=> import('./login/login.routes').then(m => m.LOGIN_ROUTES)
 },
 
