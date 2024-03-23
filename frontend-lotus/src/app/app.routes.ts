@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login/login/login.component';
+import { PokerSeleccionModoComponent } from './menu/poker-seleccion-modo/poker-seleccion-modo.component';
 
 export const routes: Routes = [
 {
     path: '',
-    component:LoginComponent
+    component:PokerSeleccionModoComponent
 
 },
 {
