@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { PokerSeleccionModoComponent } from './menu/poker-seleccion-modo/poker-seleccion-modo.component';
+import { BjSeleccionModoComponent } from './menu/bj-seleccion-modo/bj-seleccion-modo.component';
+import { InicioSeleccionJuegoComponent } from './menu/inicio-seleccion-juego/inicio-seleccion-juego.component';
 
 export const routes: Routes = [
 {
     path: '',
-    component:PokerSeleccionModoComponent
+    component:BjSeleccionModoComponent
 
 },
 {
