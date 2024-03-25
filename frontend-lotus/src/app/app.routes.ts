@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { InicioSeleccionJuegoComponent } from './menu/inicio-seleccion-juego/inicio-seleccion-juego.component';
+import { PerfilPersonalComponent } from './menu/perfil-personal/perfil-personal.component';
 
 export const routes: Routes = [
 {
     path: '',
-    component: InicioSeleccionJuegoComponent
+    component: PerfilPersonalComponent
 
 },
 {
