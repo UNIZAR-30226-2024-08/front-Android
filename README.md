@@ -1,5 +1,5 @@
 # front-Web
-Repositorio con el front-end de la aplicación Web..
+Repositorio con el front-end de la aplicación Web.
 
 ## Instrucciones de uso
 
