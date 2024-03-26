@@ -7,7 +7,8 @@ assignees: ''
 
 ---
 
-En esta tarea se incluye desarrollo completo de la pantalla NOMBRE_PANTALLA.
+En esta tarea se incluye desarrollo completo de la pantalla "NOMBRE_PANTALLA".
+
 Esto incluye: 
 - Diseño de la pantalla
 - Lógica de la pantalla
