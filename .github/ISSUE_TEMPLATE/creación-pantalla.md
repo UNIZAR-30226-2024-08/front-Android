@@ -3,7 +3,7 @@ name: Creación Pantalla
 about: Plantilla para la incidencia de creación de una pantalla
 title: ''
 labels: enhancement
-assignees: ''
+assignees: LuciaMoralesRosa, aroaaredondo, MarcosGarciaOrtega
 
 ---
 
