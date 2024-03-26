@@ -2,7 +2,7 @@
 name: Test Pantalla
 about: Plantilla para la incidencia de test de una pantalla
 title: ''
-labels: ''
+labels: Test
 assignees: ''
 
 ---
