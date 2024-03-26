@@ -1,0 +1,111 @@
+
+:root {
+    --color-principal: #00433D;
+    --color-secundario: #FFE5D4;
+    --color-acento: #FFBF00;
+    --color-nav: #002121;
+    --color-txt-secundario: #644C4F;
+    --text-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --title-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+main {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: var(--color-principal);
+    color: var(--color-secundario);
+    overflow: hidden;
+}
+
+
+
+/*Contenido*/
+
+.div_body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mensaje_bienvenida {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.mensaje_bienvenida>h1 {
+    margin: 0;
+    font-size: 90px;
+}
+
+.mensaje_bienvenida>h1>em {
+    color: var(--color-acento);
+    font-size: larger;
+}
+
+.mensaje_bienvenida>h2 {
+    align-self: center;
+    font-size: 50px;
+    margin: 0;
+}
+
+/* Cards */
+.cards_juegos {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+    /* Espacio entre las tarjetas */
+}
+
+.card {
+    width: 18rem;
+    height: 20rem;
+    /* Ajusta el ancho de las tarjetas según sea necesario */
+    border: 1px solid var(--color-secundario);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    /*background-color: var(--color-nav);*/
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border: 2px solid;
+    font-weight: 600;
+    font-size: larger;
+    cursor: pointer;
+    background-color: var(--color-nav);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 350px;
+    /* Altura de la imagen */
+    object-fit: scale-down;
+}
+
+.card-body {
+    border-top: 1px solid var(--color-secundario);
+    padding-top: 20px;
+}
+
+.card-text {
+    text-align: center;
+    font-size: 18px;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: var(--color-secundario);
+}
