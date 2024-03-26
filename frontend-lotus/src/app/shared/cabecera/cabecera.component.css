@@ -47,7 +47,7 @@ header {
     position: absolute;
     font-size: 50px;
     font-family: var(--title-font);
-    color: var(--color-acento);
+    color: var(--color-sec);
 
     /*Centrar el titulo en el header*/
     left: 50%;
