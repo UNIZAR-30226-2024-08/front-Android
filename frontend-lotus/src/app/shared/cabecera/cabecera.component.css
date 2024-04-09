@@ -1,3 +1,4 @@
+
 :root {
     --color-principal: #00433D;
     --color-secundario: #FFE5D4;
@@ -13,18 +14,20 @@ main {
     margin: 0;
 }
 
-body {
+/* body {
     padding: 0;
     margin: 0;
     background-color: var(--color-principal);
     color: var(--color-secundario);
     overflow: hidden;
-}
+} */
 
 header {
+    margin: 0px;
     font-family: var(--text-font);
     font-size: 25px;
     font-weight: 500;
+    color: var(--color-secundario);
 
     padding: 0% 5%;
     height: 12%;
@@ -47,7 +50,7 @@ header {
     position: absolute;
     font-size: 50px;
     font-family: var(--title-font);
-    color: var(--color-sec);
+    color: var(--color-secundario);
 
     /*Centrar el titulo en el header*/
     left: 50%;
