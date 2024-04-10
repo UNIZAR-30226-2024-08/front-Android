@@ -16,7 +16,7 @@ export class MiApiService {
   // Funcion especifica para el "Hola mundo"
   getHolaMundo() {
     console.log('Hola mundo en front');
-    return this._httpClient.get(`${this.baseUrl}/holamundo`);
+    return this._httpClient.get(`${this.baseUrl}/holamundo`, { responseType: 'text' });
   }
 
   // Funciones generales de get y post
