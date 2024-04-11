@@ -109,11 +109,11 @@ body{
     width: 5px;
     animation-duration: 3s;
     animation-delay: 1s;
-    animation-name: aparcion;
+    animation-name: aparicion;
     border-radius: 10px;
 }
 
-@keyframes aparcion{
+@keyframes aparicion{
     0%{
         height: 0%;
     }

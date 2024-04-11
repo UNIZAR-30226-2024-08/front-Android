@@ -5,7 +5,6 @@ export const routes: Routes = [
 {
     path: '',
     component: PerfilPersonalComponent
-
 },
 {
     path: 'login',
@@ -13,7 +12,7 @@ export const routes: Routes = [
 },
 
 {
-    path: '',
+    path: 'menu',
     loadChildren: ()=> import('./menu/menu.routes').then(m => m.MENU_ROUTES)
 },
 
