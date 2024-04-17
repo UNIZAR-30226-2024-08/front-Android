@@ -3,11 +3,11 @@
         <div class="inicio_header">
             <div class="div_usuario_header">
                 <div class="div_img_header">
-                    <img class="img_usuario_header" src="../../../assets/sources/inicio/avatarPorDefecto_01.png"
+                    <img class="img_usuario_header" [src]="../../../assets/sources/inicio/avatarPorDefecto_01.png"
                         alt="Foto de perfil">
                 </div>
                 <div class="div_nombre_usuario_header">
-                    <p>NombreUsuario</p>
+                    <p>{{nombreUsuario}}</p>
                 </div>
             </div>
             <div class="div_titulo_header">
@@ -20,7 +20,7 @@
                         alt="Imagen monedas virtuales">
                 </div>
                 <div class="div_cantidadMonedas_header">
-                    <p>XXXX</p>
+                    <p>{{ saldoUsuario }}</p>
                 </div>
             </div>
         </div>
