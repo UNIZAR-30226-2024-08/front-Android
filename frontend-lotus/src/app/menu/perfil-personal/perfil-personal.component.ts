@@ -9,5 +9,47 @@ import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
   styleUrl: './perfil-personal.component.css'
 })
 export class PerfilPersonalComponent {
+  condicion1 = true;
+  condicion2 = false;
+  condicion3 = false;
 
+
+  fichas: any = [
+    {
+      id: 1,
+      src: "../../../assets/sources/inicio/cartasPoker_01.png"
+    },
+    {
+      id: 2,
+      src: "../../../assets/sources/inicio/cartasPoker_01.png"
+    },
+    {
+      id: 3,
+      src: "../../../assets/sources/inicio/cartasPoker_01.png"
+    },
+    {
+      id: 4,
+      src: "../../../assets/sources/inicio/cartasPoker_01.png"
+    },
+    {
+      id: 5,
+      src: "../../../assets/sources/inicio/cartasPoker_01.png"
+    },
+    {
+      id: 6,
+      src: "../../../assets/sources/inicio/cartasPoker_01.png"
+    },
+    {
+      id: 7,
+      src: "../../../assets/sources/inicio/cartasPoker_01.png"
+    },
+    {
+      id: 8,
+      src: "../../../assets/sources/inicio/cartasPoker_01.png"
+    },
+    {
+      id: 9,
+      src: "../../../assets/sources/inicio/cartasPoker_01.png"
+    }
+  ];
 }
