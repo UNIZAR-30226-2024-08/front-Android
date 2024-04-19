@@ -34,6 +34,11 @@ main {
 
 }
 
+a {
+    text-decoration: none;
+    color: var(--color-secundario);
+
+}
 .div_usuario_header,
 .div_monedas_header {
     gap: 20px;

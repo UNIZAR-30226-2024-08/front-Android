@@ -1,16 +1,21 @@
 <main class="main">
     <div class="inicio_header">
         <div class="div_usuario_header">
-            <div class="div_img_header">
-                <img class="img_usuario_header" [src]="imgURL"
-                    alt="Foto de perfil">
-            </div>
+            <a [routerLink]="['/menu/perfil_personal']"> 
+                <div class="div_img_header">
+                    <img class="img_usuario_header" [src]="imgURL"
+                        alt="Foto de perfil">
+                </div>
+            </a>
             <div class="div_nombre_usuario_header">
                 <p>{{nombreUsuario}}</p>
             </div>
         </div>
-        <div class="div_titulo_header">
-            <p>Inicio</p>
+        <div class="div_titulo_header" >
+            <a routerLink="/menu">
+                <p>Inicio</p>
+            </a>
+            
         </div>
         <div class="div_monedas_header">
             <div class="div_img_monedas_header">

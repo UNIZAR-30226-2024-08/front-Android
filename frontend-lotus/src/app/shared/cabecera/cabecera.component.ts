@@ -2,11 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CabeceraService } from '../../api/cabecera.service';
 import { Usuario } from '../../models/usuario';
 import { Constantes } from '../../../constants/constantes';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-cabecera',
   standalone: true,
-  imports: [],
+  imports: [RouterOutlet,RouterModule],
   templateUrl: './cabecera.component.html',
   styleUrl: './cabecera.component.css'
 })
