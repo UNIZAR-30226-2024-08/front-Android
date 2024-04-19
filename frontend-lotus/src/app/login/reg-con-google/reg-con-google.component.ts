@@ -3,7 +3,7 @@
 
 declare var google: any;
 
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit, importProvidersFrom } from '@angular/core';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 })
 export class RegConGoogleComponent implements OnInit{
   private router = inject(Router);
+  ngZone: NgZone = inject(NgZone);
   ngOnInit(): void {
     google.accounts.id.initialize({
       client_id: '287725710191-56khg274chrdgkt1o8idkhl5g42o8522.apps.googleusercontent.com',
@@ -40,8 +41,8 @@ export class RegConGoogleComponent implements OnInit{
       const loadToken = this.decodificarToken(respuesta.credential);
       //Guardar el token en el local storage
       sessionStorage.setItem("loggedUser", JSON.stringify(loadToken));
-      this.router.navigate(['/menu'])
-
+      this.ngZone.run(() => this.router.navigate(['/menu']));
+      
     }
   }
 }
