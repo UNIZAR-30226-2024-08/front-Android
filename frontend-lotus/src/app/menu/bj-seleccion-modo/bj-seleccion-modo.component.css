@@ -1,24 +1,11 @@
-
-:root {
-    --color-principal: #00433D;
-    --color-secundario: #FFE5D4;
-    --color-acento: #FFBF00;
-    --color-nav: #002121;
-    --color-txt-secundario: #644C4F;
-    --text-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    --title-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 main {
-    padding: 0;
-    margin: 0;
-}
-
-body {
     padding: 0;
     margin: 0;
     background-color: var(--color-principal);
     color: var(--color-secundario);
     overflow: hidden;
+    width: 100vw;
+    height: 100vh;
 }
 
 
