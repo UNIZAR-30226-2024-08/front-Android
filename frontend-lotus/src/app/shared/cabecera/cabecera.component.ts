@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CabeceraService } from '../../api/cabecera.service';
 import { Usuario } from '../../models/usuario';
+import { Constantes } from '../../../constants/constantes';
 
 @Component({
   selector: 'app-cabecera',
@@ -9,16 +10,19 @@ import { Usuario } from '../../models/usuario';
   templateUrl: './cabecera.component.html',
   styleUrl: './cabecera.component.css'
 })
+  
+
+ 
 export class CabeceraComponent implements OnInit{
 
+  private usuarioActivo: any;
+  nombreUsuario!: string;
+  saldoUsuario!: string;
+  imgURL = '../../../assets/sources/inicio/avatarPorDefecto_01.png';
 
-   @Input() currentUsuario: Usuario = {
-    gmail: usuarioActual,
-    nombreUsuario: '',
-    saldo: 0
+  constructor(private cabeceraService: CabeceraService, constante: Constantes) {
+    this.usuarioActivo = constante.usuarioActivo;
   }
-
-  constructor(private cabeceraService: CabeceraService) {}
   
   ngOnInit(): void {
     this.obtenerUsuario()
@@ -26,10 +30,12 @@ export class CabeceraComponent implements OnInit{
 
   obtenerUsuario(){
     console.log("Obteniendo los datos del jugador...");
-    this.cabeceraService.obtenerUsuario(usuarioActivo)
+    this.cabeceraService.obtenerUsuario(this.usuarioActivo)
     .subscribe({
-      next: (data) => {
-        this.currentUsuario = data;
+      next: (data: any) => {
+        data as Usuario;
+        this.nombreUsuario = data.nombre;
+        this.saldoUsuario = data.saldo;
       }
     })
 
@@ -38,3 +44,12 @@ export class CabeceraComponent implements OnInit{
 
 
 }
+
+
+/*interface UsuarioInterface{
+    gmail: string;
+    nombre: string
+    saldo: number
+    autenticacion: string;
+    actualizado: boolean;
+}*/
