@@ -8,13 +8,15 @@ import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
   templateUrl: './perfil-personal.component.html',
   styleUrl: './perfil-personal.component.css'
 })
+
+
 export class PerfilPersonalComponent {
-  condicion1 = true;
-  condicion2 = false;
-  condicion3 = false;
+  public mostrarFichas():void{
+    var container = document.getElementsByClassName("mostrar")[0];
+    console.log("Hola");
+  }
 
-
-  fichas: any = [
+  fichas: any= [
     {
       id: 1,
       src: "../../../assets/sources/inicio/cartasPoker_01.png"

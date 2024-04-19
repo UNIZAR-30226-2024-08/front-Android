@@ -1,44 +1,36 @@
-<html>
-    <head>
-        <app-cabecera></app-cabecera>
-    </head>
-    <body>
-        <nav class = "menu">
-            <ul id="lista_nav">
-                <li id="pagina"><a>Personal</a></li>
-                <li><a>Historial</a></li>
-                <li><a>Tienda</a></li>
-            </ul>
-        </nav>
-        
-        <div class="pantalla">
-            <div class="perfil">
-                <div><img src = "../../../assets/sources/inicio/avatarPorDefecto_01.png" alt="foto de perfil"></div>
-                <div class="nombreUsuario">
-                    <input id="nombreinput" type="text" value="nombreUsuario">
-                    <img src = "../../../assets/sources/menu/guardar-el-archivo.png" alt="guardar cambios" id="fotoguardado">
-                </div>
-            </div>
-            <div class="personalizables">
-                <ul id = "lista_pers">
-                    <li>Personalizar ficha</li>
-                    <li>Personalizar cartas</li>
-                    <li>Personalizar avatar</li>
-                </ul>
-            </div>
-            <div class="mostrar">
-                @if(condicion1){
-                    <ul>
-                        @for (ficha of fichas; track ficha.id) {
-                            <li class="listaCondicion">
-                                <img class="imagenLista" [src]="ficha.src" alt="imagen de un animal">
-                            </li>
-                        }
-                    </ul>
-                }
-                @if(condicion2){}
-                @if(condicion3){}
+<main class="main">
+    <nav class = "menu">
+        <ul id="lista_nav">
+            <li id="pagina"><a>Personal</a></li>
+            <li><a>Historial</a></li>
+            <li><a>Tienda</a></li>
+        </ul>
+    </nav>
+    
+    <div class="pantalla">
+        <div class="perfil">
+            <div><img src = "../../../assets/sources/inicio/avatarPorDefecto_01.png" alt="foto de perfil"></div>
+            <div class="nombreUsuario">
+                <input id="nombreinput" type="text" value="nombreUsuario">
+                <img src = "../../../assets/sources/menu/guardar-el-archivo.png" alt="guardar cambios" id="fotoguardado">
             </div>
         </div>
-    </body>
-</html>
+        <div class="personalizables">
+            <ul id = "lista_pers">
+                <li><button (click)="mostrarFichas()">Personalizar ficha</button></li>
+                <li><button>Personalizar cartas</button></li>
+                <li><button>Personalizar avatar</button></li>
+            </ul>
+        </div>
+        <div class="mostrar">
+                <ul>
+                    @for (ficha of fichas; track ficha.id) {
+                        <li class="listaCondicion">
+                            <img class="imagenLista" [src]="ficha.src" alt="imagen de un animal">
+                        </li>
+                    }
+                </ul>
+        </div>
+    </div>
+
+</main>

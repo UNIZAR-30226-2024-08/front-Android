@@ -9,9 +9,20 @@
 }
 
 body{
-    font-family: var(--text-font);
-    background-color: var(--color-principal);
     margin: 0;
+    padding: 0;
+}
+
+main{
+    margin: 0;
+    padding: 0;
+}
+.main{
+    font-family: var(--text-font);
+    background-color: #00433D;
+    width: 100vw;
+    height: 100vh;
+
 }
 
 /*--------------BARRA DE NAVEGACION---------------*/
@@ -113,7 +124,7 @@ body{
 .personalizables::before{
     content: "";
     display: block;
-    background-color: #FFE5D4;
+    background-color: var(--color-secundario);
     width: 5px;
     animation-duration: 3s;
     animation-delay: 1s;
@@ -134,8 +145,6 @@ body{
     list-style: none;
     margin: 40px;
     margin-left: 70px;
-    padding: 10px;
-    border: 4px var(--color-secundario) solid;
     text-align: center;
     font-size: larger;
 }
@@ -145,7 +154,22 @@ body{
     color: var(--color-secundario);
 }
 
-#lista_pers>li:hover{
+
+#lista_pers>li>button{
+    /*quito el estilo*/
+    background-color: transparent;
+    border-color: var(--color-secundario);
+    border-style: solid;
+    border-width: 4px;
+    color: var(--color-secundario);
+    font-size: large;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+}
+
+#lista_pers>li>button:hover{
     cursor: pointer;
     background-color: var(--color-secundario);
     color: var(--color-principal);
@@ -154,7 +178,7 @@ body{
 
 /*----------------------------------------------------*/
 
-/*-------------------MOSTRAR-----------------*/
+/*-------------------MOSTRAR_PERSONALIZABLES-----------------*/
 
 .mostrar{
     width: 45%;
