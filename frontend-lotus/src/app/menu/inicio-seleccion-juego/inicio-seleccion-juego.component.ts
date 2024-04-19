@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
 
@@ -9,6 +9,6 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   templateUrl: './inicio-seleccion-juego.component.html',
   styleUrl: './inicio-seleccion-juego.component.css'
 })
-export class InicioSeleccionJuegoComponent {
+export class InicioSeleccionJuegoComponent{
 
 }

@@ -6,6 +6,7 @@ declare var google: any;
 import { Component, NgZone, OnInit, importProvidersFrom } from '@angular/core';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { Constantes } from '../../../constants/constantes';
 
 @Component({
   selector: 'app-reg-con-google',
@@ -15,6 +16,13 @@ import { Router } from '@angular/router';
   styleUrl: './reg-con-google.component.css'
 })
 export class RegConGoogleComponent implements OnInit{
+
+  gmailUsuario: any;
+
+  constructor(varGlobal: Constantes) {
+    varGlobal.usuarioActivo = this.gmailUsuario;
+  }
+
   private router = inject(Router);
   ngZone: NgZone = inject(NgZone);
   ngOnInit(): void {
@@ -41,6 +49,8 @@ export class RegConGoogleComponent implements OnInit{
       const loadToken = this.decodificarToken(respuesta.credential);
       //Guardar el token en el local storage
       sessionStorage.setItem("loggedUser", JSON.stringify(loadToken));
+      this.gmailUsuario = JSON.stringify(loadToken);
+      this.router.navigate(['/menu'])
       this.ngZone.run(() => this.router.navigate(['/menu']));
       
     }
