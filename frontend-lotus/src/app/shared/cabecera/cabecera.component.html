@@ -1,10 +1,12 @@
 <main class="main">
     <div class="inicio_header">
         <div class="div_usuario_header">
-            <div class="div_img_header">
-                <img class="img_usuario_header" src="../../../assets/sources/inicio/avatarPorDefecto_01.png"
-                    alt="Foto de perfil">
-            </div>
+            <a [routerLink]="['/menu/perfil_personal']"> 
+                <div class="div_img_header">
+                    <img class="img_usuario_header" src="../../../assets/sources/inicio/avatarPorDefecto_01.png"
+                        alt="Foto de perfil">
+                </div>
+            </a>
             <div class="div_nombre_usuario_header">
                 <p>NombreUsuario</p>
             </div>
