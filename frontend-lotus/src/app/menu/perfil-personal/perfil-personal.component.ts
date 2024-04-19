@@ -11,9 +11,14 @@ import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
 
 
 export class PerfilPersonalComponent {
-  public mostrarFichas():void{
-    var container = document.getElementsByClassName("mostrar")[0];
-    console.log("Hola");
+  public mostrarFichas(): void {
+    var container: HTMLElement = <HTMLElement>document.getElementsByClassName("mostrar")[0];
+    if(container.style.display == "none"){
+      container.style.display = "block";
+    }
+    else{
+      container.style.display = "none";
+    }
   }
 
   fichas: any= [
