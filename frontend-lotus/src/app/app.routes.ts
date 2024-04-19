@@ -5,6 +5,11 @@ import { LoginComponent } from './login/login/login.component';
 export const routes: Routes = [
 {
     path: '',
+    component: PerfilPersonalComponent
+},
+
+{
+    path: 'login',
     loadChildren: ()=> import('./login/login.routes').then(m => m.LOGIN_ROUTES)
 },
 
