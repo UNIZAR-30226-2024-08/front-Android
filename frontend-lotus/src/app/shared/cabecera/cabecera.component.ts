@@ -40,16 +40,4 @@ export class CabeceraComponent implements OnInit{
     })
 
   }
-
-
-
 }
-
-
-/*interface UsuarioInterface{
-    gmail: string;
-    nombre: string
-    saldo: number
-    autenticacion: string;
-    actualizado: boolean;
-}*/
