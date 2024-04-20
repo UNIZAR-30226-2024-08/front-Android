@@ -7,6 +7,9 @@ main {
     width: 100vw;
     height: 100vh;
 }
+.main{
+    font-family: var(--title-font);
+}
 .div_banca{
     display: flex;
     align-content: center;
@@ -22,13 +25,26 @@ main {
     height: 17vh;
     
 }
+
 .div_formato_carta{
 
     list-style: none;
     display: inline; 
 
 }
-
+.div_apuesta{
+    position:fixed;
+    top: 3vh;
+    right: 3vw;
+    display:flex;
+    display: inline;
+}
+.imagen_apuesta{
+    display: inline;
+}
+.texto_apuesta{
+    display: inline;
+}
 .div_jugador{
     position: fixed;
     bottom: 0;
