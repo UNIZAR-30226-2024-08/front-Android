@@ -1,0 +1,36 @@
+<main>
+    <div class="div_banca">
+        <div class="div_banca_texto">
+            <p> BANCA </p>
+        </div>
+    
+        <div >
+            <ul>
+                @for (carta of cartas; track carta.id) {
+                    <li class="div_formato_carta">
+                        <img class="imagenLista" [src]="carta.src" >
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="div_jugador">
+        <div >
+            <ul>
+                @for (carta of cartasUsu; track carta.id) {
+                    <li class="div_formato_carta">
+                        <img class="imagenLista" [src]="carta.src" >
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div id="div_botones">
+        <button class="boton" >Pedir Carta</button>
+        <button class="boton" >Plantarse</button>
+    </div>
+    
+
+</main>

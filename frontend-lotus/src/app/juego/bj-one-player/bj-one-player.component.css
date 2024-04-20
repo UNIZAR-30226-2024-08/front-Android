@@ -1,0 +1,55 @@
+main {
+    padding: 0;
+    margin: 0;
+    background-color: var(--color-principal);
+    color: var(--color-secundario);
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+.div_banca{
+    display: flex;
+    align-content: center;
+}
+.div_banca_texto{
+    margin: 3vh;
+    text-align: center;
+    font-size: 2em;
+    background-color: var(--color-secundario);
+    color: var(--color-principal);
+    display: inline-block; 
+    padding: 0.5em 1em;
+    height: 17vh;
+    
+}
+.div_formato_carta{
+
+    list-style: none;
+    display: inline; 
+
+}
+
+.div_jugador{
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#div_botones{
+    position: fixed;
+    bottom: 10vh;
+    right: 10vw;
+    display: flex; 
+    flex-direction: column; 
+}
+#div_botones>button{
+    margin: 1vh;
+    padding: 1vh;
+    background-color: var(--color-secundario);
+    color: var(--color-principal);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5em;
+    font-family:var(--text-font);
+}

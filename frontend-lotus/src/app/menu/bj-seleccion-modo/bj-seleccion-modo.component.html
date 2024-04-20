@@ -6,12 +6,15 @@
             <h2>Elige el tipo de Sala </h2>
         </div>
         <div class="modos_juegos">
-            <div class="modo">
-                <img class="modo-img-top" src="../../../assets/sources/modo-juego/Un_Jugador1.png" alt="Cartas de póker">
-                <div class="modo-body">
-                    <p class="modo-text">1 Jugador</p>
+            <a [routerLink]="['/juego/bj_one_player']">
+                <div class="modo">
+                    <img class="modo-img-top" src="../../../assets/sources/modo-juego/Un_Jugador1.png" alt="Cartas de póker">
+                    <div class="modo-body">
+                        <p class="modo-text">1 Jugador</p>
+                    </div>
                 </div>
-            </div>
+            </a>
+
             <div class="modo">
                 <img class="modo-img-top" src="../../../assets/sources/modo-juego/partida_online.png" alt="Cartas de póker">
                 <div class="modo-body">
