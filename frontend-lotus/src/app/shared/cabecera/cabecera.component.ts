@@ -37,6 +37,12 @@ export class CabeceraComponent implements OnInit{
         data as Usuario;
         this.nombreUsuario = data.nombre;
         this.saldoUsuario = data.saldo;
+        console.log(this.nombreUsuario);
+        console.log(this.saldoUsuario);
+      },
+      error: (error) => {
+        console.log("Error al obtener los datos del jugador");
+        console.log(error);
       }
     })
 

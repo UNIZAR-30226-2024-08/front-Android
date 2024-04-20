@@ -10,7 +10,7 @@ export class CabeceraService {
     // Base de la URL
     private baseUrl = 'https://casino-backend.azurewebsites.net';
 
-    private baseUrl2 = 'https://casino-backend.azurewebsites.net/GestorUsuarios';
+    private baseUrl2 = 'https://casino-backend.azurewebsites.net';
     constructor(private httpClient: HttpClient) { }
 
     

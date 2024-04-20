@@ -18,7 +18,7 @@ export class AppComponent {
     console.log('AppComponent ngOnInit()');
     this.miApiService.getHolaMundo().subscribe({
       next: (res: any) => {
-        console.log("Res");
+        console.log(res);
       },
       error: (err: any) => {
         console.log(err);

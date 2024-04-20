@@ -6,6 +6,10 @@ import { Injectable } from '@angular/core';
     
 export class Constantes{
 
-    usuarioActivo = 'none';
+  public setUser(usuario: string) {
+    this.usuarioActivo = usuario;
+  }
+
+    public usuarioActivo: string = 'none';
 
 }
