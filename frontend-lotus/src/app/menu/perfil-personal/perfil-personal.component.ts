@@ -11,17 +11,19 @@ import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
 
 
 export class PerfilPersonalComponent {
-  public mostrarFichas(): void {
-    var container: HTMLElement = <HTMLElement>document.getElementsByClassName("mostrar")[0];
-    if(container.style.display == "none"){
-      container.style.display = "block";
-    }
-    else{
-      container.style.display = "none";
-    }
+  mostrarCartas = false;
+  mostrarAvatar = false;
+
+  verCartas() {
+    this.mostrarCartas = !this.mostrarCartas;
+    this.mostrarAvatar = false;
+  }
+  verAvatar() {
+    this.mostrarAvatar = !this.mostrarAvatar;
+    this.mostrarCartas = false;
   }
 
-  fichas: any= [
+  listaCartas: any= [
     {
       id: 1,
       src: "../../../assets/sources/inicio/cartasPoker_01.png"
@@ -59,4 +61,44 @@ export class PerfilPersonalComponent {
       src: "../../../assets/sources/inicio/cartasPoker_01.png"
     }
   ];
+
+  listaAvatares: any = [
+    {
+      id: 1,
+      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
+    },
+    {
+      id: 2,
+      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
+    },
+    {
+      id: 3,
+      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
+    },
+    {
+      id: 4,
+      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
+    },
+    {
+      id: 5,
+      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
+    },
+    {
+      id: 6,
+      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
+    },
+    {
+      id: 7,
+      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
+    },
+    {
+      id: 8,
+      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
+    },
+    {
+      id: 9,
+      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
+    }
+  ]
+
 }

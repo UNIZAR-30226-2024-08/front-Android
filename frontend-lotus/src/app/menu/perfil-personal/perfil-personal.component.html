@@ -18,20 +18,30 @@
         </div>
         <div class="personalizables">
             <ul id = "lista_pers">
-                <li><button (click)="mostrarFichas()">Personalizar ficha</button></li>
-                <li><button>Personalizar cartas</button></li>
-                <li><button>Personalizar avatar</button></li>
+                <li><button (click)="verCartas()">Personalizar cartas</button></li>
+                <li><button (click)="verAvatar()">Personalizar avatar</button></li>
             </ul>
         </div>
-        <div class="mostrar">
+        <div class = "mostrar">
+            @if (mostrarCartas) {
                 <ul>
-                    @for (ficha of fichas; track ficha.id) {
+                    @for (carta of listaCartas; track carta.id) {
                         <li class="listaCondicion">
-                            <img class="imagenLista" [src]="ficha.src" alt="imagen de un animal">
+                            <img class="imagenLista" [src]="carta.src" alt="carta" />
                         </li>
                     }
                 </ul>
+            }
+            @else if (mostrarAvatar) {
+                <ul>
+                    @for (avatar of listaAvatares; track avatar.id) {
+                        <li class="listaCondicion">
+                            <img class="imagenLista" [src]="avatar.src" alt="carta" />
+                        </li>
+                    }
+                </ul>
+            }
+            @else {}
         </div>
     </div>
-
 </main>
