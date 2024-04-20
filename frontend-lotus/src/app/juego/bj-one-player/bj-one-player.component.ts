@@ -1,13 +1,35 @@
 import { Component } from '@angular/core';
-
+import { FormBuilder, FormControl, FormControlName, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { log } from 'console';
 @Component({
   selector: 'app-bj-one-player',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './bj-one-player.component.html',
   styleUrl: './bj-one-player.component.css'
 })
-export class BjOnePlayerComponent {
+export class BjOnePlayerComponent{
+
+  apuesta : number = 5;
+  mostrarApuesta : boolean = true;
+
+  checkoutFrom = this.fb.group({
+    apuesta : FormGroup
+  });
+
+  constructor(private fb: FormBuilder) { }
+  
+  onSubmit(): void {
+    /*mensaje de apuesta realizada*/
+    this.checkoutFrom.value.apuesta = this.checkoutFrom.value.apuesta;
+    //console.log(this.checkoutFrom.value.apuesta);
+    this.apuesta = Number(this.checkoutFrom.value.apuesta);
+    //console.log(this.apuesta);
+    this.checkoutFrom.reset();
+    this.mostrarApuesta = false;
+  }
+
+  
   cartas: any= [
     {
       id: 1,
@@ -53,10 +75,6 @@ export class BjOnePlayerComponent {
     },
     {
       id: 5,
-      src: "../../../assets/sources/juego/carta.jpg"
-    },
-    {
-      id: 6,
       src: "../../../assets/sources/juego/carta.jpg"
     }
   ];

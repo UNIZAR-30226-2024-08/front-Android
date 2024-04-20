@@ -23,22 +23,24 @@ main {
     display: inline-block; 
     padding: 0.5em 1em;
     height: 17vh;
-    
+    border-radius: 10px; 
 }
 
 .div_formato_carta{
-
     list-style: none;
     display: inline; 
-
 }
 .div_apuesta{
     position:fixed;
     top: 3vh;
     right: 3vw;
-    display:flex;
-    display: inline;
 }
+.div_apuesta1{
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
 .imagen_apuesta{
     display: inline;
 }
@@ -51,6 +53,52 @@ main {
     left: 50%;
     transform: translateX(-50%);
 }
+.div_apuesta_inicial{
+    /*recuadro en el medio de la pantalla*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: var(--color-principal);
+    border-radius: 10px;
+   
+}
+.div_apuesta_inicial>h1, .div_apuesta_inicial>input, .div_apuesta_inicial>button{
+    margin:2vh;
+    border-radius: 10px;
+
+}
+.div_apuesta_inicial>input{
+    /*ponerlo mas grande y los numeros*/
+    width: 50%;
+    height: 5vh;
+    font-size: 2em;
+}
+.div_apuesta_inicial>button{
+    border: 0;
+    margin:3vh;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--color-secundario);
+    border-radius: 10px;
+    background-color: var(--color-principal); 
+    background-image: linear-gradient(
+      to top left,
+      var(--color-principal),
+      var(--color-principal)30%,
+      var(--color-principal) ,);
+}
+.div_apuesta_inicial>button:hover{
+    background-color: var(--color-principal); 
+}
+
 
 #div_botones{
     position: fixed;
@@ -68,7 +116,7 @@ main {
     text-align: center;
     color: var(--color-principal);
     border-radius: 10px;
-    background-color: var(--color-secundario); /* Cambia al color principal */
+    background-color: var(--color-secundario); 
     background-image: linear-gradient(
       to top left,
       var(--color-secundario),
@@ -81,12 +129,13 @@ main {
 }
 
 #div_botones>button:hover{
-    background-color: var(--color-secundario); /* Cambia al color secundario */
+    background-color: var(--color-secundario); 
 
 }
 
 #div_botones>button:active{
     box-shadow:
     inset -2px -2px 3px rgba(255, 255, 255, 0.6),
-    inset 2px 2px 3px rgba(0, 0, 0, 0.6);}
+    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
 

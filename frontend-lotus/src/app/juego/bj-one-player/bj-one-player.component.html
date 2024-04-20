@@ -15,9 +15,27 @@
         </div>
     </div>
     <div class="div_apuesta">
-        <img class="imagen_apuesta" src="../../../assets/sources/juego/ficha-de-poker.png" >
-        <h1 class="texto_apuesta"> :XXXX</h1>
+        <div class="div_apuesta1">
+            <img class="imagen_apuesta" src="../../../assets/sources/juego/ficha-de-saldo.png" >
+            <h1 class="texto_apuesta"> Saldo: XXXX</h1>
+        </div>
+        <div class="div_apuesta1">
+            <img class="imagen_apuesta" src="../../../assets/sources/juego/ficha-de-poker.png" >
+            <h1 class="texto_apuesta"> Apuesta: {{apuesta}}</h1>
+        </div>
     </div>
+
+    @if (mostrarApuesta) {
+        <form [formGroup]="checkoutFrom" (ngSubmit)="onSubmit()">
+            <div class="div_apuesta_inicial">
+                <h1>¿Cual va a ser su apuesta?</h1>
+                <input type="number" formControlName="apuesta">
+                <button type="submit">Apostar</button>
+            </div>
+        </form>
+    }
+ 
+    
     <div class="div_jugador">
         <div >
             <ul>
