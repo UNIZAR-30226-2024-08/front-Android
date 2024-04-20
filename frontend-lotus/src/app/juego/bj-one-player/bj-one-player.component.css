@@ -60,12 +60,33 @@ main {
     flex-direction: column; 
 }
 #div_botones>button{
-    margin: 1vh;
-    padding: 1vh;
-    background-color: var(--color-secundario);
+    border: 0;
+    margin:3vh;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
     color: var(--color-principal);
-    border: none;
-    border-radius: 5px;
-    font-size: 1.5em;
-    font-family:var(--text-font);
+    border-radius: 10px;
+    background-color: var(--color-secundario); /* Cambia al color principal */
+    background-image: linear-gradient(
+      to top left,
+      var(--color-secundario),
+      var(--color-secundario)30%,
+      var(--color-secundario) ,
+    );
+    box-shadow:
+      inset 2px 2px 3px rgba(255, 255, 255, 0.6),
+      inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
+
+#div_botones>button:hover{
+    background-color: var(--color-secundario); /* Cambia al color secundario */
+
+}
+
+#div_botones>button:active{
+    box-shadow:
+    inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 3px rgba(0, 0, 0, 0.6);}
+
