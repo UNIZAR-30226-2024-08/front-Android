@@ -3,6 +3,7 @@ import { InicioSeleccionJuegoComponent } from "./inicio-seleccion-juego/inicio-s
 import { BjSeleccionModoComponent } from "./bj-seleccion-modo/bj-seleccion-modo.component";
 import { PokerSeleccionModoComponent } from "./poker-seleccion-modo/poker-seleccion-modo.component";
 import { PerfilPersonalComponent } from "./perfil-personal/perfil-personal.component";
+import { PerfilHistorialComponent } from "./perfil-historial/perfil-historial.component";
 
 export const MENU_ROUTES: Routes = [
     {
@@ -24,5 +25,10 @@ export const MENU_ROUTES: Routes = [
         path: 'perfil_personal',
         title: 'perfil_personal',
         component: PerfilPersonalComponent
+    },
+    {
+        path: 'perfil_historial',
+        title: 'perfil_historial',
+        component: PerfilHistorialComponent
     }
 ];
