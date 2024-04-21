@@ -31,12 +31,12 @@
                 <h1>¿Cual va a ser su apuesta?</h1>
                 <input type="number" formControlName="apuesta">
                 <div *ngIf="form.get('apuesta')?.errors ">
-                    <p class="div_mensaje_error" *ngIf="form.get('apuesta')?.hasError('required')">
+                    <span class="div_mensaje_error" *ngIf="form.get('apuesta')?.hasError('required')">
                          Campo requerido
-                    </p>
-                    <p class="div_mensaje_error" *ngIf="form.get('apuesta')?.hasError('min')">
+                    </span>
+                    <span class="div_mensaje_error" *ngIf="form.get('apuesta')?.hasError('min')">
                         La apuesta minima es de 10 fichas
-                    </p>
+                    </span>
                 </div>
                 <button type="submit">Apostar</button>
             </div>
