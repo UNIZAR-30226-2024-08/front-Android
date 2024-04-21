@@ -8,7 +8,10 @@ main {
   height: 100vh;
   font-family: var(--text-font);
 }
-
+a{
+  text-decoration: none;
+  color: var(--color-secundario);
+}
 .div_sala_creada {
   display: flex;
   position: relative;
@@ -30,7 +33,7 @@ main {
 .div_sala_creada>p>em{
   color:var(--color-acento);
 }
-.div_botones>button{
+.div_botones>button,.div_botones>a>button{
   border: 0;
   margin:3vh;
   line-height: 2.5;
@@ -51,12 +54,12 @@ main {
     inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
-.div_botones>button:hover{
+.div_botones>button:hover,.div_botones>a>button:hover{
   background-color: var(--color-secundario); 
 
 }
 
-.div_botones>button:active{
+.div_botones>button:active,.div_botones>a>button:active{
   box-shadow:
   inset -2px -2px 3px rgba(255, 255, 255, 0.6),
   inset 2px 2px 3px rgba(0, 0, 0, 0.6);
