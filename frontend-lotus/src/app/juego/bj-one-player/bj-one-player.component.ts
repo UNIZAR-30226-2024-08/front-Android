@@ -10,7 +10,7 @@ import { log } from 'console';
 })
 export class BjOnePlayerComponent{
 
-  apuesta : number = 5;
+  apuesta : number = 0;
   mostrarApuesta : boolean = true;
 
   checkoutFrom = this.fb.group({
@@ -26,7 +26,7 @@ export class BjOnePlayerComponent{
     this.apuesta = Number(this.checkoutFrom.value.apuesta);
     //console.log(this.apuesta);
     this.checkoutFrom.reset();
-    this.mostrarApuesta = false;
+    this.mostrarApuesta = false;   
   }
 
   
