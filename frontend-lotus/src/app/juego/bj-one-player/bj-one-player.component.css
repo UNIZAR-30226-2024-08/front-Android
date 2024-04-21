@@ -98,8 +98,16 @@ main {
 .div_apuesta_inicial>button:hover{
     background-color: var(--color-principal); 
 }
+.div_error{
+    color: red;
+    font-size: 2em;
 
-
+}
+.div_mensaje_error{
+    color: red;
+    font-size: 14px;
+    margin:none; 
+}
 #div_botones{
     position: fixed;
     bottom: 10vh;
