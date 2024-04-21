@@ -19,7 +19,6 @@ a{
   align-items: center;
   justify-content: center;
   height: 100vh;
-  z-index: 100;
 }
 
 .div_sala_creada>h1 {

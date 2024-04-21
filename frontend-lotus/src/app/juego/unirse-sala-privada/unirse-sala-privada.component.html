@@ -1,0 +1,16 @@
+<main>
+    <form [formGroup]="form" (ngSubmit)="save($event)">
+        <div class="div_codigo_privado">
+            <h1>Unirse a sala privada</h1>
+            <p>Introduce el código de la sala privada a la que quieres unirte</p>
+            <input type="text" placeholder="Código de la sala privada" formControlName="codigo">
+            <div *ngIf="form.get('codigo')?.errors ">
+                <span class="div_mensaje_error" *ngIf="form.get('codigo')?.hasError('required')">
+                    Este campo es obligatorio
+                </span>
+            </div>
+            <button type="submit">Unirse</button>
+        </div>
+    </form>
+
+</main>
