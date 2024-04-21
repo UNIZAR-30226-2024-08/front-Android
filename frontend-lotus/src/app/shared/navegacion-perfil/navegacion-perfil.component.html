@@ -1,0 +1,22 @@
+<main class="main">
+    <nav class = "menu">
+        <ul id="lista_nav">
+            @if (personal) {
+                <li class="pagina"><a><button>Personal</button></a></li>
+                <li><a><button>Historial</button></a></li>
+                <li><a><button>Tienda</button></a></li>
+            }
+            @else if (historial) {
+                <li><a><button>Personal</button></a></li>
+                <li class="pagina"><a><button>Historial</button></a></li>
+                <li><a><button>Tienda</button></a></li>
+            }
+            @else if (tienda) {
+                <li><a><button>Personal</button></a></li>
+                <li><a><button>Historial</button></a></li>
+                <li class="pagina"><a><button>Tienda</button></a></li>
+            }
+            
+        </ul>
+    </nav>
+</main>

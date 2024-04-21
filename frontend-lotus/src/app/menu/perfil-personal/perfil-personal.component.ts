@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
 import { Constantes } from '../../../constants/constantes';
+import { NavegacionPerfilComponent } from '../../shared/navegacion-perfil/navegacion-perfil.component';
 
 @Component({
   selector: 'app-perfil-personal',
   standalone: true,
-  imports: [CabeceraComponent],
+  imports: [CabeceraComponent, NavegacionPerfilComponent],
   templateUrl: './perfil-personal.component.html',
   styleUrl: './perfil-personal.component.css'
 })
@@ -17,7 +18,6 @@ export class PerfilPersonalComponent {
 
   listaCartas: any;
   listaAvatares: any;
-
 
   constructor(private constantes: Constantes) {}
 

@@ -10,60 +10,7 @@ main{
     height: 100vh;
 }
 
-/*--------------BARRA DE NAVEGACION---------------*/
 
-#pagina::after{
-    content: "";
-    display: block;
-    background-color: var(--color-secundario);
-    height: 3px;
-    width: 100%;
-}
-
-.menu{
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    padding: 5px;
-    font-family: var(--text-font);
-}
-
-
-
-.menu>#lista_nav>li{
-    list-style: none;
-    margin-right: 5vw;
-    margin-left: 5vw;
-    float: left; 
-    position: relative;
-}
-
-
-.menu>#lista_nav>li>a{
-    text-decoration: none;
-    font-size: 40px;
-    color: var(--color-secundario);
-}
-
-.menu>#lista_nav>li>a::before{
-    width: 0%;
-    background: var(--color-secundario);
-    bottom: 0;
-    position: absolute;
-    height: 3px;
-    display: block;
-    content: "";
-    transition: width 0.3s;
-}
-
-.menu>#lista_nav>li>a:hover{
-    cursor: pointer;
-}
-
-.menu>#lista_nav>li>a:hover::before{
-    width: 100%;
-}
-/*----------------------------------------------------*/
 
 .pantalla{
     display: flex;
@@ -167,7 +114,7 @@ main{
     width: 45%;
     overflow-y: scroll;
     height: 60vh;
-    padding: 0;/
+    padding: 0;
 }
 
 .mostrar::-webkit-scrollbar{
