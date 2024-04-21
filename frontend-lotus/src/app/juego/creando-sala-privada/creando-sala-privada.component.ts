@@ -12,7 +12,7 @@ export class CreandoSalaPrivadaComponent {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.router.navigate(['/juego/crear-sala-privada']); // Reemplaza 'otra-pantalla' por la ruta de la pantalla a la que quieres navegar
+      this.router.navigate(['/juego/crear-sala-privada']); // Redirige a la ruta /juego/crear-sala-privada
     }, 4000); // 4000 milisegundos = 4 segundos
   }
 }
