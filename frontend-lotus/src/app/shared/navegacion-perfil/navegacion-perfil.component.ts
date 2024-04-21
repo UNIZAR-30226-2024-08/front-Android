@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { Constantes } from '../../../constants/constantes';
 
 @Component({
   selector: 'app-navegacion-perfil',
@@ -10,28 +11,16 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class NavegacionPerfilComponent {
 
-  personal = true;
-  tienda = false;
-  historial = false;
+  personal!: boolean
+  tienda!: boolean
+  historial!: boolean
 
-  constructor() {}
+  constructor(private constantes: Constantes) {}
 
-  public pantallaPersonal(){
-    this.personal = true;
-    this.tienda = false;
-    this.historial = false;
-  }
-
-  public pantallaTienda(){
-    this.personal = false;
-    this.tienda = true;
-    this.historial = false;
-  }
-
-  public pantallaHistorial(){
-    this.personal = false;
-    this.tienda = false;
-    this.historial = true;
+  ngOnInit(){
+    this.personal = this.constantes.personal;
+    this.tienda = this.constantes.tienda;
+    this.historial = this.constantes.historial;
   }
 
 }

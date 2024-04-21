@@ -8,9 +8,15 @@ import { Personalizable } from '../app/models/personalizables';
     
 export class Constantes{
 
+  //En que parte del perfil nos encontramos
+  public personal = false;
+  public tienda = false;
+  public historial = false;
+
+
+
 
   public usuarioActivo: string = 'none';
-
   private cartaSeleccionada: number = 1;
   private avatarSeleccionado: number = 1;
 

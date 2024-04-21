@@ -24,6 +24,7 @@ export class PerfilPersonalComponent {
   ngOnInit(){
     this.listaCartas=this.constantes.listaCartas;
     this.listaAvatares=this.constantes.listaAvatares;
+    this.constantes.personal = true;
   }
 
   idCarta(): number{

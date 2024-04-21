@@ -44,7 +44,7 @@ main{
     color: var(--color-secundario);
 }
 
-a>button{
+a{
     background-color: var(--color-pricipal);
     font-size: 40px;
     text-decoration: none;

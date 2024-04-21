@@ -2,19 +2,19 @@
     <nav class = "menu">
         <ul id="lista_nav">
             @if (personal) {
-                <li class="pagina"><a><button>Personal</button></a></li>
-                <li><a><button>Historial</button></a></li>
-                <li><a><button>Tienda</button></a></li>
+                <li class="pagina"><a>Personal</a></li>
+                <li><a>Historial</a></li>
+                <li><a>Tienda</a></li>
             }
             @else if (historial) {
-                <li><a><button>Personal</button></a></li>
-                <li class="pagina"><a><button>Historial</button></a></li>
-                <li><a><button>Tienda</button></a></li>
+                <li><a>Personal</a></li>
+                <li class="pagina"><a>Historial</a></li>
+                <li><a>Tienda</a></li>
             }
             @else if (tienda) {
-                <li><a><button>Personal</button></a></li>
-                <li><a><button>Historial</button></a></li>
-                <li class="pagina"><a><button>Tienda</button></a></li>
+                <li><a>Personal</a></li>
+                <li><a>Historial</a></li>
+                <li class="pagina"><a>Tienda</a></li>
             }
             
         </ul>
