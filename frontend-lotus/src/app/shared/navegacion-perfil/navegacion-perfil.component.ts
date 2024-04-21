@@ -23,4 +23,9 @@ export class NavegacionPerfilComponent {
     this.historial = this.constantes.historial;
   }
 
+  irPersonal(){
+    this.constantes.personal = true;
+    this.constantes.tienda = false;
+    this.constantes.historial = false;
+  }
 }

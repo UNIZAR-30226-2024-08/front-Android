@@ -44,7 +44,7 @@ main{
     color: var(--color-secundario);
 }
 
-a{
+button{
     background-color: var(--color-pricipal);
     font-size: 40px;
     text-decoration: none;
@@ -63,7 +63,9 @@ a{
     transition: width 0.3s;
 }
 
-.menu>#lista_nav>li>a:hover{
+
+
+.menu>#lista_nav>li>a>button:hover{
     cursor: pointer;
 }
 
