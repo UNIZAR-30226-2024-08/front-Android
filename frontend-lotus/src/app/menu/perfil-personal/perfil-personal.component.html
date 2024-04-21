@@ -27,7 +27,16 @@
                 <ul>
                     @for (carta of listaCartas; track carta.id) {
                         <li class="listaCondicion">
-                            <img class="imagenLista" [src]="carta.src" alt="carta" />
+                            @if (carta.id == idCarta()) {
+                                <button class="seleccionado">
+                                    <img class="imagenLista" [src]="carta.src" alt="carta" />
+                                </button>
+                            }
+                            @else {
+                                <button>
+                                    <img class="imagenLista" [src]="carta.src" alt="carta" />
+                                </button>
+                            }
                         </li>
                     }
                 </ul>
@@ -36,7 +45,16 @@
                 <ul>
                     @for (avatar of listaAvatares; track avatar.id) {
                         <li class="listaCondicion">
-                            <img class="imagenLista" [src]="avatar.src" alt="carta" />
+                            @if (avatar.id == idAvatar()) {
+                                <button class="seleccionado">
+                                    <img class="imagenLista" [src]="avatar.src" alt="avatar" />
+                                </button>
+                            }
+                            @else {
+                                <button>
+                                    <img class="imagenLista" [src]="avatar.src" alt="avatar" />
+                                </button>
+                            }
                         </li>
                     }
                 </ul>

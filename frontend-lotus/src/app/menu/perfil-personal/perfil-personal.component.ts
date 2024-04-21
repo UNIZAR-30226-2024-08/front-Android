@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
+import { Constantes } from '../../../constants/constantes';
 
 @Component({
   selector: 'app-perfil-personal',
@@ -14,6 +15,25 @@ export class PerfilPersonalComponent {
   mostrarCartas = false;
   mostrarAvatar = false;
 
+  listaCartas: any;
+  listaAvatares: any;
+
+
+  constructor(private constantes: Constantes) {}
+
+  ngOnInit(){
+    this.listaCartas=this.constantes.listaCartas;
+    this.listaAvatares=this.constantes.listaAvatares;
+  }
+
+  idCarta(): number{
+    return this.constantes.getCarta();
+  }
+
+  idAvatar(): number{
+    return this.constantes.getAvatar();
+  }
+
   verCartas() {
     this.mostrarCartas = !this.mostrarCartas;
     this.mostrarAvatar = false;
@@ -23,82 +43,5 @@ export class PerfilPersonalComponent {
     this.mostrarCartas = false;
   }
 
-  listaCartas: any= [
-    {
-      id: 1,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 2,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 3,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 4,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 5,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 6,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 7,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 8,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 9,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    }
-  ];
-
-  listaAvatares: any = [
-    {
-      id: 1,
-      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
-    },
-    {
-      id: 2,
-      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
-    },
-    {
-      id: 3,
-      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
-    },
-    {
-      id: 4,
-      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
-    },
-    {
-      id: 5,
-      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
-    },
-    {
-      id: 6,
-      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
-    },
-    {
-      id: 7,
-      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
-    },
-    {
-      id: 8,
-      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
-    },
-    {
-      id: 9,
-      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png"
-    }
-  ]
 
 }
