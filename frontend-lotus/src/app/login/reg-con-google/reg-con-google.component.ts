@@ -26,10 +26,11 @@ export class RegConGoogleComponent implements OnInit{
   private router = inject(Router);
   ngZone: NgZone = inject(NgZone);
   ngOnInit(): void {
-    google.accounts.id.initialize({
-      client_id: '287725710191-56khg274chrdgkt1o8idkhl5g42o8522.apps.googleusercontent.com',
-      callback: (resp: any) => this.controlarLogin(resp)
-    });
+    if (typeof window !== 'undefined') { // Para que no de error en el SSR, ya que gsi solo funciona en el cliente (navegador)
+      google.accounts.id.initialize({
+        client_id: '287725710191-56khg274chrdgkt1o8idkhl5g42o8522.apps.googleusercontent.com',
+        callback: (resp: any) => this.controlarLogin(resp)
+      });
 
       google.accounts.id.renderButton(document.getElementById("google-btn"), {
         theme: 'filled_blue',
@@ -37,6 +38,7 @@ export class RegConGoogleComponent implements OnInit{
         with: 350,
         shape: 'circle'
       });
+    }
   }
 
   private decodificarToken(token: string){
