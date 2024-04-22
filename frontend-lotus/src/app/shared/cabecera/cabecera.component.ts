@@ -31,6 +31,10 @@ export class CabeceraComponent implements OnInit{
 
   obtenerUsuario(){
     console.log("Obteniendo los datos del jugador...");
+    if (this.usuarioActivo == 'none'){ // En SSR no se puede obtener el usuario activo ya que no hay un usuario activo
+      console.log("Usuario none, no se puede obtener los datos del jugador.");
+      return;
+    }
     this.cabeceraService.obtenerUsuario(this.usuarioActivo)
     .subscribe({
       next: (data: any) => {
