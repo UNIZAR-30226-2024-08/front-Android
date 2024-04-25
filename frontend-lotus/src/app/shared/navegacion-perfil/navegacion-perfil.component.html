@@ -2,7 +2,6 @@
     <nav class = "menu">
         <ul id="lista_nav">
             @if (personal) {
-<<<<<<< Updated upstream
                 <li class="pagina"><a><button>Personal</button></a></li>
                 <li><a [routerLink]="['/menu/perfil_historial']"><button (click)="irHistorial()">Historial</button></a></li>
                 <li><a><button>Tienda</button></a></li>
@@ -16,21 +15,6 @@
                 <li><a [routerLink]="['/menu/perfil_personal']"><button (click)="irPersonal()">Personal</button></a></li>
                 <li><a [routerLink]="['/menu/perfil_historial']"><button (click)="irHistorial()">Historial</button></a></li>
                 <li class="pagina"><a><button>Tienda</button></a></li>
-=======
-                <li class="pagina"><a>Personal</a></li>
-                <li><a [routerLink]="['/menu/perfil_historial']"><button (click)="irHistorial()">Historial</button></a></li>
-                <li><a>Tienda</a></li>
-            }
-            @else if (historial) {
-                <li><a [routerLink]="['/menu/perfil_personal']">Personal</a></li>
-                <li class="pagina"><a>Historial</a></li>
-                <li><a>Tienda</a></li>
-            }
-            @else if (tienda) {
-                <li><a [routerLink]="['/menu/perfil_personal']">Personal</a></li>
-                <li><a [routerLink]="['/menu/perfil_historial']">Historial</a></li>
-                <li class="pagina"><a>Tienda</a></li>
->>>>>>> Stashed changes
             }
             
         </ul>

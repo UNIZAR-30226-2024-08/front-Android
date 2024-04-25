@@ -23,7 +23,6 @@ export class NavegacionPerfilComponent {
     this.historial = this.constantes.historial;
   }
 
-<<<<<<< Updated upstream
   irPersonal(){
     this.constantes.personal = true;
     this.constantes.tienda = false;
@@ -40,11 +39,6 @@ export class NavegacionPerfilComponent {
     this.constantes.personal = false;
     this.constantes.tienda = true;
     this.constantes.historial = false;
-=======
-  irHistorial(){
-    this.constantes.historial = true;
-    this.constantes.personal = false;
-    this.constantes.tienda = false;
->>>>>>> Stashed changes
+
   }
 }
