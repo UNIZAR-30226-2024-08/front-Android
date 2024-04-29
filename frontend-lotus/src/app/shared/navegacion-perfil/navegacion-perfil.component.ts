@@ -28,4 +28,17 @@ export class NavegacionPerfilComponent {
     this.constantes.tienda = false;
     this.constantes.historial = false;
   }
+
+  irHistorial(){
+    this.constantes.personal = false;
+    this.constantes.tienda = false;
+    this.constantes.historial = true;
+  }
+
+  irTienda(){
+    this.constantes.personal = false;
+    this.constantes.tienda = true;
+    this.constantes.historial = false;
+
+  }
 }

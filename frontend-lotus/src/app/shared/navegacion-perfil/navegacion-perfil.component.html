@@ -3,7 +3,7 @@
         <ul id="lista_nav">
             @if (personal) {
                 <li class="pagina"><a><button>Personal</button></a></li>
-                <li><a><button>Historial</button></a></li>
+                <li><a [routerLink]="['/menu/perfil_historial']"><button (click)="irHistorial()">Historial</button></a></li>
                 <li><a><button>Tienda</button></a></li>
             }
             @else if (historial) {
@@ -13,7 +13,7 @@
             }
             @else if (tienda) {
                 <li><a [routerLink]="['/menu/perfil_personal']"><button (click)="irPersonal()">Personal</button></a></li>
-                <li><a><button>Historial</button></a></li>
+                <li><a [routerLink]="['/menu/perfil_historial']"><button (click)="irHistorial()">Historial</button></a></li>
                 <li class="pagina"><a><button>Tienda</button></a></li>
             }
             
