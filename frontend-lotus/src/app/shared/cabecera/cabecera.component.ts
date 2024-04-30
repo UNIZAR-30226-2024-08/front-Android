@@ -26,7 +26,7 @@ export class CabeceraComponent implements OnInit{
   }
   
   ngOnInit(): void {
-    this.obtenerUsuario()
+    //this.obtenerUsuario()
   }
 
   obtenerUsuario(){
