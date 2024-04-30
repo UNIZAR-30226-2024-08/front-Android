@@ -32,7 +32,7 @@ export class LoginComponent{
   ngZone: NgZone = inject(NgZone);
 
   ngOnInit(): void {}
-  
+
   ngAfterViewInit(): void {
     if (typeof window !== 'undefined'){
       google.accounts.id.initialize({
