@@ -89,22 +89,32 @@ export class Constantes{
   listaAvatares: Personalizable[] = [
     {
       id: 1,
-      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png",
+      src: "../../../assets/sources/avatares/1.png",
       seleccionado: false
     },
     {
       id: 2,
-      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png",
+      src: "../../../assets/sources/avatares/2.png",
       seleccionado: false
     },
     {
       id: 3,
-      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png",
+      src: "../../../assets/sources/avatares/3.png",
       seleccionado: false
     },
     {
       id: 4,
-      src: "../../../assets/sources/inicio/avatarPorDefecto_01.png",
+      src: "../../../assets/sources/avatares/4.png",
+      seleccionado: false
+    },
+    {
+      id: 5,
+      src: "../../../assets/sources/avatares/5.png",
+      seleccionado: false
+    },
+    {
+      id: 6,
+      src: "../../../assets/sources/avatares/6.png",
       seleccionado: false
     }
   ]
