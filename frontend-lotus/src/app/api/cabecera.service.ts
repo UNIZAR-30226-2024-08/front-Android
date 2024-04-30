@@ -16,11 +16,11 @@ export class CabeceraService {
     constructor(private httpClient: HttpClient) { }
 
     
-    obtenerUsuario(usuarioActivo: string): Observable<Usuario> {
+    obtenerUsuario(usuarioActivo: string): Observable<JSON> {
 
         let params = new HttpParams().set('gmail', usuarioActivo);
   
-        return this.httpClient.get<Usuario>(`${this.baseUrl2}/actualizarUsuario`, { params: params });
+        return this.httpClient.get<JSON>(`${this.baseUrl2}/obtenerUsuario`, { params: params });
 
     }
 }

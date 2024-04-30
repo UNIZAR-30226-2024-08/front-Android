@@ -21,8 +21,8 @@ export class CabeceraComponent implements OnInit{
   saldoUsuario!: string;
   imgURL = '../../../assets/sources/inicio/avatarPorDefecto_01.png';
 
-  constructor(private cabeceraService: CabeceraService, constante: Constantes) {
-    this.usuarioActivo = constante.usuarioActivo;
+
+  constructor(private cabeceraService: CabeceraService) {
   }
   
   ngOnInit(): void {
@@ -31,7 +31,8 @@ export class CabeceraComponent implements OnInit{
 
   obtenerUsuario(){
     console.log("Obteniendo los datos del jugador...");
-    console.log(this.usuarioActivo);
+    this.usuarioActivo = localStorage.getItem("usuarioActivo");
+    console.log("usuario activo"+this.usuarioActivo);
     this.cabeceraService.obtenerUsuario(this.usuarioActivo)
     .subscribe({
       next: (data: any) => {

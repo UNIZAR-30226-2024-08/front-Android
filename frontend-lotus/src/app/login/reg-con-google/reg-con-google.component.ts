@@ -65,13 +65,11 @@ export class RegConGoogleComponent implements OnInit{
 
 
       //Cambiar el usuario activo
-      this.constantes.usuarioActivo =this.gmailUsuario;
+      localStorage.setItem('usuarioActivo', this.gmailUsuario);
 
       this.userService.iniciarSesion(this.gmailUsuario, usuarioObjeto.name).subscribe({
         next: (res: any) => {
           console.log(res);
-          console.log(this.gmailUsuario);
-          console.log(usuarioObjeto.name);
           //El ngZone se pone para solventar este error: Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'?
           this.ngZone.run(() => this.router.navigate(['/menu']));
         },

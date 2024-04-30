@@ -8,14 +8,17 @@ export class UsuariosService {
   private url = 'https://casino-backend.azurewebsites.net';
 
   constructor(private httpClient: HttpClient) {}
-
-  iniciarSesion(_gmail: string, _nombre: string): any {
+  
+  iniciarSesion(gmail: string, nombre: string): any {
+    console.log(gmail);
+    console.log(nombre);
+    
     // Crear un objeto de parámetros de consulta
     let params = new HttpParams()
-      .set('gmail', _gmail)
-      .set('nombre', _nombre);
+      .set('gmail', gmail)
+      .set('nombre', nombre);
   
-    // Realizar la solicitud GET con los parámetros de consulta
-    return this.httpClient.get(`${this.url}/iniciarSesion`, { params: params, responseType: 'text' });
+    // Realizar la solicitud GET con la URL que contiene los parámetros
+    return this.httpClient.get(`${this.url}/iniciarSesion`, {params:params, responseType: 'text' });
   }
 }
