@@ -15,11 +15,12 @@ export class UsuariosService {
     console.log(nombre);
     
     // Crear un objeto de parámetros de consulta
-    let params = new HttpParams()
-      .set('gmail', gmail)
-      .set('nombre', nombre);
+    let body = {
+      'gmail': gmail,
+      'nombre': nombre
+    };
   
     // Realizar la solicitud GET con la URL que contiene los parámetros
-    return this.httpClient.post(`${this.url}/iniciarSesion`,params);
+    return this.httpClient.post(`${this.url}/iniciarSesion`, body);
   }
 }

@@ -46,7 +46,7 @@ export class LoginComponent{
   }
 
   private decodificarToken(token: string){
-    return JSON.parse(atob(token.split('.')[1]));
+    return JSON.parse(decodeURIComponent(escape(atob(token.split('.')[1]))));
   }
 
   loginWithGoogle() {
@@ -57,7 +57,6 @@ export class LoginComponent{
     if(respuesta){
       //Hay que decodificar el token
       const loadToken: string = this.decodificarToken(respuesta.credential);
-      
 
       //Guardar el token en el local storage, user es un JSON
       this.user = JSON.stringify(loadToken);
@@ -82,9 +81,6 @@ export class LoginComponent{
           console.log(err);
         }
       })
-
-
-      
     }
   }
 }
