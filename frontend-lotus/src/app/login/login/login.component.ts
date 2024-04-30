@@ -31,11 +31,15 @@ export class LoginComponent{
   private router = inject(Router);
   ngZone: NgZone = inject(NgZone);
 
-  ngOnInit(): void {
-    google.accounts.id.initialize({
-      client_id: '287725710191-56khg274chrdgkt1o8idkhl5g42o8522.apps.googleusercontent.com',
-      callback: (resp: any) => this.controlarLogin(resp)
-    });
+  ngOnInit(): void {}
+  
+  ngAfterViewInit(): void {
+    if (typeof window !== 'undefined'){
+      google.accounts.id.initialize({
+        client_id: '287725710191-56khg274chrdgkt1o8idkhl5g42o8522.apps.googleusercontent.com',
+        callback: (resp: any) => this.controlarLogin(resp)
+      });
+    }
   }
   private generarNombreUsuario(gmail: string){
     return gmail.split('@')[0];
