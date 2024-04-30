@@ -1,12 +1,6 @@
 <main class="main">
     <app-cabecera></app-cabecera>
-    <nav class = "menu">
-        <ul id="lista_nav">
-            <li id="pagina"><a>Personal</a></li>
-            <li><a>Historial</a></li>
-            <li><a>Tienda</a></li>
-        </ul>
-    </nav>
+    <app-navegacion-perfil></app-navegacion-perfil>
     
     <div class="pantalla">
         <div class="perfil">
@@ -18,20 +12,48 @@
         </div>
         <div class="personalizables">
             <ul id = "lista_pers">
-                <li><button (click)="mostrarFichas()">Personalizar ficha</button></li>
-                <li><button>Personalizar cartas</button></li>
-                <li><button>Personalizar avatar</button></li>
+                <li><button (click)="verCartas()">Personalizar cartas</button></li>
+                <li><button (click)="verAvatar()">Personalizar avatar</button></li>
             </ul>
         </div>
-        <div class="mostrar">
+        <div class = "mostrar">
+            @if (mostrarCartas) {
                 <ul>
-                    @for (ficha of fichas; track ficha.id) {
+                    @for (carta of listaCartas; track carta.id) {
                         <li class="listaCondicion">
-                            <img class="imagenLista" [src]="ficha.src" alt="imagen de un animal">
+                            @if (carta.id == idCarta()) {
+                                <button class="seleccionado">
+                                    <img class="imagenLista" [src]="carta.src" alt="carta" />
+                                </button>
+                            }
+                            @else {
+                                <button>
+                                    <img class="imagenLista" [src]="carta.src" alt="carta" />
+                                </button>
+                            }
                         </li>
                     }
                 </ul>
+            }
+            @else if (mostrarAvatar) {
+                <ul>
+                    @for (avatar of listaAvatares; track avatar.id) {
+                        <li class="listaCondicion">
+                            @if (avatar.id == idAvatar()) {
+                                <button class="seleccionado">
+                                    <img class="imagenLista" [src]="avatar.src" alt="avatar" />
+                                </button>
+                            }
+                            @else {
+                                <button>
+                                    <img class="imagenLista" [src]="avatar.src" alt="avatar" />
+                                </button>
+                            }
+                        </li>
+                    }
+                </ul>
+            }
+            @else {}
         </div>
     </div>
-
 </main>

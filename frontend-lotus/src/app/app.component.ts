@@ -15,15 +15,15 @@ export class AppComponent {
   constructor(private miApiService: MiApiService) {}
 
   ngOnInit(): void {
-    console.log('AppComponent ngOnInit()');
-    this.miApiService.getHolaMundo().subscribe({
-      next: (res: any) => {
-        console.log("Res");
-      },
-      error: (err: any) => {
-        console.log(err);
-      }
-    });
+    // console.log('AppComponent ngOnInit()');
+    // this.miApiService.getHolaMundo().subscribe({
+    //   next: (res: any) => {
+    //     console.log("Res");
+    //   },
+    //   error: (err: any) => {
+    //     console.log(err);
+    //   }
+    // });
   }
 
 
