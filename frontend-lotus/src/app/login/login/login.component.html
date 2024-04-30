@@ -5,20 +5,16 @@
             <h2>¿Tiene ya una cuenta creada?</h2>
         </div>
         <div class="logins_juegos">
-            <div class="login">
-                <img class="login-img-top" src="../../../assets/sources/login/iniciar_sesion.png" alt="iniciar sesion">
-                <div class="login-body">
-                    <p class="login-text">Iniciar sesion</p>
-                </div>
-            </div>
-            <a [routerLink]="['login-google']">
-                <div class="login">
-                    <img class="login-img-top" src="../../../assets/sources/login/google.png" alt="Registrarse con google">
-                    <div class="login-body">
-                        <p class="login-text">Registrarse</p>
+        
+                <button class="login-button"  (click)="loginWithGoogle()" >
+                    <div class="login" >
+                        <img class="login-img-top" src="../../../assets/sources/login/google.png" alt="Registrarse con google">
+                        <div class="login-body">
+                            <p class="login-text">Iniciar Sesion con Google</p>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </button>
+        
         </div>
     </div>
 </main>

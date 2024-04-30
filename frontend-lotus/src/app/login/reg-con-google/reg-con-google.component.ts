@@ -19,8 +19,13 @@ export class RegConGoogleComponent implements OnInit{
 
   gmailUsuario: any;
 
+<<<<<<< Updated upstream
   constructor(varGlobal: Constantes) {
     varGlobal.usuarioActivo = this.gmailUsuario;
+=======
+
+  constructor( private userService: UsuariosService) {
+>>>>>>> Stashed changes
   }
 
   private router = inject(Router);

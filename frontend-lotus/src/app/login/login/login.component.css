@@ -83,7 +83,13 @@ main{
     font-size: 18px;
     margin: 0;
 }
-
+.login-button{
+    /*quitar el estilo del boton*/
+    border: none;
+    background-color: var(--color-principal);
+    color: var(--color-secundario);
+    font-size: 18px;
+}
 a{
     text-decoration: none;
     color: var(--color-secundario);
