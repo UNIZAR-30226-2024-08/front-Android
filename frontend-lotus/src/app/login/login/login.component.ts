@@ -22,7 +22,8 @@ declare var google: any;
 
 export class LoginComponent{
   gmailUsuario!: string;
-  user: any;
+  nombreUsuario!: string;
+  usuarioJson: any;
 
 
   constructor( private userService: UsuariosService) {
@@ -59,18 +60,17 @@ export class LoginComponent{
       const loadToken: string = this.decodificarToken(respuesta.credential);
 
       //Guardar el token en el local storage, user es un JSON
-      this.user = JSON.stringify(loadToken);
-      sessionStorage.setItem("loggedUser", this.user);
+      this.usuarioJson = JSON.stringify(loadToken);
+      sessionStorage.setItem("loggedUser", this.usuarioJson);
       //Guardar el gmail del usuario
-      const usuarioObjeto = JSON.parse(this.user);
+      const usuarioObjeto = JSON.parse(this.usuarioJson);
       //Aqui esta el gmail del usuario
       this.gmailUsuario = usuarioObjeto.email;
-
-
+      this.nombreUsuario= this.generarNombreUsuario(this.gmailUsuario);
       //Cambiar el usuario activo
       localStorage.setItem('usuarioActivo', this.gmailUsuario);
 
-      this.userService.iniciarSesion(this.gmailUsuario, usuarioObjeto.name).subscribe({
+      this.userService.iniciarSesion(this.gmailUsuario, this.nombreUsuario).subscribe({
         next: (res: any) => {
           console.log(res);
           //El ngZone se pone para solventar este error: Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'?

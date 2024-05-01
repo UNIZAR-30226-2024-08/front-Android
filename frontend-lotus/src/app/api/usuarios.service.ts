@@ -5,15 +5,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UsuariosService {
-  private url = 'http://localhost:3001';
-  // private url = 'https://casino-backend.azurewebsites.net';
+  private url = 'https://casino-backend.azurewebsites.net';
 
   constructor(private httpClient: HttpClient) {}
   
   iniciarSesion(gmail: string, nombre: string): any {
     console.log(gmail);
     console.log(nombre);
-    
+
     // Crear un objeto de parámetros de consulta
     let body = {
       'gmail': gmail,

@@ -8,7 +8,6 @@ main{
     height: 100vh;
 }
 
-
 .mensaje_bienvenida{
     display: flex;
     flex-direction: column;
