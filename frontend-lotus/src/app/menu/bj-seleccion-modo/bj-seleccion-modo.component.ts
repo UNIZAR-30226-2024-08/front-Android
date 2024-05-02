@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
-import { RouterModule } from '@angular/router';
 import { CreandoSalaPrivadaComponent } from '../../juego/creando-sala-privada/creando-sala-privada.component';
 import { TipoJuegoService } from '../../api/tipo-juego.service';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-bj-seleccion-modo',
   standalone: true,
-  imports: [CabeceraComponent, RouterModule],
+  imports: [CabeceraComponent,RouterOutlet,RouterModule],
   templateUrl: './bj-seleccion-modo.component.html',
   styleUrl: './bj-seleccion-modo.component.css'
 })

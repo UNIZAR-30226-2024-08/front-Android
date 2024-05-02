@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegConGoogleComponent } from './reg-con-google.component';
+import { BjOnePlayerComponent } from './bj-one-player.component';
 
-describe('RegConGoogleComponent', () => {
-  let component: RegConGoogleComponent;
-  let fixture: ComponentFixture<RegConGoogleComponent>;
+describe('BjOnePlayerComponent', () => {
+  let component: BjOnePlayerComponent;
+  let fixture: ComponentFixture<BjOnePlayerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegConGoogleComponent]
+      imports: [BjOnePlayerComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(RegConGoogleComponent);
+    fixture = TestBed.createComponent(BjOnePlayerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

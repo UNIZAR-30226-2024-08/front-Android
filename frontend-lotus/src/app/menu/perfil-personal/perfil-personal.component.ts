@@ -1,62 +1,48 @@
 import { Component } from '@angular/core';
 import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
+import { Constantes } from '../../../constants/constantes';
+import { NavegacionPerfilComponent } from '../../shared/navegacion-perfil/navegacion-perfil.component';
 
 @Component({
   selector: 'app-perfil-personal',
   standalone: true,
-  imports: [CabeceraComponent],
+  imports: [CabeceraComponent, NavegacionPerfilComponent],
   templateUrl: './perfil-personal.component.html',
   styleUrl: './perfil-personal.component.css'
 })
 
 
 export class PerfilPersonalComponent {
-  public mostrarFichas(): void {
-    var container: HTMLElement = <HTMLElement>document.getElementsByClassName("mostrar")[0];
-    if(container.style.display == "none"){
-      container.style.display = "block";
-    }
-    else{
-      container.style.display = "none";
-    }
+  mostrarCartas = false;
+  mostrarAvatar = false;
+
+  listaCartas: any;
+  listaAvatares: any;
+
+  constructor(private constantes: Constantes) {}
+
+  ngOnInit(){
+    this.listaCartas=this.constantes.listaCartas;
+    this.listaAvatares=this.constantes.listaAvatares;
+    this.constantes.personal = true;
   }
 
-  fichas: any= [
-    {
-      id: 1,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 2,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 3,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 4,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 5,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 6,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 7,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 8,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    },
-    {
-      id: 9,
-      src: "../../../assets/sources/inicio/cartasPoker_01.png"
-    }
-  ];
+  idCarta(): number{
+    return this.constantes.getCarta();
+  }
+
+  idAvatar(): number{
+    return this.constantes.getAvatar();
+  }
+
+  verCartas() {
+    this.mostrarCartas = !this.mostrarCartas;
+    this.mostrarAvatar = false;
+  }
+  verAvatar() {
+    this.mostrarAvatar = !this.mostrarAvatar;
+    this.mostrarCartas = false;
+  }
+
+
 }

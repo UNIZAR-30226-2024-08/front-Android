@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { CabeceraService } from '../../api/cabecera.service';
 import { Usuario } from '../../models/usuario';
-import { Constantes } from '../../../constants/constantes';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-cabecera',
@@ -21,8 +21,11 @@ export class CabeceraComponent implements OnInit{
   saldoUsuario!: string;
   imgURL = '../../../assets/sources/inicio/avatarPorDefecto_01.png';
 
-  constructor(private cabeceraService: CabeceraService, constante: Constantes) {
-    this.usuarioActivo = constante.usuarioActivo;
+
+  constructor(private cabeceraService: CabeceraService , @Inject(PLATFORM_ID) private platformId: Object) {
+    if(isPlatformBrowser(this.platformId)){
+      this.usuarioActivo = localStorage.getItem("usuarioActivo");
+    }
   }
   
   ngOnInit(): void {
@@ -35,8 +38,12 @@ export class CabeceraComponent implements OnInit{
     .subscribe({
       next: (data: any) => {
         data as Usuario;
-        this.nombreUsuario = data.nombre;
+        this.nombreUsuario = data.nombre; 
         this.saldoUsuario = data.saldo;
+      },
+      error: (error) => {
+        console.log("Error al obtener los datos del jugador");
+        console.log(error);
       }
     })
 

@@ -1,0 +1,11 @@
+
+main{
+    margin: 0;
+    padding: 0;
+}
+.main{
+    font-family: var(--text-font);
+    background-color: #00433D;
+    width: 100vw;
+    height: 100vh;
+}
