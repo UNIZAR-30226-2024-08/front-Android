@@ -1,13 +1,21 @@
 import { Component } from '@angular/core';
 import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
+import { TipoJuegoService } from '../../api/tipo-juego.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-poker-seleccion-modo',
   standalone: true,
-  imports: [CabeceraComponent],
+  imports: [CabeceraComponent,RouterModule],
   templateUrl: './poker-seleccion-modo.component.html',
   styleUrl: './poker-seleccion-modo.component.css'
 })
 export class PokerSeleccionModoComponent {
+    constructor(private tipo: TipoJuegoService) {}
 
+    ngOnInit(): void {
+      // Your code here
+      this.tipo.tipoJuego$.next("poker");
+    
+    }
 }

@@ -1,0 +1,70 @@
+main {
+  padding: 0;
+  margin: 0;
+  background-color: var(--color-principal);
+  color: var(--color-secundario);
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  font-family: var(--text-font);
+}
+.div_codigo_privado{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.div_codigo_privado>h1{
+  font-size: 50px;
+  margin-bottom: 1rem;
+}
+.div_codigo_privado>p{
+  margin:3vh;
+  font-size: 20px;
+}
+.div_codigo_privado>input{
+  height: 2rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+.div_codigo_privado>button{
+  border: 0;
+  margin:3vh;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--color-principal);
+  border-radius: 10px;
+  background-color: var(--color-secundario); 
+  background-image: linear-gradient(
+    to top left,
+    var(--color-secundario),
+    var(--color-secundario)30%,
+    var(--color-secundario) ,
+  );
+  box-shadow:
+    inset 2px 2px 3px rgba(255, 255, 255, 0.6),
+    inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+  
+.div_codigo_privado>button:hover{
+  background-color: var(--color-secundario); 
+
+}
+
+.div_codigo_privado>button:active{
+  box-shadow:
+  inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+  inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.div_mensaje_error{
+  font-weight: bold;
+  color: red;
+  font-size: 1.3rem;
+  margin-top: 5px;
+}
