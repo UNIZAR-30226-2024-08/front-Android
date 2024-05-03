@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
 import { Constantes } from '../../../constants/constantes';
 import { NavegacionPerfilComponent } from '../../shared/navegacion-perfil/navegacion-perfil.component';
+import { CabeceraService } from '../../api/cabecera.service';
+import { PersonalizablesService } from '../../api/personalizables.service';
+import { strict } from 'assert';
+import { error } from 'console';
 
 @Component({
   selector: 'app-perfil-personal',
@@ -16,32 +20,59 @@ export class PerfilPersonalComponent {
   mostrarCartas = false;
   mostrarAvatar = false;
 
+  rutaAvatar!: string
+  nombreUsuario!: any;
+  gmailUsuario!: any;
+  
+
   listaCartas: any;
   listaAvatares: any;
 
-  constructor(private constantes: Constantes) {}
+  nuevoNombre!: string;
+
+  
+
+  constructor(private constantes: Constantes, private cabeceraService: CabeceraService,
+              private personalizablesService: PersonalizablesService) {}
 
   ngOnInit(){
-    this.listaCartas=this.constantes.listaCartas;
-    this.listaAvatares=this.constantes.listaAvatares;
     this.constantes.personal = true;
+    this.rutaAvatar = "../../../assets/sources/avatares/" + localStorage.getItem('avatar') + ".png";
+    this.nombreUsuario = localStorage.getItem('nombreUsuario');
+    this.gmailUsuario = localStorage.getItem('usuarioActivo');
   }
 
-  idCarta(): number{
-    return this.constantes.getCarta();
+
+  mostrarAviso(){
+    const textoOculto = document.getElementById("mensajeOculto");
+    
+    if(textoOculto != null){
+      console.log(textoOculto.style.display)
+      textoOculto.style.display = "block";
+    }
   }
 
-  idAvatar(): number{
-    return this.constantes.getAvatar();
-  }
+  cambiarNombre(){
+    const input = document.getElementById("nombreinput") as HTMLInputElement;
+    const textoOculto = document.getElementById("mensajeOculto");
+    
+    if(textoOculto != null){
+      console.log(textoOculto.style.display)
+      textoOculto.style.display = "none";
+    }
 
-  verCartas() {
-    this.mostrarCartas = !this.mostrarCartas;
-    this.mostrarAvatar = false;
-  }
-  verAvatar() {
-    this.mostrarAvatar = !this.mostrarAvatar;
-    this.mostrarCartas = false;
+    if(input != null){
+      this.nuevoNombre = input.value;
+      this.personalizablesService.cambiarNombre(this.gmailUsuario, this.nuevoNombre).subscribe({
+        next: (data: any) => {
+          localStorage.setItem('nombreUsuario', this.nuevoNombre);
+          location.reload();
+        },
+        error: (error: any) => {
+          console.log(error);
+        }
+      })
+    }
   }
 
 

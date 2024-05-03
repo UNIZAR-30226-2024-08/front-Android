@@ -19,7 +19,7 @@ export class CabeceraComponent implements OnInit{
   private usuarioActivo: any;
   nombreUsuario!: string;
   saldoUsuario!: string;
-  imgURL = '../../../assets/sources/inicio/avatarPorDefecto_01.png';
+  rutaAvatar!: string;
 
 
   constructor(private cabeceraService: CabeceraService , @Inject(PLATFORM_ID) private platformId: Object) {
@@ -30,6 +30,7 @@ export class CabeceraComponent implements OnInit{
   
   ngOnInit(): void {
     this.obtenerUsuario()
+    this.rutaAvatar = "../../../assets/sources/avatares/" + localStorage.getItem('avatar') + ".png";
   }
 
   obtenerUsuario(){

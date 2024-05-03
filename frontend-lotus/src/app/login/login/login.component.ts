@@ -9,6 +9,8 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../api/usuarios.service';
+import { PersonalizablesService } from '../../api/personalizables.service';
+import { CabeceraService } from '../../api/cabecera.service';
  
 declare var google: any;
 
@@ -24,15 +26,16 @@ export class LoginComponent{
   gmailUsuario!: string;
   nombreUsuario!: string;
   usuarioJson: any;
+  avatar!: string;
 
-
-  constructor( private userService: UsuariosService) {
+  constructor( private userService: UsuariosService, private personalizablesService: PersonalizablesService, private cabeceraService: CabeceraService) {
   }
 
   private router = inject(Router);
   ngZone: NgZone = inject(NgZone);
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   ngAfterViewInit(): void {
     if (typeof window !== 'undefined'){
@@ -42,7 +45,7 @@ export class LoginComponent{
       });
     }
   }
-  private generarNombreUsuario(gmail: string){
+  private generarNombreUsuario(gmail: string) : string{
     return gmail.split('@')[0];
   }
 
@@ -73,6 +76,25 @@ export class LoginComponent{
       this.userService.iniciarSesion(this.gmailUsuario, this.nombreUsuario).subscribe({
         next: (res: any) => {
           console.log(res);
+          this.personalizablesService.obtenerAvatarUsuario(this.gmailUsuario).subscribe({
+            next: (res: any) => {
+              this.avatar = res.avatar;
+              localStorage.setItem('avatar', this.avatar);
+            },
+            error: (error: any) => {
+              console.log(error);
+            }
+          
+          });
+          //Guardar el nombre del usuario
+          this.cabeceraService.obtenerUsuario(this.gmailUsuario).subscribe({
+            next: (res: any) => {
+              localStorage.setItem('nombreUsuario', res.nombre);
+            },
+            error: (error: any) => {
+              console.log(error);
+            }
+          });
           //El ngZone se pone para solventar este error: Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'?
           this.ngZone.run(() => this.router.navigate(['/menu']));
         },

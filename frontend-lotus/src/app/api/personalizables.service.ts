@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -18,6 +18,13 @@ export class PersonalizablesService {
     }
 
     return this.httpClient.put(`${this.url}/cambiarNombre`, body)
+  }
+
+  obtenerAvatarUsuario(gmail: string): any{
+
+    let params = new HttpParams().set('gmail', gmail);
+
+    return this.httpClient.get(`${this.url}/obtenerAvatar/:gmail`, {params: params})
   }
 
 }

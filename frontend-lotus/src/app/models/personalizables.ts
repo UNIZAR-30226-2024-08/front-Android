@@ -1,5 +1,5 @@
 export interface Personalizable {
-    id: number;
+    nombre: string;
     src: string;
     seleccionado: boolean;
 }

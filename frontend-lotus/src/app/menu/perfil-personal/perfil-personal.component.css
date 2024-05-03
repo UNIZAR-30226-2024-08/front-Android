@@ -39,8 +39,12 @@ main{
     top: 0;
 }
 
+.perfil>div>img{
+    width: 70%;
+    height: 70%;
+}
+
 .nombreUsuario{
-    margin: 10px;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -48,16 +52,44 @@ main{
 
 #nombreinput{
     width: 200px;
-    height: 20px;
-    font-size: medium;
+    height: 30px;
+    font-size: large;
     align-items: center;
+    color: var(--color-principal);
+    background-color: var(--color-secundario);
+    border: 2px solid var(--color-principal);
+    border-radius: 10px;
+    font-weight: bold;
+    padding-left: 2%;
 }
 
-#fotoguardado{
+#botonguardado{
+    padding: 0;
     margin-left: 10px;
+    background-color: transparent;
+    border-style: none;
+    
+
+}
+
+
+#fotoguardado{
     align-self: center;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+#botonguardado:hover{
+    transform: scale(1.1);
+    transition: 0.2s;
+}
+
+#mensajeOculto{
+    display: none;
+    color: red;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-weight: bold;
 }
 
 /*----------------------------------------------------*/

@@ -4,16 +4,21 @@
     
     <div class="pantalla">
         <div class="perfil">
-            <div><img src = "../../../assets/sources/inicio/avatarPorDefecto_01.png" alt="foto de perfil"></div>
+            <div><img [src]="rutaAvatar" alt="foto de perfil"></div>
             <div class="nombreUsuario">
-                <input id="nombreinput" type="text" value="nombreUsuario">
-                <img src = "../../../assets/sources/menu/guardar-el-archivo.png" alt="guardar cambios" id="fotoguardado">
+                <input id="nombreinput" type="text" [value]="nombreUsuario" (click)="mostrarAviso()">
+                <button id = "botonguardado" (click)="cambiarNombre()">
+                    <img src = "../../../assets/sources/menu/guardar-el-archivo.png" alt="guardar cambios" id="fotoguardado">
+                </button>
+            </div>
+            <div id="mensajeOculto">
+                Para guardar el nuevo nomre haz click en el botón de guardar
             </div>
         </div>
         <div class="personalizables">
             <ul id = "lista_pers">
-                <li><button (click)="verCartas()">Personalizar cartas</button></li>
-                <li><button (click)="verAvatar()">Personalizar avatar</button></li>
+                <li><button>Personalizar cartas</button></li>
+                <li><button>Personalizar avatar</button></li>
             </ul>
         </div>
         <div class = "mostrar">
@@ -21,7 +26,7 @@
                 <ul>
                     @for (carta of listaCartas; track carta.id) {
                         <li class="listaCondicion">
-                            @if (carta.id == idCarta()) {
+                            @if (true) {
                                 <button class="seleccionado">
                                     <img class="imagenLista" [src]="carta.src" alt="carta" />
                                 </button>
@@ -39,7 +44,7 @@
                 <ul>
                     @for (avatar of listaAvatares; track avatar.id) {
                         <li class="listaCondicion">
-                            @if (avatar.id == idAvatar()) {
+                            @if (false) {
                                 <button class="seleccionado">
                                     <img class="imagenLista" [src]="avatar.src" alt="avatar" />
                                 </button>
