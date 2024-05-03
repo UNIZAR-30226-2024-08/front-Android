@@ -1,7 +1,9 @@
 export class Carta {
-    url: string;
+    id: number;
+    src: string;
     
-    constructor(url: string) {
-        this.url = url;
+    constructor(id: number, src: string) {
+        this.id = id;
+        this.src = src;
     }
 }

@@ -6,7 +6,7 @@
 
         <div>
             <ul>
-                @for (carta of cartas; track carta.id) {
+                @for (carta of cartasBanca; track carta.id) {
                 <li class="div_formato_carta">
                     <img class="imagenLista" [src]="carta.src">
                 </li>
@@ -47,18 +47,19 @@
     <div class="div_jugador">
         <div>
             <ul>
-                @for (carta of cartasUsu; track carta.id) {
-                <li class="div_formato_carta">
-                    <img class="imagenLista" [src]="carta.src">
+                @for (carta of cartasDeUsuario; track carta.id) {
+                <li class="div_formato_carta_jugador">
+                    <img class="imagenLista_jugador" [src]="carta.src" alt="Carta del jugador">
                 </li>
                 }
             </ul>
+            {{ ElUserHaPerdido }}
         </div>
     </div>
 
     <div id="div_botones">
         <button class="boton" (click)="pedirCarta()">Pedir Carta</button>
-        <button class="boton">Plantarse</button>
+        <button class="boton" (click)="plantarse()">Plantarse</button>
     </div>
 
 

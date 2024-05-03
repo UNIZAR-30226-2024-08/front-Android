@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
     providedIn: 'root',
 })
 export class bjJuegoService {
+    
 
     private baseUrl = 'https://casino-backend.azurewebsites.net';
 
@@ -14,11 +15,18 @@ export class bjJuegoService {
     //Pedir las dos cartas iniciales al backend
     pedirCartaJugadorActual(usuarioActivo: string): Observable<JSON> {
         let params = new HttpParams().set('gmail', usuarioActivo);
-        return this._httpClient.get<JSON>(`${this.baseUrl}/obtenerUsuario`, { params: params });
+        return this._httpClient.get<JSON>(`${this.baseUrl}/bjJuego`, { params: params });
+
+    }
+
+    meHePasadoDe21(usuarioActivo: string): Observable<Boolean> {
+        let params = new HttpParams().set('gmail', usuarioActivo);
+        return this._httpClient.get<Boolean>(`${this.baseUrl}/bjJuego`, { params: params });
 
     }
 
     pedirOtrosJugadores() {
+        //Necesitamos: nombre jugador + cartas del jugador
         
     }
 }

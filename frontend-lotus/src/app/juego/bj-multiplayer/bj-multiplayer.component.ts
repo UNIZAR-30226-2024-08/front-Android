@@ -23,6 +23,11 @@ export class BjMultiplayerComponent {
   url!: string;
   apuesta : number = 0;
   mostrarApuesta: boolean = true;
+  nuevaCarta: Carta | undefined;
+  numeroCarta: number = 1;
+  ElUserHaPerdido: String = ""
+
+  cartasDeUsuario: Carta[] = []
 
   constructor(private bjJuegoService : bjJuegoService, @Inject(PLATFORM_ID) private platformId: Object) {
     this.buildForm();
@@ -60,11 +65,31 @@ export class BjMultiplayerComponent {
   }
 
   pedirCarta() {
+    //Pedir carta al backend
+    this.pedirCartaAlBackend()
+    
+    //Preguntar al backend si me he pasado de 21
+    this.bjJuegoService.meHePasadoDe21(this.usuarioActivo).subscribe({
+      next: (data: Boolean) => {
+        if (data) {
+          this.ElUserHaPerdido = "Has excedido el limite de 21 puntos. Has perdido"
+        }
+      },
+      error: (error) => {
+        console.log("Error al obtener la carta del jugador");
+        console.log(error);
+      }
+    })
+  }
+  
+  pedirCartaAlBackend() {
     this.bjJuegoService.pedirCartaJugadorActual(this.usuarioActivo).subscribe({
       next: (data: any) => {
-        data as Carta;
-        this.url = data.url; 
-        this.cartasJugadorActual.push(data);
+        data as String;
+        this.url = data; 
+        this.nuevaCarta = new Carta(this.numeroCarta, this.url);
+        this.numeroCarta = this.numeroCarta + 1;
+        this.cartasDeUsuario.push(this.nuevaCarta);
       },
       error: (error) => {
         console.log("Error al obtener la carta del jugador");
@@ -73,9 +98,11 @@ export class BjMultiplayerComponent {
     })
   }
 
-  cartasDelUsuario: any;
+  plantarse() {
+    
+  }
 
-  cartas: any= [
+  cartasBanca: any= [
     {
       id: 1,
       src: "../../../assets/sources/juego/reverso.jpg"
@@ -83,17 +110,6 @@ export class BjMultiplayerComponent {
     {
       id: 2,
       src: "../../../assets/sources/juego/reverso.jpg"
-    }
-  ];
-
-  cartasUsu: any = [
-    {
-      id: 1,
-      src: "../../../assets/sources/juego/carta.jpg"
-    },
-    {
-      id: 2,
-      src: "../../../assets/sources/juego/carta.jpg"
     }
   ];
 }

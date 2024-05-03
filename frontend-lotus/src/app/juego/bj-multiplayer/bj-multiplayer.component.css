@@ -34,6 +34,11 @@ main {
     display: inline;
 }
 
+.div_formato_carta_jugador {
+    list-style: none;
+    display: inline;
+}
+
 .div_apuesta {
     position: fixed;
     top: 3vh;
