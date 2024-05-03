@@ -18,20 +18,25 @@ main {
 }
 
 .div_banca_texto {
-    margin: 3vh;
+    margin: 1vh;
     text-align: center;
-    font-size: 2em;
+    font-size: 1em;
     background-color: var(--color-secundario);
     color: var(--color-principal);
     display: inline-block;
     padding: 0.5em 1em;
-    height: 17vh;
+    height: 8vh;
     border-radius: 10px;
 }
 
 .div_formato_carta {
+    justify-content: center;
     list-style: none;
     display: inline;
+}
+
+.imagenLista{
+    height: 60px;
 }
 
 .div_formato_carta_jugador {

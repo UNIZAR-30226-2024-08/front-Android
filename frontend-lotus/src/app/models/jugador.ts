@@ -1,10 +1,12 @@
 import { Carta } from "./carta";
 
 export class Jugador {
+    id: number;
     nombreJugador: string;
     cartasJugador: Carta[];
     
-    constructor(nombreJugador: string) {
+    constructor(id: number, nombreJugador: string) {
+        this.id = id;
         this.nombreJugador = nombreJugador;
         this.cartasJugador = [];
     }

@@ -5,6 +5,7 @@ import { debounceTime } from 'rxjs';
 import { Usuario } from '../../models/usuario';
 import { Carta } from '../../models/carta';
 import { bjJuegoService } from '../../api/bj-juego.service';
+import { Jugador } from '../../models/jugador';
 
 @Component({
   selector: 'app-bj-multiplayer',
@@ -26,6 +27,7 @@ export class BjMultiplayerComponent {
   nuevaCarta: Carta | undefined;
   numeroCarta: number = 1;
   ElUserHaPerdido: String = ""
+  listaJugadores: Jugador[] = []
 
   cartasDeUsuario: Carta[] = []
 
@@ -38,6 +40,17 @@ export class BjMultiplayerComponent {
   }
   
   ngOnInit(): void {
+    //Obtener jugadores
+    this.bjJuegoService.pedirOtrosJugadores(this.usuarioActivo).subscribe({
+      next: (data: any) => {
+        //Completar
+      },
+      error: (error) => {
+        console.log("Error al obtener la carta del jugador");
+        console.log(error);
+      }
+    })
+
     //Obtener cartas iniciales del jugador
     this.pedirCarta()
     this.pedirCarta()

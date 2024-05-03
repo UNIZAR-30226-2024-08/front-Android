@@ -1,19 +1,26 @@
 <main class="main">
-    <div class="div_banca">
-        <div class="div_banca_texto">
-            <p> BANCA </p>
-        </div>
-
-        <div>
-            <ul>
-                @for (carta of cartasBanca; track carta.id) {
-                <li class="div_formato_carta">
-                    <img class="imagenLista" [src]="carta.src">
-                </li>
-                }
-            </ul>
-        </div>
+    
+    <div class="div_jugadores">
+        <ul>
+            <li *ngFor="let jugador of listaJugadores">
+                <div class="div_banca">
+                    <div class="div_banca_texto">
+                        <p>{{ jugador.nombreJugador }}</p>
+                    </div>
+                    <div>
+                        <ul>
+                            <li *ngFor="let carta of jugador.cartasJugador" class="div_formato_carta">
+                                <img class="imagenLista" [src]="carta.src" alt="Imagen de la carta">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
+
+
+    
     <div class="div_apuesta">
         <div class="div_apuesta1">
             <img class="imagen_apuesta" src="../../../assets/sources/juego/ficha-de-saldo.png">

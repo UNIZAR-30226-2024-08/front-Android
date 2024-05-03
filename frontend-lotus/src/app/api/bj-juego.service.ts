@@ -25,8 +25,9 @@ export class bjJuegoService {
 
     }
 
-    pedirOtrosJugadores() {
-        //Necesitamos: nombre jugador + cartas del jugador
-        
+    pedirOtrosJugadores(usuarioActivo: string): Observable<JSON> {
+        let params = new HttpParams().set('gmail', usuarioActivo);
+        return this._httpClient.get<JSON>(`${this.baseUrl}/bjJuego`, { params: params });
+
     }
 }
