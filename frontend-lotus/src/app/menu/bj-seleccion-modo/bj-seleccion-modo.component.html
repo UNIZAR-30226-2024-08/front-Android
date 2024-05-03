@@ -6,7 +6,7 @@
             <h2>Elige el tipo de Sala </h2>
         </div>
         <div class="modos_juegos">
-            <a [routerLink]="['/juego/bj_one_player']">
+            <a [routerLink]="['/juego/bj-one-player']">
                 <div class="modo">
                     <img class="modo-img-top" src="../../../assets/sources/modo-juego/Un_Jugador1.png" alt="Cartas de póker">
                     <div class="modo-body">
@@ -14,13 +14,14 @@
                     </div>
                 </div>
             </a>
-
-            <div class="modo">
-                <img class="modo-img-top" src="../../../assets/sources/modo-juego/partida_online.png" alt="Cartas de póker">
-                <div class="modo-body">
-                    <p class="modo-text">Sala Pública</p>
+            <a [routerLink]="['/juego/bj-multiplayer']">
+                <div class="modo">
+                    <img class="modo-img-top" src="../../../assets/sources/modo-juego/partida_online.png" alt="Cartas de póker">
+                    <div class="modo-body">
+                        <p class="modo-text">Sala Pública</p>
+                    </div>
                 </div>
-            </div>
+            </a>
             <a [routerLink]="['/juego/creando-sala-privada']">
                 <div class="modo">
                         <img class="modo-img-top" src="../../../assets/sources/modo-juego/blackjack.png" alt="Cartas de póker">
