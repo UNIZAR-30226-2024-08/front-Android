@@ -1,14 +1,7 @@
 import { Routes } from '@angular/router';
 import { PerfilPersonalComponent } from './menu/perfil-personal/perfil-personal.component';
-import { LoginComponent } from './login/login/login.component';
-import { CabeceraComponent } from './shared/cabecera/cabecera.component';
-import { log } from 'console';
 
 export const routes: Routes = [
-// {
-//     path: '',
-//     component: PerfilPersonalComponent
-// },
 {
     path: '',
     loadChildren: ()=> import('./login/login.routes').then(m => m.LOGIN_ROUTES)
