@@ -5,8 +5,10 @@ import { PokerSeleccionModoComponent } from "./poker-seleccion-modo/poker-selecc
 import { PerfilPersonalComponent } from "./perfil-personal/perfil-personal.component";
 import { PerfilHistorialComponent } from "./perfil-historial/perfil-historial.component";
 import { PerfilTiendaComponent } from "./perfil-tienda/perfil-tienda.component";
+import { TipoPartidaSeleccionComponent } from "./tipo-partida-seleccion/tipo-partida-seleccion.component";
 
 export const MENU_ROUTES: Routes = [
+    
     {
         path: '',
         title: 'seleccion-juego',
@@ -36,5 +38,9 @@ export const MENU_ROUTES: Routes = [
         path: 'perfil_tienda',
         title: 'perfil_tienda',
         component: PerfilTiendaComponent
-    }
+    },
+    {
+        path:'tipo_partida_seleccion',
+        component: TipoPartidaSeleccionComponent
+    },
 ];
