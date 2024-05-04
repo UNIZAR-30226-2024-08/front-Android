@@ -3,6 +3,7 @@ import { CrearSalaPrivadaComponent } from "./crear-sala-privada/crear-sala-priva
 import { CreandoSalaPrivadaComponent } from "./creando-sala-privada/creando-sala-privada.component";
 import { UnirseSalaPrivadaComponent } from "./unirse-sala-privada/unirse-sala-privada.component";
 import { BjOnePlayerComponent } from "./bj-one-player/bj-one-player.component";
+import { PruebaAbandonarSalaComponent } from "./prueba-abandonar-sala/prueba-abandonar-sala.component";
 
 export const JUEGO_ROUTES: Routes = [
     { 
@@ -20,5 +21,9 @@ export const JUEGO_ROUTES: Routes = [
     {
         path:'bj_one_player',
         component: BjOnePlayerComponent
+    },
+    {
+        path:'abandonar-sala',  
+        component:PruebaAbandonarSalaComponent
     }
 ];

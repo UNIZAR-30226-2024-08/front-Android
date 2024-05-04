@@ -43,4 +43,15 @@ export class TipoJuegoService {
     return this.httpClient.put(`${this.url}/BJ/iniciarSala`, body);
   }
   
+  
+  AbandonarSala(codigo: string, gmail: string): any {
+    console.log(codigo, gmail);
+
+    let params = new HttpParams().set('codigo', codigo).set('gmail', gmail);
+    // let body = {
+    //   gmail: gmail,
+    //   codigo: codigo,
+    // };
+    return this.httpClient.delete(`${this.url}/BJ/abandonarSala`,{params:params});
+  }
 }

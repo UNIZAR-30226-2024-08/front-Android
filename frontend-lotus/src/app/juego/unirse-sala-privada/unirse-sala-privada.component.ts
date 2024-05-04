@@ -50,6 +50,7 @@ export class UnirseSalaPrivadaComponent implements OnInit{
         next: (data: any) => {
           console.log(data);
           localStorage.setItem("codigoSala",value);
+          this.router.navigate(['/juego/abandonar-sala']);
         },
         error: (error: any) => {
           console.log("Error al unirse a sala privada");
