@@ -1,7 +1,7 @@
 import { Component, Inject, NgZone, PLATFORM_ID, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import { TipoJuegoService } from '../../api/tipo-juego.service';
+import { GestorSalasService } from '../../api/gestor-salas.service';
 @Component({
   selector: 'app-creando-sala-privada',
   standalone: true,
@@ -16,7 +16,7 @@ export class CreandoSalaPrivadaComponent {
   
   private tipoSala: boolean = false;
 
-  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object,private tipo: TipoJuegoService) {
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object,private tipo: GestorSalasService) {
     if(isPlatformBrowser(this.platformId)){
       this.usuarioActivo = localStorage.getItem("usuarioActivo");
       

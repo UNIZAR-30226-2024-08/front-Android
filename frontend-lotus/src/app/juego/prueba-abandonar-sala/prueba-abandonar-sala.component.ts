@@ -1,5 +1,5 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { TipoJuegoService } from '../../api/tipo-juego.service';
+import { GestorSalasService } from '../../api/gestor-salas.service';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import { isPlatformBrowser } from '@angular/common';
 export class PruebaAbandonarSalaComponent {
   codigoSala: any ;
   usuarioActivo: any;
-  constructor(private tipo: TipoJuegoService,@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(private tipo: GestorSalasService,@Inject(PLATFORM_ID) private platformId: Object) {
     if(isPlatformBrowser(this.platformId)){
       this.codigoSala = localStorage.getItem("codigoSala");
       this.usuarioActivo = localStorage.getItem("usuarioActivo");

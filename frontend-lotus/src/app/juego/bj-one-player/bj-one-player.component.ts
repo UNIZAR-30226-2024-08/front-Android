@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { log } from 'console';
 import { debounceTime } from 'rxjs';
 @Component({
   selector: 'app-bj-one-player',
@@ -26,43 +25,21 @@ export class BjOnePlayerComponent implements OnInit{
     });
   }
   
-
   private buildForm(){
     this.form = new FormGroup({
       apuesta: new FormControl('',[Validators.required,Validators.min(10)])
     });
   }
-
-
-
   apuesta : number = 0;
   mostrarApuesta : boolean = true;
-
-  // checkoutFrom = this.fb.group({
-  //   apuesta : FormGroup
-  // });
-
-  // constructor(private fb: FormBuilder) { }
-  
-  // onSubmit(): void {
-  //   /*mensaje de apuesta realizada*/
-  //   this.checkoutFrom.value.apuesta = this.checkoutFrom.value.apuesta;
-  //   //console.log(this.checkoutFrom.value.apuesta);
-  //   this.apuesta = Number(this.checkoutFrom.value.apuesta);
-  //   //console.log(this.apuesta);
-  //   this.checkoutFrom.reset();
-  //   this.mostrarApuesta = false;   
-  // }
-  save(event : Event){
-    
+  save(event : Event){ 
     event.preventDefault();
     if(this.form.valid){
       this.mostrarApuesta = false;
       this.apuesta = Number(this.form.value.apuesta);
     }
-
   }
-
+  
   
   cartas: any= [
     {

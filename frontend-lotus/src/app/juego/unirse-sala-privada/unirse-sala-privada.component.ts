@@ -3,7 +3,7 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import {  FormControl, FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
-import { TipoJuegoService } from '../../api/tipo-juego.service';
+import { GestorSalasService } from '../../api/gestor-salas.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -17,7 +17,7 @@ export class UnirseSalaPrivadaComponent implements OnInit{
   form !: FormGroup;
   tipoJuego !: any;
   usuarioActivo !: any;
-  constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: Object,private tipo: TipoJuegoService) {
+  constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: Object,private tipo: GestorSalasService) {
     this.buildForm();
     if(isPlatformBrowser(this.platformId)){
       this.tipoJuego = localStorage.getItem("tipoDeJuego");
@@ -57,12 +57,6 @@ export class UnirseSalaPrivadaComponent implements OnInit{
           console.log(error);
         }
       })
-      // if(this.tipoJuego == "poker"){
-      //   console.log('Uniendo a sala de poker');
-      //   this.router.navigate(['/menu/poker_seleccion']);
-      // } else if(this.tipoJuego == "blackjack"){
-      //   this.router.navigate(['/menu/bj_seleccion']);
-      // } 
     }else {
       console.log('Formulario no valido');
     }   

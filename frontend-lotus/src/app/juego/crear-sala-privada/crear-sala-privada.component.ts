@@ -1,8 +1,8 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import { TipoJuegoService } from '../../api/tipo-juego.service';
+import { GestorSalasService } from '../../api/gestor-salas.service';
 
 @Component({
   selector: 'app-crear-sala-privada',
@@ -14,7 +14,7 @@ import { TipoJuegoService } from '../../api/tipo-juego.service';
 export class CrearSalaPrivadaComponent {
   codigoSala: any= '123456';
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,private tipo: TipoJuegoService) {
+  constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: Object,private tipo: GestorSalasService) {
     if(isPlatformBrowser(this.platformId)){
       this.codigoSala = localStorage.getItem("codigoSala");
       
@@ -25,6 +25,7 @@ export class CrearSalaPrivadaComponent {
     this.tipo.IniciarSala(this.codigoSala).subscribe({
       next: (data: any) => {
         console.log(data);
+        this.router.navigate(['/juego/abandonar-sala']);
       },
       error: (error: any) => {
         console.log("Error al iniciar partida");

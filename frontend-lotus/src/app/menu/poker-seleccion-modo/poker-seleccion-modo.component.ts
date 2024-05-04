@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
-import { TipoJuegoService } from '../../api/tipo-juego.service';
 import { RouterModule } from '@angular/router';
 
 @Component({

@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class TipoJuegoService {
+export class GestorSalasService {
 
    //private url = 'https://casino-backend.azurewebsites.net';
   private url = 'http://localhost:3001';
