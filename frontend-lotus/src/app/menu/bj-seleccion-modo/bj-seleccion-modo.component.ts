@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
-import { CreandoSalaPrivadaComponent } from '../../juego/creando-sala-privada/creando-sala-privada.component';
-import { TipoJuegoService } from '../../api/tipo-juego.service';
 import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -13,11 +11,10 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class BjSeleccionModoComponent {
 
-  constructor(private tipo: TipoJuegoService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    // Your code here
-    this.tipo.tipoJuego$.next("blackjack");
-  
+    localStorage.setItem('tipoDeJuego', 'blackjack');
   }
+  
 }

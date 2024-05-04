@@ -34,6 +34,7 @@ export class CabeceraComponent implements OnInit{
 
   obtenerUsuario(){
     console.log("Obteniendo los datos del jugador...");
+    console.log(this.usuarioActivo);
     this.cabeceraService.obtenerUsuario(this.usuarioActivo)
     .subscribe({
       next: (data: any) => {
