@@ -17,8 +17,8 @@
         </div>
         <div class="personalizables">
             <ul id = "lista_pers">
-                <li><button>Personalizar cartas</button></li>
-                <li><button>Personalizar avatar</button></li>
+                <li><button (click)="mostrarCartasFunc()">Personalizar cartas</button></li>
+                <li><button (click)="mostrarAvatarFunc()">Personalizar avatar</button></li>
             </ul>
         </div>
         <div class = "mostrar">
@@ -42,20 +42,21 @@
             }
             @else if (mostrarAvatar) {
                 <ul>
-                    @for (avatar of listaAvatares; track avatar.id) {
+                    @for (avatar of listaAvataresMostrar; track avatar.nombre) {
                         <li class="listaCondicion">
-                            @if (false) {
+                            @if (avatarUsuario == avatar.nombre) {
                                 <button class="seleccionado">
-                                    <img class="imagenLista" [src]="avatar.src" alt="avatar" />
+                                    <img class="imagenLista" [src]="crearRutaAvatar(avatar.nombre)" alt="avatar" />
                                 </button>
                             }
                             @else {
-                                <button>
-                                    <img class="imagenLista" [src]="avatar.src" alt="avatar" />
+                                <button (click)="cambiarAvatar(avatar.nombre)">
+                                    <img class="imagenLista" [src]="crearRutaAvatar(avatar.nombre)" alt="avatar" />
                                 </button>
                             }
                         </li>
                     }
+                    
                 </ul>
             }
             @else {}

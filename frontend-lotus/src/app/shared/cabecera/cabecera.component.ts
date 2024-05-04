@@ -3,6 +3,8 @@ import { CabeceraService } from '../../api/cabecera.service';
 import { Usuario } from '../../models/usuario';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { Personalizable } from '../../models/personalizables';
+import { PersonalizablesService } from '../../api/personalizables.service';
 
 @Component({
   selector: 'app-cabecera',
@@ -22,7 +24,7 @@ export class CabeceraComponent implements OnInit{
   rutaAvatar!: string;
 
 
-  constructor(private cabeceraService: CabeceraService , @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(private cabeceraService: CabeceraService , @Inject(PLATFORM_ID) private platformId: Object, private personalizablesService: PersonalizablesService) {
     if(isPlatformBrowser(this.platformId)){
       this.usuarioActivo = localStorage.getItem("usuarioActivo");
     }
@@ -30,7 +32,17 @@ export class CabeceraComponent implements OnInit{
   
   ngOnInit(): void {
     this.obtenerUsuario()
-    this.rutaAvatar = "../../../assets/sources/avatares/" + localStorage.getItem('avatar') + ".png";
+    this.personalizablesService.obtenerAvatarUsuario(this.usuarioActivo).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.rutaAvatar = this.obtenerRutaAvatar(data.nombre);
+      },
+      error: (error: any) => {
+        console.log("Error al obtener el avatar del usuario");
+        console.log(error);
+      }
+    
+    });
   }
 
   obtenerUsuario(){
@@ -48,5 +60,9 @@ export class CabeceraComponent implements OnInit{
       }
     })
 
+  }
+
+  obtenerRutaAvatar(avatar: string){
+    return "../../../assets/sources/avatares/" + avatar + ".png";
   }
 }

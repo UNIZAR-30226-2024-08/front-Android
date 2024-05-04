@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class MiApiService {
   // Base de la URL
-  private baseUrl = 'https://casino-backend.azurewebsites.net';
+  //private baseUrl = 'https://casino-backend.azurewebsites.net';
+  private baseUrl = 'http://localhost:3001';
 
   constructor(private _httpClient: HttpClient) {}
 

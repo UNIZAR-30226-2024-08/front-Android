@@ -180,8 +180,15 @@ main{
 }
 
 .listaCondicion>.seleccionado{
-    border-color: black;
-    border-width: 6px;
+    width: 120px;
+    height: 120px;
+    margin: 5px;
+    border: black;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 5px;
+    background-color: var(--color-principal);
+    padding: 0px;
 }
 
 .imagenLista{

@@ -4,7 +4,7 @@
 
 
 import { Component } from '@angular/core';
-import {NgZone } from '@angular/core';
+import { NgZone } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
@@ -78,7 +78,7 @@ export class LoginComponent{
           console.log(res);
           this.personalizablesService.obtenerAvatarUsuario(this.gmailUsuario).subscribe({
             next: (res: any) => {
-              this.avatar = res.avatar;
+              this.avatar = res.nombre;
               localStorage.setItem('avatar', this.avatar);
             },
             error: (error: any) => {

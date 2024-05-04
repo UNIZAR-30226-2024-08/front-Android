@@ -3,3 +3,7 @@ export interface Personalizable {
     tipo: string;
     precio: number;
 }
+
+export interface listaAvatares{
+    avatares: Personalizable[];
+}

@@ -4,13 +4,14 @@ import { Constantes } from '../../../constants/constantes';
 import { NavegacionPerfilComponent } from '../../shared/navegacion-perfil/navegacion-perfil.component';
 import { CabeceraService } from '../../api/cabecera.service';
 import { PersonalizablesService } from '../../api/personalizables.service';
-import { strict } from 'assert';
-import { error } from 'console';
+import { Observable } from 'rxjs';
+import { Personalizable, listaAvatares } from '../../models/personalizables';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-perfil-personal',
   standalone: true,
-  imports: [CabeceraComponent, NavegacionPerfilComponent],
+  imports: [AsyncPipe,CabeceraComponent, NavegacionPerfilComponent],
   templateUrl: './perfil-personal.component.html',
   styleUrl: './perfil-personal.component.css'
 })
@@ -20,13 +21,17 @@ export class PerfilPersonalComponent {
   mostrarCartas = false;
   mostrarAvatar = false;
 
-  rutaAvatar!: string
+  avatarUsuario!: any;
   nombreUsuario!: any;
   gmailUsuario!: any;
+
+  rutaAvatar!: string;
   
 
+  listaAvataresMostrar!: any;
+
   listaCartas: any;
-  listaAvatares: any;
+  // listaAvatares: any;
 
   nuevoNombre!: string;
 
@@ -37,11 +42,35 @@ export class PerfilPersonalComponent {
 
   ngOnInit(){
     this.constantes.personal = true;
-    this.rutaAvatar = "../../../assets/sources/avatares/" + localStorage.getItem('avatar') + ".png";
+    this.avatarUsuario = localStorage.getItem('avatar');
+    this.rutaAvatar = "../../../assets/sources/avatares/" + this.avatarUsuario + ".png";
     this.nombreUsuario = localStorage.getItem('nombreUsuario');
     this.gmailUsuario = localStorage.getItem('usuarioActivo');
+    this.personalizablesService.obtenerAvataresDesbloqueados(this.gmailUsuario).subscribe({
+      next: (data: any) => {
+        this.listaAvataresMostrar = data;
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    
+    });
+  }
+  
+  mostrarCartasFunc(){
+    this.mostrarCartas = !this.mostrarCartas;
+    this.mostrarAvatar = false;
   }
 
+  mostrarAvatarFunc(){
+    this.mostrarAvatar = !this.mostrarAvatar;
+    this.mostrarCartas = false;
+  }
+
+  crearRutaAvatar(avatar: string){
+    return "../../../assets/sources/avatares/" + avatar + ".png";
+  
+  }
 
   mostrarAviso(){
     const textoOculto = document.getElementById("mensajeOculto");
@@ -73,6 +102,19 @@ export class PerfilPersonalComponent {
         }
       })
     }
+  }
+
+  cambiarAvatar(avatar: string){
+    this.personalizablesService.cambiarAvatar(this.gmailUsuario, avatar).subscribe({
+      next: (data: any) => {
+        localStorage.setItem('avatar', avatar);
+        console.log(data.mesaje);
+        location.reload();
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
   }
 
 
