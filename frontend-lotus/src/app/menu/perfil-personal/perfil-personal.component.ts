@@ -109,7 +109,10 @@ export class PerfilPersonalComponent {
       next: (data: any) => {
         localStorage.setItem('avatar', avatar);
         console.log(data.mesaje);
+        // this.rutaAvatar = this.crearRutaAvatar(avatar);
+        // this.avatarUsuario = avatar;
         location.reload();
+        
       },
       error: (error: any) => {
         console.log(error);
