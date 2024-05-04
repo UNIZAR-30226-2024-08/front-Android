@@ -3,6 +3,33 @@
     <app-navegacion-perfil></app-navegacion-perfil>
 
     <div class="pantalla">
+        <div class="avatares">
+            <p class="titulo">Avatares</p>
+            <div class="listaAvatres">
+                <ul>
+                    @for (avatar of listaAvataresComprar; track avatar.nombre) {
+                        <li>
+                          <button class="imgAvatar">
+                            <img [src]="crearRutaAvatar(avatar.nombre)" alt="avatar">
+                            <p>
+                                Precio: 10
+                            </p>
+                          </button>  
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="cartas">
+            <p class="titulo">Cartas</p>
+        </div>
+    </div>
+    <div class="mensaje">
+        <p>¿Seguro que quieres comprar este avatar?</p>
+        <div class="botones">
+            <button>Si</button>
+            <button>No</button>
+        </div>
         
     </div>
 </main>

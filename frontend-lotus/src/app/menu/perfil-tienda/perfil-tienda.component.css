@@ -7,4 +7,134 @@ main{
     background-color: #00433D;
     width: 100vw;
     height: 100vh;
+    
+}
+
+.pantalla{
+    display: flex;
+    justify-content: space-around;
+    height: 70%;
+    padding: 0;
+}
+
+.titulo{
+    color: var(--color-secundario);
+    font-size: xx-large;
+    height: 10%;
+    margin: 10px;
+    text-align: center;
+}
+
+.avatares{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cartas{
+    justify-content: center;
+    display: grid;
+    align-items: center;
+    width: 50%;
+    border: white 2px solid;
+}
+
+.listaAvatres{
+    overflow-y: scroll;
+    height: 80%;
+    margin: 0px;
+    padding: 0;
+    width: 80%;
+    padding:0;
+}
+
+.listaAvatres>ul{
+    list-style: none;
+    padding: 0;
+    display: inline;
+    align-content: center;
+}
+
+.listaAvatres>ul>li{
+    padding: 0;
+    display: inline;
+    margin: 5px;
+}
+
+.imgAvatar{
+    width: 180px;
+    height: 180px;
+    padding: 0;
+    padding-top: 2vh;
+    border: var(--color-secundario) 5px solid;
+    background-color: var(--color-principal);
+    margin: 10px;
+    
+}
+
+.imgAvatar>img{
+    width: 60%;
+    height: 60%;
+    margin: 0;
+}
+
+.imgAvatar>p{
+    height: 30%;
+    text-align: center;
+    color: var(--color-secundario);
+    font-size: x-large;
+    margin: 2vh;
+}
+
+.listaAvatres::-webkit-scrollbar{
+    width: 12px;
+}
+
+.listaAvatres::-webkit-scrollbar-thumb{
+    background-color: var(--color-secundario);
+    border-radius: 10px;
+}
+
+.mensaje{
+    z-index: 100;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 35vw;
+    height: 35vh;
+    background-color: var(--color-secundario);
+    border: var(--color-secundario) 2px solid;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.mensaje>p{
+    color: var(--color-principal);
+    font-size: xx-large;
+    margin: 2%;
+    padding: 0;
+    text-align: center;
+}
+
+.mensaje>.botones{
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.botones>button{
+    margin: 5%;
+    width: 10vw;
+    height: 10vh;
+    padding: 0;
+    font-size: x-large;
+    background-color: var(--color-principal);
+    color: var(--color-secundario);
+    border: none;
+    border-radius: 15%;
 }

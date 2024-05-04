@@ -14,7 +14,7 @@ export class TiendaService {
   constructor(private httpClient: HttpClient) { }
 
   obtenerAvataresTineda(): Observable<listaAvatares>{
-    return this.httpClient.get<listaAvatares>(`${this.url}/tineda/obtenerAvatares`)
+    return this.httpClient.get<listaAvatares>(`${this.url}/tienda/obtenerAvatares`)
 
   }
 
@@ -26,7 +26,7 @@ export class TiendaService {
       'tipo' : "Avatar"
     }
 
-    return this.httpClient.put(`${this.url}/tineda/comprarPersonalizable`, body)
+    return this.httpClient.put(`${this.url}/tienda/comprarPersonalizable`, body)
   }
 
 }

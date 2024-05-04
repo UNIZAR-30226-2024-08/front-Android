@@ -14,20 +14,24 @@ import { listaAvatares } from '../../models/personalizables';
 })
 export class PerfilTiendaComponent {
 
-  listaAvatares$!: Observable<listaAvatares>;
+  listaAvataresComprar!: any;
 
   constructor(private tiendaService: TiendaService) { }
 
   ngOnInit(): void {
     this.tiendaService.obtenerAvataresTineda().subscribe({
       next: (data: any) => {
-        this.listaAvatares$ = data;
+        this.listaAvataresComprar = data;
         console.log(data);
       },
       error: (error: any) => {
         console.error(error);
       }
     })
+  }
+
+  crearRutaAvatar(nombreAvatar: string): string {
+    return "../../../assets/sources/avatares/" + nombreAvatar + ".png";
   }
 
 }
