@@ -19,5 +19,5 @@ export class PersonalizablesService {
 
     return this.httpClient.put(`${this.url}/cambiarNombre`, body)
   }
-
+  
 }
