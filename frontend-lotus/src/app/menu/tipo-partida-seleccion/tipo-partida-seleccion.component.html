@@ -1,0 +1,28 @@
+<main>
+    <app-cabecera></app-cabecera>    
+    <div class="div_body">
+        <div class="mensaje_bienvenida">
+            <h1>Bienvenido a <em>CasinoLotus</em></h1>
+            <h2>¿Quiere iniciar una nueva partida o reaundarla ?</h2>
+        </div>
+        <div class="cards_juegos">
+            <a >
+                <div class="card">
+                    <img class="card-img-top" src="../../../assets/sources/inicio/reanudar.png" alt="Foto de reanudar">
+                    <div class="card-body">
+                        <p class="card-text">Reanudar Partida</p>
+                    </div>
+                
+                </div>
+            </a>
+            <a routerLink={{this.ruta}}>
+                <div class="card">
+                    <img class="card-img-top" src="../../../assets/sources/inicio/nueva_partida.png" alt="Fichas de póker">
+                    <div class="card-body">
+                        <p class="card-text"> Nueva Partida</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</main>

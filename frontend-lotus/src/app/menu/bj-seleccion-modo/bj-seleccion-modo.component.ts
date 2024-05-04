@@ -14,7 +14,6 @@ export class BjSeleccionModoComponent {
   constructor() {}
 
   ngOnInit(): void {
-    localStorage.setItem('tipoDeJuego', 'blackjack');
   }
   
 }

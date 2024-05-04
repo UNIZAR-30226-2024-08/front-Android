@@ -13,6 +13,5 @@ export class PokerSeleccionModoComponent {
     constructor() {}
 
     ngOnInit(): void {
-      localStorage.setItem("tipoJuego", "poker");
     }
 }
