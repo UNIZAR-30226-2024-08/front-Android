@@ -13,11 +13,10 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class BjSeleccionModoComponent {
 
-  constructor(private tipo: TipoJuegoService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    // Your code here
-    this.tipo.tipoJuego$.next("blackjack");
-  
+    localStorage.setItem('tipoDeJuego', 'blackjack');
   }
+  
 }

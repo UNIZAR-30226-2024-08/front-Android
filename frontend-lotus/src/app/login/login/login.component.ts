@@ -9,7 +9,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../api/usuarios.service';
- 
+
 declare var google: any;
 
 @Component({

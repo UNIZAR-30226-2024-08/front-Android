@@ -4,7 +4,7 @@
         <p>Comparte el siguiente código con tus amigos para que puedan unirse a la sala</p>
         <p>El codigo de la sala es <em>{{codigoSala}}</em></p>   
         <div class="div_botones">
-            <button class="boton">Aceptar</button>
+            <button class="boton" (click)="iniciarSala()" >Aceptar</button>
             <a [routerLink]="['/menu/']" >
                 <button class="boton">Volver</button>
             </a>

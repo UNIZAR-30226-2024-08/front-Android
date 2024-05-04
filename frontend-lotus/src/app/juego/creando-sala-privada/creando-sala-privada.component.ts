@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject, NgZone, PLATFORM_ID, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 import { TipoJuegoService } from '../../api/tipo-juego.service';
 @Component({
   selector: 'app-creando-sala-privada',
@@ -9,13 +10,36 @@ import { TipoJuegoService } from '../../api/tipo-juego.service';
   styleUrl: './creando-sala-privada.component.css'
 })
 export class CreandoSalaPrivadaComponent {
-  
-  constructor(private router: Router,private tipo :TipoJuegoService) { }
 
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.router.navigate(['/juego/crear-sala-privada']); // Redirige a la ruta /juego/crear-sala-privada
-    }, 4000); // 4000 milisegundos = 4 segundos
-    this.tipo.tipoJuego$.subscribe(data => {console.log(`El valor de la variable cambio a: ${data}`);});
+
+  private usuarioActivo: any;
+  
+  private tipoSala: boolean = false;
+
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object,private tipo: TipoJuegoService) {
+    if(isPlatformBrowser(this.platformId)){
+      this.usuarioActivo = localStorage.getItem("usuarioActivo");
+      
+    }
+  }
+  ngZone: NgZone = inject(NgZone);
+  ngAfterViewInit(): void {
+    this.crearSalaPrivada();
+    
+  }
+  crearSalaPrivada(){
+    console.log("Creando sala privada...");
+
+    this.tipo.CrearSalaPrivada(this.usuarioActivo, this.tipoSala).subscribe({
+      next: (data: any) => {
+        localStorage.setItem("codigoSala", data.codigo);
+        console.log(data.codigo);
+        this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
+      },
+      error: (error: any) => {
+        console.log("Error al crear sala privada");
+        console.log(error);
+      }
+    })
   }
 }

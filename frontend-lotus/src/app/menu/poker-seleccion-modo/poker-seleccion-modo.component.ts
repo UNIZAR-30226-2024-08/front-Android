@@ -11,11 +11,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './poker-seleccion-modo.component.css'
 })
 export class PokerSeleccionModoComponent {
-    constructor(private tipo: TipoJuegoService) {}
+    constructor() {}
 
     ngOnInit(): void {
-      // Your code here
-      this.tipo.tipoJuego$.next("poker");
-    
+      localStorage.setItem("tipoJuego", "poker");
     }
 }
