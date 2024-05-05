@@ -34,7 +34,7 @@ export class CabeceraComponent implements OnInit{
     this.obtenerUsuario()
     this.personalizablesService.obtenerAvatarUsuario(this.usuarioActivo).subscribe({
       next: (data: any) => {
-        console.log(data);
+        console.log("El avatar es: "+data.nombre);
         this.rutaAvatar = this.obtenerRutaAvatar(data.nombre);
       },
       error: (error: any) => {

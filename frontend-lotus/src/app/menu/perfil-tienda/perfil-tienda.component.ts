@@ -16,9 +16,13 @@ export class PerfilTiendaComponent {
 
   listaAvataresComprar!: any;
 
+  avatarSeleccionado!: string;
+  gmailUsuario!: any;
+
   constructor(private tiendaService: TiendaService) { }
 
   ngOnInit(): void {
+    this.gmailUsuario = localStorage.getItem('usuarioActivo');
     this.tiendaService.obtenerAvataresTineda().subscribe({
       next: (data: any) => {
         this.listaAvataresComprar = data;
@@ -30,8 +34,36 @@ export class PerfilTiendaComponent {
     })
   }
 
-  crearRutaAvatar(nombreAvatar: string): string {
+  crearRutaAvatar(nombreAvatar: string): string{
     return "../../../assets/sources/avatares/" + nombreAvatar + ".png";
+  }
+
+  mostrarAvisoCompra(): void{
+    //Cojemos el div con el id avisoCompra
+    const avisoCompra = document.getElementsByClassName("mensaje")[0] as HTMLElement;
+    avisoCompra.style.display = "block";
+  }
+
+  seleccionarAvatar(nombreAvatar: string): void{
+    this.avatarSeleccionado = nombreAvatar;
+    this.mostrarAvisoCompra();
+  }
+
+  cancelarCompra(): void{
+    const avisoCompra = document.getElementsByClassName("mensaje")[0] as HTMLElement;
+    avisoCompra.style.display = "none";
+    this.avatarSeleccionado = "";
+  }
+
+  comprarAvatar(){
+    this.tiendaService.comprarAvatar(this.gmailUsuario, this.avatarSeleccionado, "Avatar").subscribe({
+      next(data: any){
+        console.log(data);
+      },
+      error(error: any){
+        console.error(error);
+      }
+    });
   }
 
 }

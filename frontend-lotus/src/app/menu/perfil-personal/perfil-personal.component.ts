@@ -111,7 +111,7 @@ export class PerfilPersonalComponent {
         console.log(data.mesaje);
         // this.rutaAvatar = this.crearRutaAvatar(avatar);
         // this.avatarUsuario = avatar;
-        location.reload();
+        
         
       },
       error: (error: any) => {

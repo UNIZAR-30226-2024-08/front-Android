@@ -9,7 +9,7 @@
                 <ul>
                     @for (avatar of listaAvataresComprar; track avatar.nombre) {
                         <li>
-                          <button class="imgAvatar">
+                          <button class="imgAvatar" (click)="seleccionarAvatar(avatar.nombre)">
                             <img [src]="crearRutaAvatar(avatar.nombre)" alt="avatar">
                             <p>
                                 Precio: 10
@@ -27,8 +27,8 @@
     <div class="mensaje">
         <p>¿Seguro que quieres comprar este avatar?</p>
         <div class="botones">
-            <button>Si</button>
-            <button>No</button>
+            <button (click)="comprarAvatar()">Si</button>
+            <button (click)="cancelarCompra()">No</button>
         </div>
         
     </div>

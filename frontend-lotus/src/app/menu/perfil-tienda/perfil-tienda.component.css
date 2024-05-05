@@ -110,6 +110,7 @@ main{
     display: flex;
     flex-direction: column;
     padding: 0;
+    display: none;
 }
 
 .mensaje>p{
