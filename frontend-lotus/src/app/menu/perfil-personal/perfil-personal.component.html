@@ -24,16 +24,16 @@
         <div class = "mostrar">
             @if (mostrarCartas) {
                 <ul>
-                    @for (carta of listaCartas; track carta.id) {
+                    @for (carta of listaCartas; track carta.nombre) {
                         <li class="listaCondicion">
                             @if (true) {
                                 <button class="seleccionado">
-                                    <img class="imagenLista" [src]="carta.src" alt="carta" />
+                                    <img class="imagenLista" [src]="crearRutaAvatar(carta.nombre)" alt="carta" />
                                 </button>
                             }
                             @else {
                                 <button>
-                                    <img class="imagenLista" [src]="carta.src" alt="carta" />
+                                    <img class="imagenLista" [src]="crearRutaAvatar(carta.nombre)" alt="carta" />
                                 </button>
                             }
                         </li>

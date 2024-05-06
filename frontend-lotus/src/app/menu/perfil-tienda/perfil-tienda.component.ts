@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
 import { NavegacionPerfilComponent } from '../../shared/navegacion-perfil/navegacion-perfil.component';
 import { TiendaService } from '../../api/tienda.service';
-import { Observable } from 'rxjs';
-import { listaAvatares } from '../../models/personalizables';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-perfil-tienda',
@@ -15,23 +15,37 @@ import { listaAvatares } from '../../models/personalizables';
 export class PerfilTiendaComponent {
 
   listaAvataresComprar!: any;
-
+  listaCartasComprar!: any;
   avatarSeleccionado!: string;
   gmailUsuario!: any;
-
+  tipoPersonalizable!: string;
   constructor(private tiendaService: TiendaService) { }
 
   ngOnInit(): void {
+    const avisoCompra = document.getElementsByClassName("mensaje")[0] as HTMLElement;
+    avisoCompra.style.display = "none";
+    const avisoCompra2 = document.getElementsByClassName("mensaje2")[0] as HTMLElement;
+    avisoCompra2.style.display = "none";
     this.gmailUsuario = localStorage.getItem('usuarioActivo');
-    this.tiendaService.obtenerAvataresTineda().subscribe({
+    this.tiendaService.obtenerAvataresTineda(this.gmailUsuario).subscribe({
       next: (data: any) => {
         this.listaAvataresComprar = data;
         console.log(data);
-      },
+      },   
       error: (error: any) => {
         console.error(error);
       }
     })
+    this.tiendaService.obtenerCartasTineda(this.gmailUsuario).subscribe({
+      next: (data: any) => {
+        this.listaCartasComprar = data;
+        console.log(data);
+      },   
+      error: (error: any) => {
+        console.error(error);
+      }
+    })
+
   }
 
   crearRutaAvatar(nombreAvatar: string): string{
@@ -46,22 +60,41 @@ export class PerfilTiendaComponent {
 
   seleccionarAvatar(nombreAvatar: string): void{
     this.avatarSeleccionado = nombreAvatar;
+    this.tipoPersonalizable = "Avatar";
     this.mostrarAvisoCompra();
   }
-
+  seleccionarCarta(nombreCarta: string): void{
+    this.avatarSeleccionado = nombreCarta;
+    this.tipoPersonalizable = "Cartas";
+    this.mostrarAvisoCompra();
+  }
   cancelarCompra(): void{
     const avisoCompra = document.getElementsByClassName("mensaje")[0] as HTMLElement;
     avisoCompra.style.display = "none";
     this.avatarSeleccionado = "";
   }
-
+  mensajeSaldo(){
+    const avisoCompra = document.getElementsByClassName("mensaje2")[0] as HTMLElement;
+    avisoCompra.style.display = "none";
+    this.avatarSeleccionado = "";
+  }
   comprarAvatar(){
-    this.tiendaService.comprarAvatar(this.gmailUsuario, this.avatarSeleccionado, "Avatar").subscribe({
+    this.tiendaService.comprarPersonalizable(this.gmailUsuario, this.avatarSeleccionado, this.tipoPersonalizable).subscribe({
       next(data: any){
-        console.log(data);
+        const avisoCompra = document.getElementsByClassName("mensaje")[0] as HTMLElement;
+        avisoCompra.style.display = "none";
+        this.avatarSeleccionado = "";
+        location.reload();
       },
       error(error: any){
         console.error(error);
+        if(error.status == 400){
+          console.log("No tienes suficientes monedas");
+          const avisoCompra = document.getElementsByClassName("mensaje")[0] as HTMLElement;
+          avisoCompra.style.display = "none";
+          const avisoCompra2= document.getElementsByClassName("mensaje2")[0] as HTMLElement;
+          avisoCompra2.style.display = "block";
+        }
       }
     });
   }

@@ -18,27 +18,27 @@ export class NavegacionPerfilComponent {
   constructor(private constantes: Constantes) {}
 
   ngOnInit(){
-    this.personal = this.constantes.personal;
-    this.tienda = this.constantes.tienda;
-    this.historial = this.constantes.historial;
+    this.personal = localStorage.getItem('personal')== 'true';
+    this.tienda =  localStorage.getItem('tienda')== 'true';
+    this.historial = localStorage.getItem('historial')== 'true';
   }
 
   irPersonal(){
-    this.constantes.personal = true;
-    this.constantes.tienda = false;
-    this.constantes.historial = false;
+    localStorage.setItem('personal', 'true');
+    localStorage.setItem('tienda', 'false');
+    localStorage.setItem('historial', 'false');
   }
 
   irHistorial(){
-    this.constantes.personal = false;
-    this.constantes.tienda = false;
-    this.constantes.historial = true;
+    localStorage.setItem('personal', 'false');
+    localStorage.setItem('tienda', 'false');
+    localStorage.setItem('historial', 'true');
   }
 
   irTienda(){
-    this.constantes.personal = false;
-    this.constantes.tienda = true;
-    this.constantes.historial = false;
+    localStorage.setItem('personal', 'false');
+    localStorage.setItem('tienda', 'true');
+    localStorage.setItem('historial', 'false');
 
   }
 }

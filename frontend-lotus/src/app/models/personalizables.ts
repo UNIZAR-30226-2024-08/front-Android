@@ -7,3 +7,7 @@ export interface Personalizable {
 export interface listaAvatares{
     avatares: Personalizable[];
 }
+
+export interface listaCartas{
+    cartas: Personalizable[];
+}

@@ -38,7 +38,11 @@ export class PerfilPersonalComponent {
   
 
   constructor(private constantes: Constantes, private cabeceraService: CabeceraService,
-              private personalizablesService: PersonalizablesService) {}
+              private personalizablesService: PersonalizablesService) {
+                localStorage.setItem('personal', 'true');
+                localStorage.setItem('tienda', 'false');
+                localStorage.setItem('historial', 'false');
+              }
 
   ngOnInit(){
     this.constantes.personal = true;
@@ -49,6 +53,15 @@ export class PerfilPersonalComponent {
     this.personalizablesService.obtenerAvataresDesbloqueados(this.gmailUsuario).subscribe({
       next: (data: any) => {
         this.listaAvataresMostrar = data;
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    
+    });
+    this.personalizablesService.obtenerCartasDesbloqueadas(this.gmailUsuario).subscribe({
+      next: (data: any) => {
+        this.listaCartas = data;
       },
       error: (error: any) => {
         console.log(error);
@@ -92,6 +105,7 @@ export class PerfilPersonalComponent {
 
     if(input != null){
       this.nuevoNombre = input.value;
+      console.log(this.nuevoNombre);
       this.personalizablesService.cambiarNombre(this.gmailUsuario, this.nuevoNombre).subscribe({
         next: (data: any) => {
           localStorage.setItem('nombreUsuario', this.nuevoNombre);

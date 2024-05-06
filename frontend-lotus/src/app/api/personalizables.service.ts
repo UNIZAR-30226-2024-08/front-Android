@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Personalizable, listaAvatares } from '../models/personalizables';
+import { Personalizable, listaAvatares, listaCartas } from '../models/personalizables';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,10 @@ export class PersonalizablesService {
     }
     return this.httpClient.put(`${this.url}/cambiarNombre`, body)
   }
+  
+  obtenerUsuario(gmail: string):any{
+    return this.httpClient.get(`${this.url}/obtenerUsuario/${gmail}`)
+  }
 
   obtenerAvatarUsuario(gmail: string): any{
     return this.httpClient.get(`${this.url}/obtenerAvatar/${gmail}`)
@@ -31,6 +35,10 @@ export class PersonalizablesService {
     return this.httpClient.get<listaAvatares>(`${this.url}/obtenerAvataresDesbloqueados/${gmail}`)
   }
 
+  obtenerCartasDesbloqueadas(gmail: string): Observable<listaCartas>{
+    return this.httpClient.get<listaCartas>(`${this.url}/obtenerCartasDesbloqueadas/${gmail}`)
+  }
+  
   cambiarAvatar(gmail: string, nombreAvatar: string): any{
     let body = {
       'gmail' : gmail,
