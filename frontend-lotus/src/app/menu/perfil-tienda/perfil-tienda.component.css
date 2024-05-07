@@ -61,6 +61,7 @@ main{
     padding: 0;
     padding-top: 2vh;
     border: var(--color-secundario) 5px solid;
+    border-radius: 5px;
     background-color: var(--color-principal);
     margin: 10px;
     
