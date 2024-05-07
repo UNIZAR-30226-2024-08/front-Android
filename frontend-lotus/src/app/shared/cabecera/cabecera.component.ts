@@ -41,7 +41,6 @@ export class CabeceraComponent implements OnInit{
         console.log("Error al obtener el avatar del usuario");
         console.log(error);
       }
-    
     });
   }
 

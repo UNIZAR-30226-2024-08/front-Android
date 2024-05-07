@@ -15,8 +15,6 @@ export class NavegacionPerfilComponent {
   tienda!: boolean
   historial!: boolean
 
-  constructor(private constantes: Constantes) {}
-
   ngOnInit(){
     this.personal = localStorage.getItem('personal')== 'true';
     this.tienda =  localStorage.getItem('tienda')== 'true';

@@ -27,7 +27,7 @@ export class LoginComponent{
   nombreUsuario!: string;
   usuarioJson: any;
   avatar!: string;
-
+  carta !: string;
   constructor( private userService: UsuariosService, private personalizablesService: PersonalizablesService, private cabeceraService: CabeceraService) {
   }
 
@@ -95,6 +95,15 @@ export class LoginComponent{
               console.log(error);
             }
           });
+          this.personalizablesService.obtenerCartasUsuario(this.gmailUsuario).subscribe({
+            next: (res: any) => {
+              this.carta = res.nombre;
+              localStorage.setItem('cartas', this.carta);
+            },
+            error: (error: any) => {
+              console.log(error);
+            }
+          });
           //El ngZone se pone para solventar este error: Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'?
           this.ngZone.run(() => this.router.navigate(['/menu']));
         },
@@ -103,6 +112,8 @@ export class LoginComponent{
           console.log(err);
         }
       })
+      localStorage.setItem('mostarCartas', 'false');
+      localStorage.setItem('mostrarAvatar', 'false');
     }
   }
 }

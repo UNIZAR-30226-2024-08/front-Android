@@ -29,7 +29,9 @@ export class PersonalizablesService {
   obtenerAvatarUsuario(gmail: string): any{
     return this.httpClient.get(`${this.url}/obtenerAvatar/${gmail}`)
   }
-
+  obtenerCartasUsuario(gmail: string): any{
+    return this.httpClient.get(`${this.url}/obtenerCartas/${gmail}`)
+  }
 
   obtenerAvataresDesbloqueados(gmail: string): Observable<listaAvatares>{
     return this.httpClient.get<listaAvatares>(`${this.url}/obtenerAvataresDesbloqueados/${gmail}`)
@@ -46,4 +48,12 @@ export class PersonalizablesService {
     }
     return this.httpClient.put(`${this.url}/cambiarAvatar`, body)
   }
+  cambiarCarta(gmail: string, nombreCarta: string): any{
+    let body = {
+      'gmail' : gmail,
+      'carta' : nombreCarta
+    }
+    return this.httpClient.put(`${this.url}/cambiarCartas`, body)
+  }
+  
 }

@@ -26,13 +26,13 @@
                 <ul>
                     @for (carta of listaCartas; track carta.nombre) {
                         <li class="listaCondicion">
-                            @if (true) {
+                            @if (cartasUsuario == carta.nombre) {
                                 <button class="seleccionado">
                                     <img class="imagenLista" [src]="crearRutaAvatar(carta.nombre)" alt="carta" />
                                 </button>
                             }
                             @else {
-                                <button>
+                                <button (click)="cambiarCartas(carta.nombre)">
                                     <img class="imagenLista" [src]="crearRutaAvatar(carta.nombre)" alt="carta" />
                                 </button>
                             }

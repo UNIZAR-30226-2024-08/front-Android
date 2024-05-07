@@ -20,16 +20,13 @@ import { AsyncPipe } from '@angular/common';
 export class PerfilPersonalComponent {
   mostrarCartas = false;
   mostrarAvatar = false;
-
   avatarUsuario!: any;
+  cartasUsuario!: any;
   nombreUsuario!: any;
   gmailUsuario!: any;
-
   rutaAvatar!: string;
-  
-
+  rutaCarta!: string;
   listaAvataresMostrar!: any;
-
   listaCartas: any;
   // listaAvatares: any;
 
@@ -45,11 +42,14 @@ export class PerfilPersonalComponent {
               }
 
   ngOnInit(){
-    this.constantes.personal = true;
     this.avatarUsuario = localStorage.getItem('avatar');
+    this.cartasUsuario = localStorage.getItem('cartas');
     this.rutaAvatar = "../../../assets/sources/avatares/" + this.avatarUsuario + ".png";
+    this.rutaCarta = "../../../assets/sources/cartas/" + this.cartasUsuario + ".png";
     this.nombreUsuario = localStorage.getItem('nombreUsuario');
     this.gmailUsuario = localStorage.getItem('usuarioActivo');
+    this.mostrarCartas = localStorage.getItem('mostrarCartas') == 'true';
+    this.mostrarAvatar = localStorage.getItem('mostrarAvatar') == 'true';
     this.personalizablesService.obtenerAvataresDesbloqueados(this.gmailUsuario).subscribe({
       next: (data: any) => {
         this.listaAvataresMostrar = data;
@@ -72,12 +72,16 @@ export class PerfilPersonalComponent {
   
   mostrarCartasFunc(){
     this.mostrarCartas = !this.mostrarCartas;
+    localStorage.setItem('mostrarCartas', this.mostrarCartas.toString());
     this.mostrarAvatar = false;
+    localStorage.setItem('mostrarAvatar', this.mostrarAvatar.toString());
   }
 
   mostrarAvatarFunc(){
     this.mostrarAvatar = !this.mostrarAvatar;
+    localStorage.setItem('mostrarAvatar', this.mostrarAvatar.toString());
     this.mostrarCartas = false;
+    localStorage.setItem('mostrarCartas', this.mostrarCartas.toString());
   }
 
   crearRutaAvatar(avatar: string){
@@ -102,7 +106,6 @@ export class PerfilPersonalComponent {
       console.log(textoOculto.style.display)
       textoOculto.style.display = "none";
     }
-
     if(input != null){
       this.nuevoNombre = input.value;
       console.log(this.nuevoNombre);
@@ -123,10 +126,9 @@ export class PerfilPersonalComponent {
       next: (data: any) => {
         localStorage.setItem('avatar', avatar);
         console.log(data.mesaje);
-        // this.rutaAvatar = this.crearRutaAvatar(avatar);
-        // this.avatarUsuario = avatar;
-        
-        
+        this.rutaAvatar = this.crearRutaAvatar(avatar);
+        this.avatarUsuario = avatar;
+        location.reload();
       },
       error: (error: any) => {
         console.log(error);
@@ -134,5 +136,18 @@ export class PerfilPersonalComponent {
     });
   }
 
-
+  cambiarCartas(carta: string){
+    this.personalizablesService.cambiarCarta(this.gmailUsuario, carta).subscribe({
+      next: (data: any) => {
+        localStorage.setItem('cartas', carta);
+        console.log(data.mesaje);
+        this.rutaCarta = this.crearRutaAvatar(carta);
+        this.cartasUsuario = carta;
+        location.reload();
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
+  }
 }
