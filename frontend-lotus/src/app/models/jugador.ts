@@ -3,15 +3,26 @@ import { Carta } from "./carta";
 export class Jugador {
     id: number;
     nombreJugador: string;
-    cartasJugador: Carta[];
+    cartasJugador: any[] = [];
     
-    constructor(id: number, nombreJugador: string) {
+    constructor(id: number, nombreJugador: string, cartas: String[]) {
         this.id = id;
         this.nombreJugador = nombreJugador;
-        this.cartasJugador = [];
+
+        for (let i = 0; cartas.length; i++){
+            this.cartasJugador.push({
+                id: i + 1,
+                src: cartas[i]
+            });
+        }    
     }
 
-    addCarta(carta: Carta) {
-        this.cartasJugador.push(carta);
+    addCarta(cartas: String) {
+        for (let i = 0; cartas.length; i++){
+            this.cartasJugador.push({
+                id: i + 1,
+                src: cartas[i]
+            });
+        }   
     }
 }
