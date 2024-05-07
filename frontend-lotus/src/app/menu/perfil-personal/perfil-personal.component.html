@@ -28,12 +28,12 @@
                         <li class="listaCondicion">
                             @if (cartasUsuario == carta.nombre) {
                                 <button class="seleccionado">
-                                    <img class="imagenLista" [src]="crearRutaAvatar(carta.nombre)" alt="carta" />
+                                    <img class="imagenLista2" [src]="crearRutaAvatar(carta.nombre)" alt="carta" />
                                 </button>
                             }
                             @else {
                                 <button (click)="cambiarCartas(carta.nombre)">
-                                    <img class="imagenLista" [src]="crearRutaAvatar(carta.nombre)" alt="carta" />
+                                    <img class="imagenLista2" [src]="crearRutaAvatar(carta.nombre)" alt="carta" />
                                 </button>
                             }
                         </li>

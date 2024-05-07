@@ -26,7 +26,7 @@
                 <ul>
                     @for (carta of listaCartasComprar; track carta.nombre) {
                         <li>
-                            <button class="img" (click)="seleccionarCarta(carta.nombre)">
+                            <button class="img2" (click)="seleccionarCarta(carta.nombre)">
                                 <img [src]="crearRutaAvatar(carta.nombre)" alt="carta">
                                 <p>
                                     Precio: {{carta.precio}}

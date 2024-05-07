@@ -143,7 +143,8 @@ export class PerfilPersonalComponent {
         console.log(data.mesaje);
         this.rutaCarta = this.crearRutaAvatar(carta);
         this.cartasUsuario = carta;
-        location.reload();
+        // Add the following code to update the UI without reloading the page
+        this.listaCartas = [...this.listaCartas]; // Trigger change detection
       },
       error: (error: any) => {
         console.log(error);
