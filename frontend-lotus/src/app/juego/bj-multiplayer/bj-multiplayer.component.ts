@@ -18,7 +18,7 @@ import { Jugador } from '../../models/jugador';
 export class BjMultiplayerComponent {
   
   private usuarioActivo: any;
-  private idPartida: any;
+  private codigoSala: any;
 
   form!: FormGroup;
   apuesta : number = 0;
@@ -52,19 +52,17 @@ export class BjMultiplayerComponent {
     //Obener el usuario actual
     if(isPlatformBrowser(this.platformId)){
       this.usuarioActivo = localStorage.getItem("usuarioActivo");
-      this.idPartida  = localStorage.getItem("idPartida");
+      this.codigoSala  = localStorage.getItem("codigoSala");
     }
   }
   
   ngOnInit(): void {
-
-    // Pedir numero de jugadores en la partida
-    this.pedirNumeroJugadores();
-        //Obtener cartas iniciales del jugador
+    console.log("En ngOnInit de multijugador...")
+    //Obtener cartas iniciales del jugador
     this.pedirCartasIniciales();
 
     //Obtener jugadores
-    this.mostrarCartasOtros();
+    //this.mostrarCartasOtros();
     
 
     this.form.valueChanges.pipe(
@@ -73,12 +71,12 @@ export class BjMultiplayerComponent {
       console.log(value);
     });
 
-    this.esMiTurno();
+    //this.esMiTurno();
   }
 
   private esMiTurno() {
     while (this.noEsMiTurno) {
-      this.bjJuegoService.esMiTurno(this.usuarioActivo, this.idPartida).subscribe({
+      this.bjJuegoService.esMiTurno(this.usuarioActivo, this.codigoSala).subscribe({
         next: (data: any) => {
           data as boolean
           if (data) {
@@ -103,7 +101,7 @@ export class BjMultiplayerComponent {
   }
 
   private pedirNumeroJugadores() {
-    this.bjJuegoService.numeroJugadores(this.idPartida).subscribe({
+    this.bjJuegoService.numeroJugadores(this.codigoSala).subscribe({
       next: (data: any) => {
         data as number
         this.numeroJugadores = data;
@@ -118,7 +116,7 @@ export class BjMultiplayerComponent {
   private mostrarCartasOtros() {
 
     // Pedir cartas crupier
-    this.bjJuegoService.pedirCartasCrupier(this.idPartida).subscribe({
+    this.bjJuegoService.pedirCartasCrupier(this.codigoSala).subscribe({
       next: (data: any) => {
         data as String[]
         this.cartasCrupier.push(data)
@@ -133,7 +131,7 @@ export class BjMultiplayerComponent {
     this.listaJugadores.push(this.bancaJugador);
 
     // Pedir cartas otros jugadores
-    this.bjJuegoService.pedirOtrosJugadores(this.usuarioActivo, this.idPartida).subscribe({
+    this.bjJuegoService.pedirOtrosJugadores(this.usuarioActivo, this.codigoSala).subscribe({
       next: (data: any) => {
         //this.listaJugadores.push()
       },
@@ -157,7 +155,9 @@ export class BjMultiplayerComponent {
   }
 
   pedirCartasIniciales() {
-    this.bjJuegoService.pedirCartasIniciales(this.usuarioActivo, this.idPartida).subscribe({
+    console.log("Pidiendo las dos cartas iniciales del jugador...")
+
+    this.bjJuegoService.pedirCartasIniciales(this.usuarioActivo, this.codigoSala).subscribe({
       next: (data: any) => {
         data as string[]
         this.urlsCartasJugadorActivo.push(data);
@@ -167,7 +167,7 @@ export class BjMultiplayerComponent {
   }
   
   pedirCarta() {
-    this.bjJuegoService.pedirCarta(this.usuarioActivo, this.idPartida).subscribe({
+    this.bjJuegoService.pedirCarta(this.usuarioActivo, this.codigoSala).subscribe({
       next: (data: any) => {
         data as String;
         this.urlsCartasJugadorActivo.push(data);
@@ -184,13 +184,13 @@ export class BjMultiplayerComponent {
     for (let i = 0; this.urlsCartasJugadorActivo.length; i++){
       this.cartasUsuarioActivo.push({
         id: i + 1,
-        src: this.urlsCartasJugadorActivo[i]
+        src: "../../../assets/sources/juego/cartas/" + this.urlsCartasJugadorActivo[i]
       });
     }    
   }
 
   plantarse() {
-    this.bjJuegoService.plantarse(this.usuarioActivo, this.idPartida).subscribe({
+    this.bjJuegoService.plantarse(this.usuarioActivo, this.codigoSala).subscribe({
       next: (data: any) => {
       },
       error: (error) => {
@@ -204,7 +204,7 @@ export class BjMultiplayerComponent {
 
   private finPartida() {
     while (this.noEsFinPartida) {
-      this.bjJuegoService.finPartida(this.idPartida).subscribe({
+      this.bjJuegoService.finPartida(this.codigoSala).subscribe({
         next: (data: any) => {
           data as String[]
           if (data[0] == "Si") {
@@ -224,7 +224,7 @@ export class BjMultiplayerComponent {
   }
   
   apostar() {
-    this.bjJuegoService.apostar(this.usuarioActivo, this.apuesta, this.idPartida).subscribe({
+    this.bjJuegoService.apostar(this.usuarioActivo, this.apuesta, this.codigoSala).subscribe({
       next: (data: any) => {
       },
       error: (error) => {

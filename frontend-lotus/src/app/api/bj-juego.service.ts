@@ -11,61 +11,61 @@ export class bjJuegoService {
 
     constructor(private _httpClient: HttpClient) { }
 
-    apostar(usuarioActivo: string, cant: number, idPartida: number): Observable<JSON> {
+    apostar(usuarioActivo: string, cant: number, codigoSala: number): Observable<JSON> {
         let params = new HttpParams().set('gmail', usuarioActivo);
         params.set('cant', cant);
-        params.set('idPartida', idPartida);
+        params.set('codigoSala', codigoSala);
         return this._httpClient.get<JSON>(`${this.baseUrl}/bjJuego`, { params: params });
     }
 
-    plantarse(usuarioActivo: string, idPartida: number): Observable<JSON> {
+    plantarse(usuarioActivo: string, codigoSala: number): Observable<JSON> {
         let params = new HttpParams().set('gmail', usuarioActivo);
-        params.set('idPartida', idPartida);
+        params.set('codigoSala', codigoSala);
         return this._httpClient.get<JSON>(`${this.baseUrl}/bjJuego`, { params: params });
     }
 
-    pedirCarta(usuarioActivo: string, idPartida: number): Observable<JSON> {
+    pedirCarta(usuarioActivo: string, codigoSala: number): Observable<JSON> {
         let params = new HttpParams().set('gmail', usuarioActivo);
-        params.set('idPartida', idPartida);
+        params.set('codigoSala', codigoSala);
         return this._httpClient.get<JSON>(`${this.baseUrl}/bjJuego`, { params: params });
     }
 
-    retirarse(usuarioActivo: string, idPartida: number) {
+    retirarse(usuarioActivo: string, codigoSala: number) {
         let params = new HttpParams().set('gmail', usuarioActivo);
-        params.set('idPartida', idPartida);
+        params.set('codigoSala', codigoSala);
         return this._httpClient.get<JSON>(`${this.baseUrl}/bjJuego`, { params: params });
     }
 
-    esMiTurno(usuarioActivo: string, idPartida: number) {
+    esMiTurno(usuarioActivo: string, codigoSala: number) {
         let params = new HttpParams().set('gmail', usuarioActivo);
-        params.set('idPartida', idPartida);
+        params.set('codigoSala', codigoSala);
         return this._httpClient.get<JSON>(`${this.baseUrl}/bjJuego`, { params: params });
     }
 
-    pedirCartasCrupier(idPartida: number) {
-        let params = new HttpParams().set('idPartida', idPartida);
+    pedirCartasCrupier(codigoSala: number) {
+        let params = new HttpParams().set('codigoSala', codigoSala);
         return this._httpClient.get<JSON>(`${this.baseUrl}/bjJuego`, { params: params });
     }
 
-    pedirCartasIniciales(usuarioActivo: string, idPartida: number) {
+    pedirCartasIniciales(usuarioActivo: string, codigoSala: number) {
         let params = new HttpParams().set('gmail', usuarioActivo);
-        params.set('idPartida', idPartida);
+        params.set('codigoSala', codigoSala);
         return this._httpClient.get<JSON>(`${this.baseUrl}/bjJuego`, { params: params });
     }
 
-    pedirOtrosJugadores(usuarioActivo: string, idPartida: number) {
+    pedirOtrosJugadores(usuarioActivo: string, codigoSala: number) {
         let params = new HttpParams().set('gmail', usuarioActivo);
-        params.set('idPartida', idPartida);
+        params.set('codigoSala', codigoSala);
         return this._httpClient.get<JSON>(`${this.baseUrl}/bjJuego`, { params: params });
     }
 
-    numeroJugadores(idPartida: number) {
-        let params = new HttpParams().set('idPartida', idPartida);
+    numeroJugadores(codigoSala: number) {
+        let params = new HttpParams().set('codigoSala', codigoSala);
         return this._httpClient.get<JSON>(`${this.baseUrl}/bjJuego`, { params: params });
     }
 
-    finPartida(idPartida: number) {
-        let params = new HttpParams().set('idPartida', idPartida);
+    finPartida(codigoSala: number) {
+        let params = new HttpParams().set('codigoSala', codigoSala);
         return this._httpClient.get<JSON>(`${this.baseUrl}/bjJuego`, { params: params });
     }
 

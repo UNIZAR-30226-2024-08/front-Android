@@ -20,12 +20,12 @@ export const JUEGO_ROUTES: Routes = [
         component: UnirseSalaPrivadaComponent
     },
     {
-        path:'bj-multiplayer',
-        component: BjMultiplayerComponent
-    },
-    {
         path:'bj-one-player',
         component: BjOnePlayerComponent
+    },
+    {
+        path:'bj-multiplayer',
+        component: BjMultiplayerComponent
     },
     {
         path:'abandonar-sala',  
