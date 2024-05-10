@@ -25,4 +25,20 @@ export class Jugador {
             });
         }   
     }
+
+    ocultarDosPrimerasCartas() {
+        this.cartasJugador[0] = "../../../assets/sources/juego/reverso.jpg";
+        this.cartasJugador[1] = "../../../assets/sources/juego/reverso.jpg";
+    }
+
+    mostrarTodasLasCartas(): any {
+        return this.cartasJugador;
+    }
+
+    mostrarSoloCartasPedidas():any {
+        var cartasPedidas = this.cartasJugador;
+        cartasPedidas[0] = "../../../assets/sources/juego/reverso.jpg";
+        cartasPedidas[1] = "../../../assets/sources/juego/reverso.jpg";
+        return cartasPedidas;
+    }
 }

@@ -25,7 +25,8 @@ export class CrearSalaPrivadaComponent {
     this.tipo.IniciarSala(this.codigoSala).subscribe({
       next: (data: any) => {
         console.log(data);
-        this.router.navigate(['/juego/abandonar-sala']);
+        //        this.router.navigate(['/juego/abandonar-sala']);
+        this.router.navigate(['/juego/bj-multiplayer'])
       },
       error: (error: any) => {
         console.log("Error al iniciar partida");

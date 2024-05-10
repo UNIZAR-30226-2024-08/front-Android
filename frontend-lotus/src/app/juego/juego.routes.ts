@@ -24,7 +24,8 @@ export const JUEGO_ROUTES: Routes = [
         component: BjOnePlayerComponent
     },
     {
-        path:'bj-multiplayer',
+        path: 'bj-multiplayer',
+        title: 'BJ Multijugador',
         component: BjMultiplayerComponent
     },
     {

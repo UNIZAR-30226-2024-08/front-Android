@@ -18,7 +18,7 @@ import { Jugador } from '../../models/jugador';
 export class BjMultiplayerComponent {
   
   private usuarioActivo: any;
-  private codigoSala: any;
+  private idPartida: any;
 
   form!: FormGroup;
   apuesta : number = 0;
@@ -52,7 +52,7 @@ export class BjMultiplayerComponent {
     //Obener el usuario actual
     if(isPlatformBrowser(this.platformId)){
       this.usuarioActivo = localStorage.getItem("usuarioActivo");
-      this.codigoSala  = localStorage.getItem("codigoSala");
+      this.idPartida  = localStorage.getItem("codigoSala");
     }
   }
   
@@ -76,7 +76,7 @@ export class BjMultiplayerComponent {
 
   private esMiTurno() {
     while (this.noEsMiTurno) {
-      this.bjJuegoService.esMiTurno(this.usuarioActivo, this.codigoSala).subscribe({
+      this.bjJuegoService.esMiTurno(this.usuarioActivo, this.idPartida).subscribe({
         next: (data: any) => {
           data as boolean
           if (data) {
@@ -101,22 +101,22 @@ export class BjMultiplayerComponent {
   }
 
   private pedirNumeroJugadores() {
-    this.bjJuegoService.numeroJugadores(this.codigoSala).subscribe({
-      next: (data: any) => {
-        data as number
-        this.numeroJugadores = data;
-      },
-      error: (error) => {
-        console.log("Error al obtener el numero de jugadores");
-        console.log(error);
-      }
-    })
+    // this.bjJuegoService.numeroJugadores(this.idPartida).subscribe({
+    //   next: (data: any) => {
+    //     data as number
+    //     this.numeroJugadores = data;
+    //   },
+    //   error: (error) => {
+    //     console.log("Error al obtener el numero de jugadores");
+    //     console.log(error);
+    //   }
+    // })
   }
 
   private mostrarCartasOtros() {
 
     // Pedir cartas crupier
-    this.bjJuegoService.pedirCartasCrupier(this.codigoSala).subscribe({
+    this.bjJuegoService.pedirCartasCrupier(this.idPartida).subscribe({
       next: (data: any) => {
         data as String[]
         this.cartasCrupier.push(data)
@@ -131,7 +131,7 @@ export class BjMultiplayerComponent {
     this.listaJugadores.push(this.bancaJugador);
 
     // Pedir cartas otros jugadores
-    this.bjJuegoService.pedirOtrosJugadores(this.usuarioActivo, this.codigoSala).subscribe({
+    this.bjJuegoService.pedirOtrosJugadores(this.usuarioActivo, this.idPartida).subscribe({
       next: (data: any) => {
         //this.listaJugadores.push()
       },
@@ -157,8 +157,9 @@ export class BjMultiplayerComponent {
   pedirCartasIniciales() {
     console.log("Pidiendo las dos cartas iniciales del jugador...")
 
-    this.bjJuegoService.pedirCartasIniciales(this.usuarioActivo, this.codigoSala).subscribe({
+    this.bjJuegoService.pedirCartasIniciales(this.usuarioActivo, this.idPartida).subscribe({
       next: (data: any) => {
+        console.log("Obteniendo las cartas iniciales...")
         data as string[]
         this.urlsCartasJugadorActivo.push(data);
       }
@@ -167,12 +168,12 @@ export class BjMultiplayerComponent {
   }
   
   pedirCarta() {
-    this.bjJuegoService.pedirCarta(this.usuarioActivo, this.codigoSala).subscribe({
+    this.bjJuegoService.pedirCarta(this.usuarioActivo, this.idPartida).subscribe({
       next: (data: any) => {
         data as String;
         this.urlsCartasJugadorActivo.push(data);
       },
-      error: (error) => {
+      error: (error: any) => {
         console.log("Error al obtener la carta del jugador");
         console.log(error);
       }
@@ -190,10 +191,10 @@ export class BjMultiplayerComponent {
   }
 
   plantarse() {
-    this.bjJuegoService.plantarse(this.usuarioActivo, this.codigoSala).subscribe({
+    this.bjJuegoService.plantarse(this.usuarioActivo, this.idPartida).subscribe({
       next: (data: any) => {
       },
-      error: (error) => {
+      error: (error: any) => {
         console.log("Error al plantarse");
         console.log(error);
       }
@@ -204,7 +205,7 @@ export class BjMultiplayerComponent {
 
   private finPartida() {
     while (this.noEsFinPartida) {
-      this.bjJuegoService.finPartida(this.codigoSala).subscribe({
+      this.bjJuegoService.finPartida(this.idPartida).subscribe({
         next: (data: any) => {
           data as String[]
           if (data[0] == "Si") {
@@ -224,10 +225,10 @@ export class BjMultiplayerComponent {
   }
   
   apostar() {
-    this.bjJuegoService.apostar(this.usuarioActivo, this.apuesta, this.codigoSala).subscribe({
+    this.bjJuegoService.apostar(this.usuarioActivo, this.apuesta, this.idPartida).subscribe({
       next: (data: any) => {
       },
-      error: (error) => {
+      error: (error: any) => {
         console.log("Error al apostar");
         console.log(error);
       }
