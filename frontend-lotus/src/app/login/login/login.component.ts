@@ -90,6 +90,7 @@ export class LoginComponent{
           this.cabeceraService.obtenerUsuario(this.gmailUsuario).subscribe({
             next: (res: any) => {
               localStorage.setItem('nombreUsuario', res.nombre);
+              localStorage.setItem('saldo', res.saldo);
             },
             error: (error: any) => {
               console.log(error);

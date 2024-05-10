@@ -112,7 +112,8 @@ export class PerfilPersonalComponent {
       this.personalizablesService.cambiarNombre(this.gmailUsuario, this.nuevoNombre).subscribe({
         next: (data: any) => {
           localStorage.setItem('nombreUsuario', this.nuevoNombre);
-          location.reload();
+          this.nombreUsuario = this.nuevoNombre;
+          // location.reload();
         },
         error: (error: any) => {
           console.log(error);
@@ -128,7 +129,7 @@ export class PerfilPersonalComponent {
         console.log(data.mesaje);
         this.rutaAvatar = this.crearRutaAvatar(avatar);
         this.avatarUsuario = avatar;
-        location.reload();
+        // location.reload();
       },
       error: (error: any) => {
         console.log(error);

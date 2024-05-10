@@ -19,9 +19,11 @@ import { PersonalizablesService } from '../../api/personalizables.service';
 export class CabeceraComponent implements OnInit{
 
   private usuarioActivo: any;
-  nombreUsuario!: string;
-  saldoUsuario!: string;
-  rutaAvatar!: string;
+  
+ 
+  @Input() nombreUsuario!: string;
+  @Input() saldoUsuario!: string;
+  @Input() rutaAvatar!: string;
 
 
   constructor(private cabeceraService: CabeceraService , @Inject(PLATFORM_ID) private platformId: Object, private personalizablesService: PersonalizablesService) {
@@ -35,7 +37,9 @@ export class CabeceraComponent implements OnInit{
     this.personalizablesService.obtenerAvatarUsuario(this.usuarioActivo).subscribe({
       next: (data: any) => {
         console.log("El avatar es: "+data.nombre);
-        this.rutaAvatar = this.obtenerRutaAvatar(data.nombre);
+        if(this.rutaAvatar == null){
+          this.rutaAvatar = this.obtenerRutaAvatar(data.nombre);
+        }
       },
       error: (error: any) => {
         console.log("Error al obtener el avatar del usuario");
@@ -50,8 +54,12 @@ export class CabeceraComponent implements OnInit{
     .subscribe({
       next: (data: any) => {
         data as Usuario;
-        this.nombreUsuario = data.nombre; 
-        this.saldoUsuario = data.saldo;
+        if(this.nombreUsuario == null){
+          this.nombreUsuario = data.nombre;
+        }
+        if(this.saldoUsuario == null){
+          this.saldoUsuario = data.saldo;
+        }
       },
       error: (error) => {
         console.log("Error al obtener los datos del jugador");
