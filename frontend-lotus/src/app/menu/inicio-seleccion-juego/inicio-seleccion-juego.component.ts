@@ -10,5 +10,12 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   styleUrl: './inicio-seleccion-juego.component.css'
 })
 export class InicioSeleccionJuegoComponent{
-
+  pulsarPoker(){
+    localStorage.setItem("tipoJuego", "poker");
+    console.log("Pulsado poker");
+  }
+  pulsarBlackjack(){
+    localStorage.setItem("tipoJuego", "blackjack");
+    console.log("Pulsado blackjack");
+  }
 }

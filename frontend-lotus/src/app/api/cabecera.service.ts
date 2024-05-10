@@ -9,13 +9,13 @@ import { json } from 'stream/consumers';
 })
 export class CabeceraService {
 
-    private baseUrl2 = 'https://casino-backend.azurewebsites.net';
+     private url = 'https://casino-backend.azurewebsites.net';
+    // private url = 'http://localhost:3001';
     constructor(private httpClient: HttpClient) { }
     
     obtenerUsuario(usuarioActivo: string): Observable<JSON> {
 
-        let params = new HttpParams().set('gmail', usuarioActivo);
-        return this.httpClient.get<JSON>(`${this.baseUrl2}/obtenerUsuario`, { params: params });
+        return this.httpClient.get<JSON>(`${this.url}/obtenerUsuario/${usuarioActivo}`);
 
     }
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
-import { TipoJuegoService } from '../../api/tipo-juego.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -11,11 +10,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './poker-seleccion-modo.component.css'
 })
 export class PokerSeleccionModoComponent {
-    constructor(private tipo: TipoJuegoService) {}
+    constructor() {}
 
     ngOnInit(): void {
-      // Your code here
-      this.tipo.tipoJuego$.next("poker");
-    
     }
 }

@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 import { PerfilPersonalComponent } from './menu/perfil-personal/perfil-personal.component';
-import { LoginComponent } from './login/login/login.component';
-import { CabeceraComponent } from './shared/cabecera/cabecera.component';
 
 export const routes: Routes = [
 {

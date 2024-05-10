@@ -1,7 +1,12 @@
 
-main{
-    margin: 0;
+main {
     padding: 0;
+    margin: 0;
+    background-color: var(--color-principal);
+    color: var(--color-secundario);
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
 }
 .main{
     font-family: var(--text-font);
@@ -9,3 +14,32 @@ main{
     width: 100vw;
     height: 100vh;
 }
+.div_partida {
+    /* Bordes redondeados y de color blanco */
+    border: 1px solid var(--color-secundario);
+    border-radius: 8px;
+    margin-left: 10vw;
+    width: 80vw;
+    height: 20vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2vh;
+
+}
+
+.div_img_partida {
+    /* Estilos del contenedor de la imagen */
+    height: 100%;
+    padding-left: 15px;
+}
+
+.div_img_partida > img {
+    /* Estilos de la imagen dentro del contenedor */
+    height: 100%;
+    margin: 0;
+}
+
+
