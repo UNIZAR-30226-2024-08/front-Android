@@ -1,4 +1,29 @@
 <main class="main">
     <app-cabecera></app-cabecera>
     <app-navegacion-perfil></app-navegacion-perfil>
+    @for(partida of partidas; track partida.inicio){
+        <div class="div_partida">
+            <div class="div_img_partida">
+                @if(partida.juego == "Poker"){
+                    <img src="../../../assets/sources/inicio/cartasPoker_01.png" alt="Imagen partida">
+                }@else {
+                    <img src="../../../assets/sources/inicio/monedasVirtuales_03.png" alt="Imagen partida">
+                }
+            </div>
+            <div>
+                Partida de {{partida.juego}}
+            </div>
+            <div>
+                {{partida.inicio}}
+            </div>
+            <div>
+                @if(partida.monto > 0){
+                    Fichas ganadas : +{{partida.monto}}
+                }@else {
+                    Fichas perdidas : {{partida.monto}}
+                }
+                
+            </div>
+        </div>
+    }
 </main>

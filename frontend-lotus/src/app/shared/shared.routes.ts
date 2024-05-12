@@ -6,5 +6,5 @@ export const MENU_ROUTES: Routes = [
     },
     {
         path: '/menu'
-    }
+    },
 ];
