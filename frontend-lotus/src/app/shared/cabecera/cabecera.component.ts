@@ -3,6 +3,8 @@ import { CabeceraService } from '../../api/cabecera.service';
 import { Usuario } from '../../models/usuario';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { Personalizable } from '../../models/personalizables';
+import { PersonalizablesService } from '../../api/personalizables.service';
 
 @Component({
   selector: 'app-cabecera',
@@ -17,12 +19,14 @@ import { isPlatformBrowser } from '@angular/common';
 export class CabeceraComponent implements OnInit{
 
   private usuarioActivo: any;
-  nombreUsuario!: string;
-  saldoUsuario!: string;
-  imgURL = '../../../assets/sources/inicio/avatarPorDefecto_01.png';
+  
+ 
+  @Input() nombreUsuario!: string;
+  @Input() saldoUsuario!: string;
+  @Input() rutaAvatar!: string;
 
 
-  constructor(private cabeceraService: CabeceraService , @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(private cabeceraService: CabeceraService , @Inject(PLATFORM_ID) private platformId: Object, private personalizablesService: PersonalizablesService) {
     if(isPlatformBrowser(this.platformId)){
       this.usuarioActivo = localStorage.getItem("usuarioActivo");
     }
@@ -30,6 +34,18 @@ export class CabeceraComponent implements OnInit{
   
   ngOnInit(): void {
     this.obtenerUsuario()
+    this.personalizablesService.obtenerAvatarUsuario(this.usuarioActivo).subscribe({
+      next: (data: any) => {
+        console.log("El avatar es: "+data.nombre);
+        if(this.rutaAvatar == null){
+          this.rutaAvatar = this.obtenerRutaAvatar(data.nombre);
+        }
+      },
+      error: (error: any) => {
+        console.log("Error al obtener el avatar del usuario");
+        console.log(error);
+      }
+    });
   }
 
   obtenerUsuario(){
@@ -39,8 +55,12 @@ export class CabeceraComponent implements OnInit{
     .subscribe({
       next: (data: any) => {
         data as Usuario;
-        this.nombreUsuario = data.nombre; 
-        this.saldoUsuario = data.saldo;
+        if(this.nombreUsuario == null){
+          this.nombreUsuario = data.nombre;
+        }
+        if(this.saldoUsuario == null){
+          this.saldoUsuario = data.saldo;
+        }
       },
       error: (error) => {
         console.log("Error al obtener los datos del jugador");
@@ -48,5 +68,9 @@ export class CabeceraComponent implements OnInit{
       }
     })
 
+  }
+
+  obtenerRutaAvatar(avatar: string){
+    return "../../../assets/sources/avatares/" + avatar + ".png";
   }
 }

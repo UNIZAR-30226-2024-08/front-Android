@@ -1,34 +1,39 @@
 <main class="main">
-    <app-cabecera></app-cabecera>
+    <app-cabecera nombreUsuario={{nombreUsuario}} rutaAvatar={{rutaAvatar}}></app-cabecera>
     <app-navegacion-perfil></app-navegacion-perfil>
     
     <div class="pantalla">
         <div class="perfil">
-            <div><img src = "../../../assets/sources/inicio/avatarPorDefecto_01.png" alt="foto de perfil"></div>
+            <div><img [src]="rutaAvatar" alt="foto de perfil"></div>
             <div class="nombreUsuario">
-                <input id="nombreinput" type="text" value="nombreUsuario">
-                <img src = "../../../assets/sources/menu/guardar-el-archivo.png" alt="guardar cambios" id="fotoguardado">
+                <input id="nombreinput" type="text" [value]="nombreUsuario" (click)="mostrarAviso()">
+                <button id = "botonguardado" (click)="cambiarNombre()">
+                    <img src = "../../../assets/sources/menu/guardar-el-archivo.png" alt="guardar cambios" id="fotoguardado">
+                </button>
+            </div>
+            <div id="mensajeOculto">
+                Para guardar el nuevo nomre haz click en el botón de guardar
             </div>
         </div>
         <div class="personalizables">
             <ul id = "lista_pers">
-                <li><button (click)="verCartas()">Personalizar cartas</button></li>
-                <li><button (click)="verAvatar()">Personalizar avatar</button></li>
+                <li><button (click)="mostrarCartasFunc()">Personalizar cartas</button></li>
+                <li><button (click)="mostrarAvatarFunc()">Personalizar avatar</button></li>
             </ul>
         </div>
         <div class = "mostrar">
             @if (mostrarCartas) {
                 <ul>
-                    @for (carta of listaCartas; track carta.id) {
+                    @for (carta of listaCartas; track carta.nombre) {
                         <li class="listaCondicion">
-                            @if (carta.id == idCarta()) {
+                            @if (cartasUsuario == carta.nombre) {
                                 <button class="seleccionado">
-                                    <img class="imagenLista" [src]="carta.src" alt="carta" />
+                                    <img class="imagenLista2" [src]="crearRutaAvatar(carta.nombre)" alt="carta" />
                                 </button>
                             }
                             @else {
-                                <button>
-                                    <img class="imagenLista" [src]="carta.src" alt="carta" />
+                                <button (click)="cambiarCartas(carta.nombre)">
+                                    <img class="imagenLista2" [src]="crearRutaAvatar(carta.nombre)" alt="carta" />
                                 </button>
                             }
                         </li>
@@ -37,20 +42,21 @@
             }
             @else if (mostrarAvatar) {
                 <ul>
-                    @for (avatar of listaAvatares; track avatar.id) {
+                    @for (avatar of listaAvataresMostrar; track avatar.nombre) {
                         <li class="listaCondicion">
-                            @if (avatar.id == idAvatar()) {
+                            @if (avatarUsuario == avatar.nombre) {
                                 <button class="seleccionado">
-                                    <img class="imagenLista" [src]="avatar.src" alt="avatar" />
+                                    <img class="imagenLista" [src]="crearRutaAvatar(avatar.nombre)" alt="avatar" />
                                 </button>
                             }
                             @else {
-                                <button>
-                                    <img class="imagenLista" [src]="avatar.src" alt="avatar" />
+                                <button (click)="cambiarAvatar(avatar.nombre)">
+                                    <img class="imagenLista" [src]="crearRutaAvatar(avatar.nombre)" alt="avatar" />
                                 </button>
                             }
                         </li>
                     }
+                    
                 </ul>
             }
             @else {}
