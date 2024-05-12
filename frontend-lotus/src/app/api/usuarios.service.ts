@@ -23,4 +23,12 @@ export class UsuariosService {
     // Realizar la solicitud GET con la URL que contiene los parámetros
     return this.httpClient.post(`${this.url}/iniciarSesion`, body);
   }
+
+  obtenerUsuario(gmail: string): any {
+        let params = {
+            gmail: gmail
+        };
+        return this.httpClient.get(`${this.url}/partidaBJ/pedirJugadores/${gmail}`, {params: params});
+    }
+  
 }

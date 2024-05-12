@@ -20,12 +20,16 @@ export class CrearSalaPrivadaComponent {
       
     }
   }
-  iniciarSala(){
-    console.log("Iniciando partida...");
+  
+  iniciarSala() {
+    console.log("[+] Iniciando partida en sala con codigo: " + this.codigoSala +"...");
     this.tipo.IniciarSala(this.codigoSala).subscribe({
-      next: (data: any) => {
-        console.log(data);
-        //        this.router.navigate(['/juego/abandonar-sala']);
+      next: (data: number) => {
+        data as number
+        console.log("[+] Se ha creado la partida con idPartida: " + data + "...")
+        localStorage.setItem("codigoPartida", data.toString());
+
+        //this.router.navigate(['/juego/abandonar-sala']);
         this.router.navigate(['/juego/bj-multiplayer'])
       },
       error: (error: any) => {

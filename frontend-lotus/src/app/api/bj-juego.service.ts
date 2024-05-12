@@ -11,36 +11,25 @@ export class bjJuegoService {
 
     constructor(private _httpClient: HttpClient) { }
 
-    // pedirCartasIniciales(usuarioActivo: string, idPartida: number): any {
-    //     console.log("Pedir cartas iniciales: " + usuarioActivo, idPartida);
-    //     let body = {
-    //         'gmail': usuarioActivo,
-    //         'idPartida': idPartida
-    //     };
-    //     return this._httpClient.put(`${this.baseUrl}/partidaBJ/pedirCartasIniciales`, body);
-    // }
 
-    // pedirCartasIniciales(usuarioActivo: string, idPartida: any): Observable<String[]> {
-    //     console.log("Estoy en el servicio de bj-service...." + usuarioActivo, idPartida)
-    //     const params = {
-    //         gmail: usuarioActivo,
-    //         idPartida: idPartida
-    //     };
-    //     return this._httpClient.get<String[]>(`${this.baseUrl}/partidaBJ/pedirCartasIniciales`, { params : params });
-    // }
+    pedirNombresJugadores(idPartida: any): any {
+        console.log("Pidiendo nombres de jugadores de la partida " + idPartida + "...")
 
-    pedirCartasIniciales(usuarioActivo: string, idPartida: any): any {
-        console.log("Estoy en el servicio de bj-service...." + usuarioActivo, idPartida)
+        let params = {
+            idPartida: idPartida
+        };
+        return this._httpClient.get(`${this.baseUrl}/partidaBJ/pedirJugadores/${idPartida}`, {params: params});
+    }
 
+    pedirCartasJugador(usuarioActivo: string, idPartida: any): any {
         let params = {
             gmail: usuarioActivo,
             idPartida: idPartida,
         };
-        return this._httpClient.get(`${this.baseUrl}/partidaBJ/pedirCartasIniciales/${usuarioActivo}/${idPartida}`, {params: params});
+        return this._httpClient.get(`${this.baseUrl}/partidaBJ/pedirCartasJugador/${usuarioActivo}/${idPartida}`, {params: params});
     }
 
     apostar(usuarioActivo: string, cant: number, idPartida: number): any {
-        console.log(usuarioActivo, cant, idPartida);
         let body = {
             gmail: usuarioActivo,
             cant: cant,
@@ -49,51 +38,49 @@ export class bjJuegoService {
         return this._httpClient.put(`${this.baseUrl}/partidaBJ/apostar`, body);
     }
 
-    plantarse(usuarioActivo: string, idPartida: number): Observable<JSON> {
-        let params = new HttpParams().set('gmail', usuarioActivo);
-        params.set('idPartida', idPartida);
-        return this._httpClient.get<JSON>(`${this.baseUrl}/partidaBJ`, { params: params });
+    plantarse(usuarioActivo: string, idPartida: number): any {
+        let body = {
+            gmail: usuarioActivo,
+            idPartida: idPartida
+        };
+        return this._httpClient.post(`${this.baseUrl}/partidaBJ/plantarse`, body);
     }
 
-    pedirCarta(usuarioActivo: string, idPartida: number): Observable<JSON> {
-        let params = new HttpParams().set('gmail', usuarioActivo);
-        params.set('idPartida', idPartida);
-        return this._httpClient.get<JSON>(`${this.baseUrl}/partidaBJ`, { params: params });
+    pedirCarta(usuarioActivo: string, idPartida: any): any {
+        let params = {
+            gmail: usuarioActivo,
+            idPartida: idPartida
+        };
+        return this._httpClient.get(`${this.baseUrl}/partidaBJ/pedirCarta/${usuarioActivo}/${idPartida}`, {params: params});
     }
-
-    retirarse(usuarioActivo: string, idPartida: number) {
-        let params = new HttpParams().set('gmail', usuarioActivo);
-        params.set('idPartida', idPartida);
-        return this._httpClient.get<JSON>(`${this.baseUrl}/partidaBJ`, { params: params });
-    }
-
-    esMiTurno(usuarioActivo: string, idPartida: number) {
-        let params = new HttpParams().set('gmail', usuarioActivo);
-        params.set('idPartida', idPartida);
-        return this._httpClient.get<JSON>(`${this.baseUrl}/partidaBJ`, { params: params });
-    }
-
-    pedirCartasCrupier(idPartida: number) {
-        let params = new HttpParams().set('idPartida', idPartida);
-        return this._httpClient.get<JSON>(`${this.baseUrl}/partidaBJ`, { params: params });
-    }
-
     
-
-    pedirOtrosJugadores(usuarioActivo: string, idPartida: number) {
-        let params = new HttpParams().set('gmail', usuarioActivo);
-        params.set('idPartida', idPartida);
-        return this._httpClient.get<JSON>(`${this.baseUrl}/partidaBJ`, { params: params });
+    retirarse(usuarioActivo: string, idPartida: number): any {
+        let body = {
+            gmail: usuarioActivo,
+            idPartida: idPartida
+        };
+        return this._httpClient.post(`${this.baseUrl}/partidaBJ/retirarse`, body);
     }
 
-    // numeroJugadores(idPartida: number) {
-    //     let params = new HttpParams().set('idPartida', idPartida);
-    //     return this._httpClient.get<JSON>(`${this.baseUrl}/partidaBJ`, { params: params });
-    // }
-
-    finPartida(idPartida: number) {
-        let params = new HttpParams().set('idPartida', idPartida);
-        return this._httpClient.get<JSON>(`${this.baseUrl}/partidaBJ`, { params: params });
+    esMiTurno(usuarioActivo: string, idPartida: any): any {
+        let params = {
+            gmail: usuarioActivo,
+            idPartida: idPartida
+        };
+        return this._httpClient.get(`${this.baseUrl}/partidaBJ/esMiTurno/${usuarioActivo}/${idPartida}`, {params: params});
     }
 
+    pedirCartasCrupier(idPartida: any): any {
+        let params = {
+            idPartida: idPartida
+        };
+        return this._httpClient.get(`${this.baseUrl}/partidaBJ/pedirCartasCrupier/${idPartida}`, {params: params});
+    }
+
+    finPartida(idPartida: any): any {
+        let params = {
+            idPartida: idPartida
+        };
+        return this._httpClient.get(`${this.baseUrl}/partidaBJ/esFinPartida/${idPartida}`, {params: params});
+    }
 }

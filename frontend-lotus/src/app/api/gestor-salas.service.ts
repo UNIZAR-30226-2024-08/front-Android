@@ -37,10 +37,10 @@ export class GestorSalasService {
   IniciarSala(codigo: string): any {
     console.log(codigo);
 
-    let body = {
-      codigo: codigo,
+    let params = {
+      codigo: codigo
     };
-    return this.httpClient.put(`${this.url}/BJ/iniciarSala`, body);
+    return this.httpClient.get(`${this.url}/BJ/iniciarSala/${codigo}`, {params : params});
   }
   
   

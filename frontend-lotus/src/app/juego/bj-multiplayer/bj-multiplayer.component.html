@@ -9,7 +9,7 @@
                     </div>
                     <div>
                         <ul>
-                            <li *ngFor="let carta of jugador.cartasJugador" class="div_formato_carta">
+                            <li *ngFor="let carta of jugador.cartasVisibles" class="div_formato_carta">
                                 <img class="imagenLista" [src]="carta.src" alt="Imagen de la carta">
                             </li>
                         </ul>
@@ -54,7 +54,7 @@
     <div class="div_jugador">
         <div>
             <ul>
-                @for (carta of cartasDeUsuario; track carta.id) {
+                @for (carta of cartasUsuarioActivo; track carta.id) {
                 <li class="div_formato_carta_jugador">
                     <img class="imagenLista_jugador" [src]="carta.src" alt="Carta del jugador">
                 </li>

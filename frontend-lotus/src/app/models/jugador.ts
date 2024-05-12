@@ -1,12 +1,12 @@
-import { Carta } from "./carta";
-
 export class Jugador {
     id: number;
+    correoJugador: string;
     nombreJugador: string;
-    cartasJugador: any[] = [];
+    cartasJugador: any[] = []; //URLS completas de las cartas
     
-    constructor(id: number, nombreJugador: string, cartas: String[]) {
+    constructor(id: number, correoJugador: string, nombreJugador: string, cartas: String[]) {
         this.id = id;
+        this.correoJugador = correoJugador;
         this.nombreJugador = nombreJugador;
 
         for (let i = 0; cartas.length; i++){
@@ -14,16 +14,12 @@ export class Jugador {
                 id: i + 1,
                 src: cartas[i]
             });
-        }    
+        }            
     }
 
-    addCarta(cartas: String) {
-        for (let i = 0; cartas.length; i++){
-            this.cartasJugador.push({
-                id: i + 1,
-                src: cartas[i]
-            });
-        }   
+    
+    establecerCartas(cartas: String[]) {
+        this.cartasJugador = cartas;
     }
 
     ocultarDosPrimerasCartas() {
