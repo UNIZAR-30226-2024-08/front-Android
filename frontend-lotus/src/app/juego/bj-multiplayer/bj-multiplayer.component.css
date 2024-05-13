@@ -97,7 +97,7 @@ main {
 .div_apuesta_inicial>button {
     margin: 2vh;
     border-radius: 10px;
-
+    color: var(--color-txt-secundario);
 }
 
 .div_apuesta_inicial>input {
@@ -109,18 +109,24 @@ main {
 
 .div_apuesta_inicial>button {
     border: 0;
-    margin: 3vh;
+    width: 10vw;
     line-height: 2.5;
     padding: 0 20px;
     font-size: 1rem;
     text-align: center;
     color: var(--color-secundario);
     border-radius: 10px;
-    background-color: var(--color-principal);
-    background-image: linear-gradient(to top left,
-            var(--color-principal),
-            var(--color-principal)30%,
-            var(--color-principal), );
+    background-color: var(--color-txt-secundario);
+    box-shadow:
+        inset 2px 2px 3px rgba(242, 196, 168, 0.4),
+        inset -2px -2px 3px rgba(43, 34, 29, 0.8);
+}
+
+.div_apuesta_inicial>button:active,
+.boton_mensaje_final:active{
+    box-shadow:
+        inset 2px 2px 3px rgba(43, 34, 29, 0.8),
+        inset -2px -2px 3px rgba(126, 99, 82, 0.4);
 }
 
 .boton_mensaje_final {
@@ -138,15 +144,6 @@ main {
     box-shadow:
             inset 2px 2px 3px rgba(242, 196, 168, 0.4),
             inset -2px -2px 3px rgba(43, 34, 29, 0.8);
-}
-
-.boton_mensaje_final:hover{
-    background-color: var(--color-acento);
-    color: var(--color-txt-secundario);
-}
-
-.div_apuesta_inicial>button:hover {
-    background-color: var(--color-principal);
 }
 
 .div_error {
@@ -169,7 +166,16 @@ main {
     flex-direction: column;
 }
 
-#div_botones>button {
+#div_botones_izda {
+    position: fixed;
+    bottom: 10vh;
+    left: 6vw;
+    display: flex;
+    flex-direction: column;
+}
+
+#div_botones>button,
+#div_botones_izda>button {
     font-weight:600;
     width: 12vw;
     height: 6vh;
@@ -188,12 +194,15 @@ main {
         inset -2px -2px 3px #5c483a99;
 }
 
-#div_botones>button:hover {
+#div_botones>button:hover,
+#div_botones_izda>button:hover {
     background-color: var(--color-acento);
 }
 
-#div_botones>button:active {
-    box-shadow:
-        inset -2px -2px 3px rgba(255, 255, 255, 0.6),
-        inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+.boton_mensaje_final:hover,
+.div_apuesta_inicial>button:hover,
+#div_botones>button:active,
+#div_botones_izda>button:active {
+    background-color: var(--color-acento);
+    color: var(--color-txt-secundario);
 }

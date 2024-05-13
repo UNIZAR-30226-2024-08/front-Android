@@ -24,8 +24,8 @@ export class BjMultiplayerComponent {
   private idPartida: any;
   private idSala: any;
   
-  mostrarApuesta: boolean = false;
-  mostrarMensajeFinal: boolean = true;
+  mostrarApuesta: boolean = true;
+  mostrarMensajeFinal: boolean = false;
 
   form!: FormGroup;
   apuesta : number = 0;
@@ -75,7 +75,7 @@ export class BjMultiplayerComponent {
     });
 
     // // Listar jugadores en la partida sin cartas
-    // this.listarNombresJugadores(); // Hay error en el backend
+    //this.listarNombresJugadores(); // Hay error en el backend
 
     // // Mostrar las cartas iniciales del jugador actual
     // console.log("[~] Pidiendo las dos cartas iniciales del jugador activo...")
@@ -264,7 +264,7 @@ export class BjMultiplayerComponent {
     })
   }
 
-  private finPartida() { //Terminar
+  private finPartida() {
     while (this.noEsFinPartida) {
       this.bjJuegoService.finPartida(this.idPartida).subscribe({
         next: (data: any) => {
@@ -345,6 +345,10 @@ export class BjMultiplayerComponent {
 
     // Reiniciar juego
     this.ngOnInit()
+  }
+
+  pausarPartida() {
+    
   }
 
 

@@ -45,7 +45,7 @@
                     La apuesta minima es de 10 fichas
                 </span>
             </div>
-            <button type="submit" (click)="apostar()">Apostar</button>
+            <button type="submit" class="boton_apostar" (click)="apostar()">Apostar</button>
         </div>
     </form>
     }
@@ -85,5 +85,10 @@
             <button (click)="plantarse()">Plantarse</button>
         </div>
     }
+
+    <div id="div_botones_izda">
+        <button (click)="abandonar()">Abandonar Partida</button>
+        <button (click)="pausarPartida()">Pausar Partida</button>
+    </div>
 
 </main>
