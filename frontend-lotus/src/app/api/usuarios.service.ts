@@ -28,7 +28,7 @@ export class UsuariosService {
         let params = {
             gmail: gmail
         };
-        return this.httpClient.get(`${this.url}/partidaBJ/pedirJugadores/${gmail}`, {params: params});
+        return this.httpClient.get(`${this.url}/obtenerUsuario/${gmail}`, {params: params});
     }
   
 }

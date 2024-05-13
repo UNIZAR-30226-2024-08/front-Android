@@ -75,12 +75,12 @@ export class BjMultiplayerComponent {
       console.log(value);
     });
 
-    // // Listar jugadores en la partida sin cartas
+    // Listar jugadores en la partida sin cartas
     this.listarNombresJugadores(); // Hay error en el backend
 
-    // // Mostrar las cartas iniciales del jugador actual
-    // console.log("[~] Pidiendo las dos cartas iniciales del jugador activo...")
-    // this.pedirCartasJugadorActivo();   // Hay error en esta funcion en el backend
+    // Mostrar las cartas iniciales del jugador actual
+    console.log("[~] Pidiendo las dos cartas iniciales del jugador activo...")
+    this.pedirCartasJugadorActivo();   // Hay error en esta funcion en el backend
 
     // while (this.noEsMiTurno) {
     //   this.pedirCartasOtrosJugadores()
@@ -113,12 +113,7 @@ export class BjMultiplayerComponent {
     }
   }
 
-  // Quitar el correo del usuario de la lista 
-        // data.forEach((correo: any) => {
-        //   if (correo !== this.usuarioActivo) {
-        //     this.correosJugadores.push(correo);
-        //   }
-        // });
+  
 
   // Muestra los jugadores sin cartas
   private async listarNombresJugadores(): Promise<void> {
@@ -130,6 +125,12 @@ export class BjMultiplayerComponent {
           //Con data as String[]
           data as String[]
           data.forEach((correo: string) => {
+            // Quitar el correo del usuario de la lista 
+            // data.forEach((correo: any) => {
+            //   if (correo !== this.usuarioActivo) {
+            //     this.correosJugadores.push(correo);
+            //   }
+            // });
             this.correosJugadores.push(correo);
           });
           console.log("[~] Los nombres de los jugadores obtenidos son... " + this.correosJugadores[0])
@@ -184,26 +185,6 @@ export class BjMultiplayerComponent {
     else {
       console.log("[x] la lista de correos tiene longitud 0: " + this.correosJugadores.length)
     }
-
-    // Añadir otros jugadores   
-    // this.correosJugadores.forEach(correo => {
-    //   console.log("[~] Se van a obtener los datos del usuario con correo: " + correo + "...")
-    //   id++;
-    //   this.usuarioService.obtenerUsuario(correo).subscribe({
-    //   next: (data: any) => {
-    //     data as Usuario;
-    //     console.log("[~] Obteniendo datos del usuario " + data.nombre + "...")
-
-    //     jugadorAuxiliar = new Jugador(id, correo, data.nombre, [])
-    //     this.listaJugadores.push(jugadorAuxiliar);
-    //     console.log("[+] Se ha añadido al jugador " + data.nombre + "a la lista de jugadores");
-    //   },
-    //   error: (error : any) => {
-    //     console.log("[x] Error al obtener los datos del jugador con correo: " + correo + "...");
-    //     console.log(error);
-    //   }
-    // })
-    // })
   }
 
   private pedirCartasJugadorActivo() {
