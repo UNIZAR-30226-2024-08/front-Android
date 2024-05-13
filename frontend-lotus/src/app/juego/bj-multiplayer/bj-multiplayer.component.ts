@@ -75,7 +75,7 @@ export class BjMultiplayerComponent {
     });
 
     // // Listar jugadores en la partida sin cartas
-    //this.listarNombresJugadores(); // Hay error en el backend
+    this.listarNombresJugadores(); // Hay error en el backend
 
     // // Mostrar las cartas iniciales del jugador actual
     // console.log("[~] Pidiendo las dos cartas iniciales del jugador activo...")
@@ -118,16 +118,16 @@ export class BjMultiplayerComponent {
     // Obtener correos de los jugadores
     this.bjJuegoService.pedirNombresJugadores(this.idPartida).subscribe({
       next: (data: any) => {
-        console.log("Este console.log no se esta mostrando data: " + data)
         //Con data as String[]
         data as String[]
+        console.log("[~] Los nombres de los jugadores obtenidos son... " + data)
+        
         this.correosJugadores.push(data);
-
-        // Con data as JSON[]
-        // data as JSON[]
-        // data.array.forEach((correo: { email: string; }) => {
-        //   this.correosJugadores.push(correo.email);
-        //   console.log("Correo jugador: " + correo.email + "...")
+        // Quitar el correo del usuario de la lista 
+        // data.forEach((correo: any) => {
+        //   if (correo !== this.usuarioActivo) {
+        //     this.correosJugadores.push(correo);
+        //   }
         // });
       },
       error: (error: any) => {
