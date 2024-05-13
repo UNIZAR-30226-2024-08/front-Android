@@ -9,6 +9,7 @@ import { GestorSalasService } from '../../api/gestor-salas.service';
 import { UsuariosService } from '../../api/usuarios.service';
 import { Jugador } from '../../models/jugador';
 import { MensajePedirCarta } from '../../models/mensajePedirCarta';
+import { reverse } from 'dns';
 
 @Component({
   selector: 'app-bj-multiplayer',
@@ -112,49 +113,97 @@ export class BjMultiplayerComponent {
     }
   }
 
-  // Muestra los jugadores sin cartas
-  private listarNombresJugadores(): void {
-    console.log("[~] Listando nombres de los jugadores...")
-    // Obtener correos de los jugadores
-    this.bjJuegoService.pedirNombresJugadores(this.idPartida).subscribe({
-      next: (data: any) => {
-        //Con data as String[]
-        data as String[]
-        console.log("[~] Los nombres de los jugadores obtenidos son... " + data)
-
-        this.correosJugadores.push(data);
-        // Quitar el correo del usuario de la lista 
+  // Quitar el correo del usuario de la lista 
         // data.forEach((correo: any) => {
         //   if (correo !== this.usuarioActivo) {
         //     this.correosJugadores.push(correo);
         //   }
         // });
-      },
-      error: (error: any) => {
-        console.log("[x] Error al obtener los correos de los jugadores...");
-        console.log(error);
-      }
-    })
+
+  // Muestra los jugadores sin cartas
+  private async listarNombresJugadores(): Promise<void> {
+    console.log("[~] Listando nombres de los jugadores...")
+    // Obtener correos de los jugadores
+    const nombresJugadoresPromise = new Promise<void>((resolve, reject) => {
+      this.bjJuegoService.pedirNombresJugadores(this.idPartida).subscribe({
+        next: (data: any) => {
+          //Con data as String[]
+          data as String[]
+          data.forEach((correo: string) => {
+            this.correosJugadores.push(correo);
+          });
+          console.log("[~] Los nombres de los jugadores obtenidos son... " + this.correosJugadores[0])
+          resolve();
+        },
+        error: (error: any) => {
+          console.log("[x] Error al obtener los correos de los jugadores...");
+          console.log(error);
+          reject(error);
+        }
+      });
+    });
+
+    await nombresJugadoresPromise;
+    console.log("Correo del usuario: " + this.correosJugadores[0]);
 
     //Obtener los nombres de usuario de los jugadores y crear al jugador
     var id = 0;
     var jugadorAuxiliar = new Jugador(id, "banca", "Banca", []);
     this.listaJugadores.push(jugadorAuxiliar)
-    this.correosJugadores.forEach(correo => {
-      id++;
-      this.usuarioService.obtenerUsuario(correo).subscribe({
-      next: (data: any) => {
-        data as Usuario;
-          jugadorAuxiliar = new Jugador(id, correo, data.nombre, [])
-          this.listaJugadores.push(jugadorAuxiliar);
-          console.log("[+] Se ha añadido al jugador " + data.nombre + "a la lista de jugadores");
-      },
-      error: (error : any) => {
-        console.log("[x] Error al obtener los datos del jugador con correo: " + correo + "...");
-        console.log(error);
+    console.log("[~] Se ha mostrado la banca...")
+
+    if (this.correosJugadores.length > 0) {
+      for (var i = 0; i < this.correosJugadores.length; i++){
+        console.log("[~] Se van a obtener los datos del usuario con correo: " + this.correosJugadores[i] + "...") //ok
+        id++;
+        var usuario: Usuario
+        const obtenerUsuarioPromise = new Promise<void>((resolve, reject) => {
+          this.usuarioService.obtenerUsuario(this.correosJugadores[i]).subscribe({
+            next: (data: any) => {
+              data as Usuario;
+              usuario = data
+              console.log("[~] Obteniendo datos del usuario " + data.nombre + "...")
+              console.log("[~] Datos: nombre-" + data.nombre + "; gmail-" + data.gmail + "; saldo-" + data.saldo + "...")
+              resolve();
+            },
+            error: (error: any) => {
+              console.log("[x] Error al obtener los datos del jugador con correo: " + this.correosJugadores[i] + "...");
+              console.log(error);
+              reject(error);
+            }
+          })
+        });
+        
+        await obtenerUsuarioPromise;
+
+        jugadorAuxiliar = new Jugador(id, usuario!.gmail, usuario!.nombre, [])
+        this.listaJugadores.push(jugadorAuxiliar);
+        console.log("[+] Se ha añadido al jugador " + usuario!.nombre + " a la lista de jugadores");
       }
-    })
-    })
+    }
+    else {
+      console.log("[x] la lista de correos tiene longitud 0: " + this.correosJugadores.length)
+    }
+
+    // Añadir otros jugadores   
+    // this.correosJugadores.forEach(correo => {
+    //   console.log("[~] Se van a obtener los datos del usuario con correo: " + correo + "...")
+    //   id++;
+    //   this.usuarioService.obtenerUsuario(correo).subscribe({
+    //   next: (data: any) => {
+    //     data as Usuario;
+    //     console.log("[~] Obteniendo datos del usuario " + data.nombre + "...")
+
+    //     jugadorAuxiliar = new Jugador(id, correo, data.nombre, [])
+    //     this.listaJugadores.push(jugadorAuxiliar);
+    //     console.log("[+] Se ha añadido al jugador " + data.nombre + "a la lista de jugadores");
+    //   },
+    //   error: (error : any) => {
+    //     console.log("[x] Error al obtener los datos del jugador con correo: " + correo + "...");
+    //     console.log(error);
+    //   }
+    // })
+    // })
   }
 
   private pedirCartasJugadorActivo() {
