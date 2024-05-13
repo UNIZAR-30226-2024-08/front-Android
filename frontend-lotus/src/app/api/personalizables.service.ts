@@ -8,8 +8,8 @@ import { Personalizable, listaAvatares, listaCartas } from '../models/personaliz
 })
 export class PersonalizablesService {
 
-  //private url = 'https://casino-backend.azurewebsites.net';
-  private url = 'http://localhost:3001';
+  private url = 'https://casino-backend.azurewebsites.net';
+  // private url = 'http://localhost:3001';
 
   constructor(private httpClient: HttpClient) { }
 
