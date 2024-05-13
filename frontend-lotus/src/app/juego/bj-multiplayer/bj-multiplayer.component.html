@@ -9,7 +9,7 @@
                     </div>
                     <div>
                         <ul>
-                            <li *ngFor="let carta of jugador.cartasVisibles" class="div_formato_carta">
+                            <li *ngFor="let carta of jugador.cartasJugador" class="div_formato_carta">
                                 <img class="imagenLista" [src]="carta.src" alt="Imagen de la carta">
                             </li>
                         </ul>
@@ -50,6 +50,21 @@
     </form>
     }
 
+    @if (mostrarMensajeFinal) {
+    <form [formGroup]="form" (ngSubmit)="saveMensajeFinal($event)">
+        <div class="div_mensaje_final">
+            <h1>Los ganadores son:</h1>
+            <p> Lista de ganadores...{{ listaGanadores }} </p>
+            <h2>¿Quiere volver a jugar?</h2>
+            <div>
+                <button class="boton_mensaje_final" type="button" (click)="abandonar()">Abandonar</button>
+                <button  class="boton_mensaje_final" type="submit" (click)="resetearPartida()">Jugar</button>
+            </div>
+        </div>
+    </form>
+    }
+
+
 
     <div class="div_jugador">
         <div>
@@ -64,10 +79,11 @@
         </div>
     </div>
 
-    <div id="div_botones">
-        <button class="boton" (click)="pedirCarta()">Pedir Carta</button>
-        <button class="boton" (click)="plantarse()">Plantarse</button>
-    </div>
-
+    @if (!noEsMiTurno) {
+        <div id="div_botones">
+            <button (click)="pedirCarta()">Pedir Carta</button>
+            <button (click)="plantarse()">Plantarse</button>
+        </div>
+    }
 
 </main>

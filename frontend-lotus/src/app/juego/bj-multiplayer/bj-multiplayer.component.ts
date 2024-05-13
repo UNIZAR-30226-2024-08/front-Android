@@ -23,6 +23,9 @@ export class BjMultiplayerComponent {
   private usuarioActivo: any;
   private idPartida: any;
   private idSala: any;
+  
+  mostrarApuesta: boolean = false;
+  mostrarMensajeFinal: boolean = true;
 
   form!: FormGroup;
   apuesta : number = 0;
@@ -34,6 +37,7 @@ export class BjMultiplayerComponent {
   listaJugadores: Jugador[] = [];
   listaJugadoresSinBanca: Jugador[] = [];
   bancaJugador!: Jugador;
+  listaGanadores: string[] = []
   
   noEsFinPartida: boolean = true;
   noEsMiTurno: boolean = true;
@@ -44,7 +48,7 @@ export class BjMultiplayerComponent {
   jugadores: Usuario | undefined;
 
   url!: string;
-  mostrarApuesta: boolean = true;
+
   nuevaCarta: Carta | undefined;
   numeroCarta: number = 1;
   ElUserHaPerdido: String = ""
@@ -70,7 +74,20 @@ export class BjMultiplayerComponent {
       console.log(value);
     });
 
-    this.iniciarJuego()
+    // // Listar jugadores en la partida sin cartas
+    // this.listarNombresJugadores(); // Hay error en el backend
+
+    // // Mostrar las cartas iniciales del jugador actual
+    // console.log("[~] Pidiendo las dos cartas iniciales del jugador activo...")
+    // this.pedirCartasJugadorActivo();   // Hay error en esta funcion en el backend
+
+    // while (this.noEsMiTurno) {
+    //   this.pedirCartasOtrosJugadores()
+    //   this.esMiTurno()
+    // }
+
+    //Ahora es mi turno
+    // En su turno puede pedir carta o plantarse
   }
 
    // Creacion del formulario de apuesta
@@ -78,23 +95,6 @@ export class BjMultiplayerComponent {
     this.form = new FormGroup({
       apuesta: new FormControl('10', [Validators.required, Validators.min(10)])
     });
-  }
-
-  private iniciarJuego() {
-    // Listar jugadores en la partida sin cartas //FALLA
-    //this.listarNombresJugadores();
-
-    // Mostrar las cartas iniciales del jugador actual
-    console.log("[~] Pidiendo las dos cartas iniciales del jugador activo...")
-    this.pedirCartasJugadorActivo();   // Hay error en esta funcion en el backend
-
-    while (this.noEsMiTurno) {
-      this.pedirCartasOtrosJugadores()
-      this.esMiTurno()
-    }
-
-    //Ahora es mi turno
-    // En su turno puede pedir carta o plantarse
   }
 
   save(event : Event){
@@ -105,22 +105,30 @@ export class BjMultiplayerComponent {
     }
   }
 
+  saveMensajeFinal(event : Event){
+    event.preventDefault();
+    if(this.form.valid){
+      this.mostrarMensajeFinal = false;
+    }
+  }
+
   // Muestra los jugadores sin cartas
   private listarNombresJugadores(): void {
+    console.log("[~] Listando nombres de los jugadores...")
     // Obtener correos de los jugadores
     this.bjJuegoService.pedirNombresJugadores(this.idPartida).subscribe({
       next: (data: any) => {
-        console.log("data: " + data)
+        console.log("Este console.log no se esta mostrando data: " + data)
         //Con data as String[]
         data as String[]
         this.correosJugadores.push(data);
 
         // Con data as JSON[]
-        data as JSON[]
-        data.array.forEach((correo: { email: string; }) => {
-          this.correosJugadores.push(correo.email);
-          console.log("Correo jugador: " + correo.email + "...")
-        });
+        // data as JSON[]
+        // data.array.forEach((correo: { email: string; }) => {
+        //   this.correosJugadores.push(correo.email);
+        //   console.log("Correo jugador: " + correo.email + "...")
+        // });
       },
       error: (error: any) => {
         console.log("[x] Error al obtener los correos de los jugadores...");
@@ -260,20 +268,18 @@ export class BjMultiplayerComponent {
     while (this.noEsFinPartida) {
       this.bjJuegoService.finPartida(this.idPartida).subscribe({
         next: (data: any) => {
-          data as String[]
-          if (data[0] == "Si") {
-            this.noEsFinPartida = false;
-            this.ganador = data[0]
-          }
+          data as string[]
+          this.noEsFinPartida = false;
+          this.listaGanadores = data;
         },
         error: (error: any) => {
-          console.log("Error al apostar");
+          console.log("[x] La partida no ha terminado...");
           console.log(error);
         }
       })
     }
-
-    // Mostrar ganador
+    
+    //Mostrar ganadores:
     
   }
 
@@ -295,7 +301,8 @@ export class BjMultiplayerComponent {
         data as MensajePedirCarta;
         this.urlsCartasJugadorActivo.push(data.urlCarta);
         if (data.mensaje === "El jugador se ha pasado de 21") {
-          this.noEsMiTurno = true
+          this.noEsMiTurno = true;
+          this.ElUserHaPerdido = "Has superado los 21 puntos. Has perdido"
         }
       },
       error: (error: any) => {
@@ -317,8 +324,27 @@ export class BjMultiplayerComponent {
         console.log(error);
       }
     })   
-    
-    //this.finPartida()
+    this.finPartida()
+  }
+
+  abandonar() {
+    // El jugaodr desea abandonar la partida
+    this.bjJuegoService.retirarse(this.usuarioActivo, this.idPartida).subscribe({
+      next: (data: any) => {
+        console.log("[+] El usuario ha abandonado la partida...")
+      },
+      error: (error: any) => {
+        console.log("[x] Error al abandonar la partida...");
+        console.log(error);
+      }
+    })
+  }
+
+  resetearPartida() {
+    // Reestablecer todos los valores
+
+    // Reiniciar juego
+    this.ngOnInit()
   }
 
 

@@ -71,8 +71,9 @@ main {
     transform: translateX(-50%);
 }
 
-.div_apuesta_inicial {
+.div_apuesta_inicial, .div_mensaje_final {
     /*recuadro en el medio de la pantalla*/
+    padding: 1vh;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -81,10 +82,14 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: white;
+    background-color: var(--color-secundario);
     color: var(--color-principal);
     border-radius: 10px;
+}
 
+.div_mensaje_final>h1, 
+.div_mensaje_final>h2{
+    color: var(--color-txt-secundario);
 }
 
 .div_apuesta_inicial>h1,
@@ -118,6 +123,28 @@ main {
             var(--color-principal), );
 }
 
+.boton_mensaje_final {
+    border: 0;
+    width: 10vw;
+    margin-left: 1vh;
+    margin-right: 1vh;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--color-secundario);
+    border-radius: 10px;
+    background-color: var(--color-txt-secundario);
+    box-shadow:
+            inset 2px 2px 3px rgba(242, 196, 168, 0.4),
+            inset -2px -2px 3px rgba(43, 34, 29, 0.8);
+}
+
+.boton_mensaje_final:hover{
+    background-color: var(--color-acento);
+    color: var(--color-txt-secundario);
+}
+
 .div_apuesta_inicial>button:hover {
     background-color: var(--color-principal);
 }
@@ -137,14 +164,18 @@ main {
 #div_botones {
     position: fixed;
     bottom: 10vh;
-    right: 10vw;
+    right: 6vw;
     display: flex;
     flex-direction: column;
 }
 
 #div_botones>button {
+    font-weight:600;
+    width: 12vw;
+    height: 6vh;
     border: 0;
     margin: 3vh;
+    margin-top: 0.5vh;
     line-height: 2.5;
     padding: 0 20px;
     font-size: 1rem;
@@ -152,19 +183,13 @@ main {
     color: var(--color-principal);
     border-radius: 10px;
     background-color: var(--color-secundario);
-    background-image: linear-gradient(to top left,
-            var(--color-secundario),
-            var(--color-secundario)30%,
-            var(--color-secundario),
-        );
     box-shadow:
-        inset 2px 2px 3px rgba(255, 255, 255, 0.6),
-        inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+        inset 2px 2px 3px rgba(255, 255, 255, 0.7),
+        inset -2px -2px 3px #5c483a99;
 }
 
 #div_botones>button:hover {
-    background-color: var(--color-secundario);
-
+    background-color: var(--color-acento);
 }
 
 #div_botones>button:active {
