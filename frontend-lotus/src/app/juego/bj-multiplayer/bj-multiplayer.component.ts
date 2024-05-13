@@ -5,9 +5,9 @@ import { debounceTime, noop } from 'rxjs';
 import { Usuario } from '../../models/usuario';
 import { Carta } from '../../models/carta';
 import { bjJuegoService } from '../../api/bj-juego.service';
+import { GestorSalasService } from '../../api/gestor-salas.service';
 import { UsuariosService } from '../../api/usuarios.service';
 import { Jugador } from '../../models/jugador';
-import { stringify } from 'querystring';
 import { MensajePedirCarta } from '../../models/mensajePedirCarta';
 
 @Component({
@@ -55,7 +55,7 @@ export class BjMultiplayerComponent {
 
   cartasDeUsuario: Carta[] = []
 
-  constructor(private bjJuegoService : bjJuegoService, private usuarioService : UsuariosService, @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(private bjJuegoService : bjJuegoService, private gestorSalas : GestorSalasService, private usuarioService : UsuariosService, @Inject(PLATFORM_ID) private platformId: Object) {
     this.buildForm();
     //Obener el usuario actual
     if(isPlatformBrowser(this.platformId)){
@@ -121,7 +121,7 @@ export class BjMultiplayerComponent {
         //Con data as String[]
         data as String[]
         console.log("[~] Los nombres de los jugadores obtenidos son... " + data)
-        
+
         this.correosJugadores.push(data);
         // Quitar el correo del usuario de la lista 
         // data.forEach((correo: any) => {
@@ -338,6 +338,7 @@ export class BjMultiplayerComponent {
         console.log(error);
       }
     })
+    this.salirMenuPrincipal();    
   }
 
   resetearPartida() {
@@ -348,6 +349,19 @@ export class BjMultiplayerComponent {
   }
 
   pausarPartida() {
+    this.gestorSalas.pausarSala(this.idSala).subscribe({
+      next: (data: any) => {
+        console.log("[+] El usuario ha pausado la partida...")
+      },
+      error: (error: any) => {
+        console.log("[x] Error al pausar la partida...");
+        console.log(error);
+      }
+    })
+    this.salirMenuPrincipal();
+  }
+
+  salirMenuPrincipal() {
     
   }
 

@@ -12,18 +12,17 @@ import { GestorSalasService } from '../../api/gestor-salas.service';
   styleUrl: './crear-sala-privada.component.css'
 })
 export class CrearSalaPrivadaComponent {
-  codigoSala: any= '123456';
+  codigoSala: any = '123456';
 
   constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: Object,private tipo: GestorSalasService) {
     if(isPlatformBrowser(this.platformId)){
       this.codigoSala = localStorage.getItem("codigoSala");
-      
     }
   }
   
   iniciarSala() {
     console.log("[+] Iniciando partida en sala con codigo: " + this.codigoSala +"...");
-    this.tipo.IniciarSala(this.codigoSala).subscribe({
+    this.tipo.iniciarSala(this.codigoSala).subscribe({
       next: (data: number) => {
         data as number
         console.log("[+] Se ha creado la partida con idPartida: " + data + "...")

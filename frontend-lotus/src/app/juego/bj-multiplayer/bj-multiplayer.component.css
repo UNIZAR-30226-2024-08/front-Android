@@ -122,13 +122,6 @@ main {
         inset -2px -2px 3px rgba(43, 34, 29, 0.8);
 }
 
-.div_apuesta_inicial>button:active,
-.boton_mensaje_final:active{
-    box-shadow:
-        inset 2px 2px 3px rgba(43, 34, 29, 0.8),
-        inset -2px -2px 3px rgba(126, 99, 82, 0.4);
-}
-
 .boton_mensaje_final {
     border: 0;
     width: 10vw;
@@ -200,9 +193,17 @@ main {
 }
 
 .boton_mensaje_final:hover,
-.div_apuesta_inicial>button:hover,
-#div_botones>button:active,
-#div_botones_izda>button:active {
+.div_apuesta_inicial>button:hover {
     background-color: var(--color-acento);
     color: var(--color-txt-secundario);
+}
+
+
+.div_apuesta_inicial>button:active,
+.boton_mensaje_final:active, 
+#div_botones>button:active,
+#div_botones_izda>button:active {
+    box-shadow:
+        inset 2px 2px 3px rgba(43, 34, 29, 0.8),
+        inset -2px -2px 3px rgba(126, 99, 82, 0.4);
 }
