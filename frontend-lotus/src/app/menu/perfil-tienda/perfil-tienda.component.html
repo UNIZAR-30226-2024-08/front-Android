@@ -11,7 +11,7 @@
                         <li>
                             <button class="img" (click)="seleccionarAvatar(avatar.nombre)" [class.selected]="avatarSeleccionado === avatar.nombre">
                                 <img [src]="crearRutaAvatar(avatar.nombre)" alt="avatar">
-                                <p>
+                                <p class="precio">
                                     Precio: {{avatar.precio}}
                                 </p>
                             </button>  
@@ -28,7 +28,7 @@
                         <li>
                             <button class="img2" (click)="seleccionarCarta(carta.nombre)" [class.selected]="avatarSeleccionado === carta.nombre">
                                 <img [src]="crearRutaAvatar(carta.nombre)" alt="carta">
-                                <p>
+                                <p class="precio">
                                     Precio: {{carta.precio}}
                                 </p>
                             </button>  

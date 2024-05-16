@@ -30,6 +30,7 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* justify-content: center; */
 }
 
 
@@ -45,17 +46,22 @@ main{
 .lista>ul{
     list-style: none;
     padding: 0;
-    display: inline;
-    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
 }
 
 .lista>ul>li{
     padding: 0;
-    display: inline;
+    display: inline-block;
     margin: 5px;
 }
 
 .img,.img2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 180px;
     height: 180px;
     padding: 0;
@@ -146,5 +152,8 @@ main{
     
 }
 
-
-
+.precio{
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
+}
