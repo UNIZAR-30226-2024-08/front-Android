@@ -30,7 +30,7 @@ export class CreandoSalaPrivadaComponent {
   crearSalaPrivada(){
     console.log("Creando sala privada...");
 
-    this.tipo.CrearSalaPrivada(this.usuarioActivo, this.tipoSala).subscribe({
+    this.tipo.crearSalaPrivada(this.usuarioActivo, this.tipoSala).subscribe({
       next: (data: any) => {
         localStorage.setItem("codigoSala", data.codigo);
         console.log(data.codigo);

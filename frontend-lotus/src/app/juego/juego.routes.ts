@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { CrearSalaPrivadaComponent } from "./crear-sala-privada/crear-sala-privada.component";
 import { CreandoSalaPrivadaComponent } from "./creando-sala-privada/creando-sala-privada.component";
 import { UnirseSalaPrivadaComponent } from "./unirse-sala-privada/unirse-sala-privada.component";
+import { BjMultiplayerComponent } from "./bj-multiplayer/bj-multiplayer.component";
 import { BjOnePlayerComponent } from "./bj-one-player/bj-one-player.component";
 import { PruebaAbandonarSalaComponent } from "./prueba-abandonar-sala/prueba-abandonar-sala.component";
 
@@ -19,8 +20,13 @@ export const JUEGO_ROUTES: Routes = [
         component: UnirseSalaPrivadaComponent
     },
     {
-        path:'bj_one_player',
+        path:'bj-one-player',
         component: BjOnePlayerComponent
+    },
+    {
+        path: 'bj-multiplayer',
+        title: 'BJ Multijugador',
+        component: BjMultiplayerComponent
     },
     {
         path:'abandonar-sala',  

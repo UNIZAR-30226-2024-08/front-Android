@@ -1,0 +1,94 @@
+<main class="main">
+    
+    <div class="div_jugadores">
+        <ul>
+            <li *ngFor="let jugador of listaJugadores">
+                <div class="div_banca">
+                    <div class="div_banca_texto">
+                        <p>{{ jugador.nombreJugador }}</p>
+                    </div>
+                    <div>
+                        <ul>
+                            <li *ngFor="let carta of jugador.cartasJugador" class="div_formato_carta">
+                                <img class="imagenLista" [src]="carta.src" alt="Imagen de la carta">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    
+    <div class="div_apuesta">
+        <div class="div_apuesta1">
+            <img class="imagen_apuesta" src="../../../assets/sources/juego/ficha-de-saldo.png">
+            <h1 class="texto_apuesta"> Saldo: XXXX</h1>
+        </div>
+        <div class="div_apuesta1">
+            <img class="imagen_apuesta" src="../../../assets/sources/juego/ficha-de-poker.png">
+            <h1 class="texto_apuesta"> Apuesta:{{apuesta}}</h1>
+        </div>
+    </div>
+
+    @if (mostrarApuesta) {
+    <form [formGroup]="form" (ngSubmit)="save($event)">
+        <div class="div_apuesta_inicial">
+            <h1>¿Cual va a ser su apuesta?</h1>
+            <input type="number" formControlName="apuesta">
+            <div *ngIf="form.get('apuesta')?.errors ">
+                <span class="div_mensaje_error" *ngIf="form.get('apuesta')?.hasError('required')">
+                    Campo requerido
+                </span>
+                <span class="div_mensaje_error" *ngIf="form.get('apuesta')?.hasError('min')">
+                    La apuesta minima es de 10 fichas
+                </span>
+            </div>
+            <button type="submit" class="boton_apostar" (click)="apostar()">Apostar</button>
+        </div>
+    </form>
+    }
+
+    @if (mostrarMensajeFinal) {
+    <form [formGroup]="form" (ngSubmit)="saveMensajeFinal($event)">
+        <div class="div_mensaje_final">
+            <h1>Los ganadores son:</h1>
+            <p> Lista de ganadores...{{ listaGanadores }} </p>
+            <h2>¿Quiere volver a jugar?</h2>
+            <div>
+                <button class="boton_mensaje_final" type="button" (click)="abandonar()">Abandonar</button>
+                <button  class="boton_mensaje_final" type="submit" (click)="resetearPartida()">Jugar</button>
+            </div>
+        </div>
+    </form>
+    }
+
+
+
+    <div class="div_jugador">
+        <div>
+            <ul>
+                @for (carta of cartasUsuarioActivo; track carta.id) {
+                <li class="div_formato_carta_jugador">
+                    <img class="imagenLista_jugador" [src]="carta.src" alt="Carta del jugador">
+                </li>
+                }
+            </ul>
+            {{ ElUserHaPerdido }}
+        </div>
+    </div>
+
+    @if (!noEsMiTurno) {
+        <div id="div_botones">
+            <button (click)="pedirCarta()">Pedir Carta</button>
+            <button (click)="plantarse()">Plantarse</button>
+        </div>
+    }
+
+    <div id="div_botones_izda">
+        <button (click)="abandonar()">Abandonar Partida</button>
+        <button (click)="pausarPartida()">Pausar Partida</button>
+    </div>
+
+</main>

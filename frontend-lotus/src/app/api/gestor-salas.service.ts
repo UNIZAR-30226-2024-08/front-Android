@@ -11,10 +11,7 @@ export class GestorSalasService {
 
   constructor(private httpClient: HttpClient) {}
   
-  CrearSalaPrivada(gmail: string, tipoDeSala: boolean): any {
-    console.log(gmail, tipoDeSala);
-    // Crear un objeto de parámetros de consulta
-    //let params = new HttpParams().set('gmail', gmail).set('tipo', tipoDeSala);
+  crearSalaPrivada(gmail: string, tipoDeSala: boolean): any {
     let body = {
       gmail: gmail,
       tipo: tipoDeSala
@@ -24,9 +21,7 @@ export class GestorSalasService {
     return this.httpClient.post(`${this.url}/BJ/crearSala`, body);
   }
 
-  UnirseSala(codigo: string, gmail: string): any {
-    console.log(codigo, gmail);
-
+  unirseSala(codigo: string, gmail: string): any {
     let body = {
       gmail: gmail,
       codigo: codigo,
@@ -34,17 +29,22 @@ export class GestorSalasService {
     return this.httpClient.put(`${this.url}/BJ/unirseSala`, body);
   }
 
-  IniciarSala(codigo: string): any {
-    console.log(codigo);
-
-    let body = {
-      codigo: codigo,
+  iniciarSala(codigo: string): any {
+    let params = {
+      codigo: codigo
     };
-    return this.httpClient.put(`${this.url}/BJ/iniciarSala`, body);
+    return this.httpClient.get(`${this.url}/BJ/iniciarSala/${codigo}`, {params : params});
+  }
+
+  pausarSala(codigo: string) {
+    let body = {
+      codigo: codigo
+    }
+    return this.httpClient.put(`${this.url}/BJ/pausarSala`, body);
   }
   
   
-  AbandonarSala(codigo: string, gmail: string): any {
+  abandonarSala(codigo: string, gmail: string): any {
     console.log(codigo, gmail);
 
     let params = new HttpParams().set('codigo', codigo).set('gmail', gmail);

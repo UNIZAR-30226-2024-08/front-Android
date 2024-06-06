@@ -18,9 +18,9 @@ export class PruebaAbandonarSalaComponent {
       this.usuarioActivo = localStorage.getItem("usuarioActivo");
     }
   }
-  AbandonarSala(){
+  abandonarSala(){
     console.log("Abandonando sala...");
-    this.tipo.AbandonarSala(this.codigoSala,this.usuarioActivo).subscribe({
+    this.tipo.abandonarSala(this.codigoSala,this.usuarioActivo).subscribe({
       next: (data: any) => {
         console.log(data);
       },

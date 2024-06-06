@@ -46,7 +46,7 @@ export class UnirseSalaPrivadaComponent implements OnInit{
       const value = this.form.value.codigo;
       console.log(value);
       console.log(this.tipoJuego);
-      this.tipo.UnirseSala(value,this.usuarioActivo).subscribe({
+      this.tipo.unirseSala(value,this.usuarioActivo).subscribe({
         next: (data: any) => {
           console.log(data);
           localStorage.setItem("codigoSala",value);

@@ -1,0 +1,209 @@
+main {
+    padding: 0;
+    margin: 0;
+    background-color: var(--color-principal);
+    color: var(--color-secundario);
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+.main {
+    font-family: var(--title-font);
+}
+
+.div_banca {
+    display: flex;
+    align-content: center;
+}
+
+.div_banca_texto {
+    margin: 1vh;
+    text-align: center;
+    font-size: 1em;
+    background-color: var(--color-secundario);
+    color: var(--color-principal);
+    display: inline-block;
+    padding: 0.5em 1em;
+    height: 8vh;
+    border-radius: 10px;
+}
+
+.div_formato_carta {
+    justify-content: center;
+    list-style: none;
+    display: inline;
+}
+
+.imagenLista{
+    height: 60px;
+}
+
+.div_formato_carta_jugador {
+    list-style: none;
+    display: inline;
+}
+
+.div_apuesta {
+    position: fixed;
+    top: 3vh;
+    right: 3vw;
+}
+
+.div_apuesta1 {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+.imagen_apuesta {
+    display: inline;
+}
+
+.texto_apuesta {
+    display: inline;
+}
+
+.div_jugador {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.div_apuesta_inicial, .div_mensaje_final {
+    /*recuadro en el medio de la pantalla*/
+    padding: 1vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-secundario);
+    color: var(--color-principal);
+    border-radius: 10px;
+}
+
+.div_mensaje_final>h1, 
+.div_mensaje_final>h2{
+    color: var(--color-txt-secundario);
+}
+
+.div_apuesta_inicial>h1,
+.div_apuesta_inicial>input,
+.div_apuesta_inicial>button {
+    margin: 2vh;
+    border-radius: 10px;
+    color: var(--color-txt-secundario);
+}
+
+.div_apuesta_inicial>input {
+    /*ponerlo mas grande y los numeros*/
+    width: 50%;
+    height: 5vh;
+    font-size: 2em;
+}
+
+.div_apuesta_inicial>button {
+    border: 0;
+    width: 10vw;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--color-secundario);
+    border-radius: 10px;
+    background-color: var(--color-txt-secundario);
+    box-shadow:
+        inset 2px 2px 3px rgba(242, 196, 168, 0.4),
+        inset -2px -2px 3px rgba(43, 34, 29, 0.8);
+}
+
+.boton_mensaje_final {
+    border: 0;
+    width: 10vw;
+    margin-left: 1vh;
+    margin-right: 1vh;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--color-secundario);
+    border-radius: 10px;
+    background-color: var(--color-txt-secundario);
+    box-shadow:
+            inset 2px 2px 3px rgba(242, 196, 168, 0.4),
+            inset -2px -2px 3px rgba(43, 34, 29, 0.8);
+}
+
+.div_error {
+    color: red;
+    font-size: 2em;
+
+}
+
+.div_mensaje_error {
+    color: red;
+    font-size: 14px;
+    margin: none;
+}
+
+#div_botones {
+    position: fixed;
+    bottom: 10vh;
+    right: 6vw;
+    display: flex;
+    flex-direction: column;
+}
+
+#div_botones_izda {
+    position: fixed;
+    bottom: 10vh;
+    left: 6vw;
+    display: flex;
+    flex-direction: column;
+}
+
+#div_botones>button,
+#div_botones_izda>button {
+    font-weight:600;
+    width: 12vw;
+    height: 6vh;
+    border: 0;
+    margin: 3vh;
+    margin-top: 0.5vh;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--color-principal);
+    border-radius: 10px;
+    background-color: var(--color-secundario);
+    box-shadow:
+        inset 2px 2px 3px rgba(255, 255, 255, 0.7),
+        inset -2px -2px 3px #5c483a99;
+}
+
+#div_botones>button:hover,
+#div_botones_izda>button:hover {
+    background-color: var(--color-acento);
+}
+
+.boton_mensaje_final:hover,
+.div_apuesta_inicial>button:hover {
+    background-color: var(--color-acento);
+    color: var(--color-txt-secundario);
+}
+
+
+.div_apuesta_inicial>button:active,
+.boton_mensaje_final:active, 
+#div_botones>button:active,
+#div_botones_izda>button:active {
+    box-shadow:
+        inset 2px 2px 3px rgba(43, 34, 29, 0.8),
+        inset -2px -2px 3px rgba(126, 99, 82, 0.4);
+}

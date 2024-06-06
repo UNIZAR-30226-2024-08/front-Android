@@ -29,6 +29,7 @@ export class LoginComponent{
   usuarioJson: any;
   avatar!: string;
   carta !: string;
+
   constructor( private userService: UsuariosService, private personalizablesService: PersonalizablesService, private cabeceraService: CabeceraService) {
   }
 
@@ -43,6 +44,33 @@ export class LoginComponent{
       google.accounts.id.initialize({
         client_id: '287725710191-56khg274chrdgkt1o8idkhl5g42o8522.apps.googleusercontent.com',
         callback: (resp: any) => this.controlarLogin(resp)
+      });
+
+      // LOS WEBSOCKETS SOLO SE PUEDEN USAR EN EL NAVEGADOR (typeof window !== 'undefined')
+      let socket = new WebSocket('ws://localhost:8080');
+      
+      // Connection opened
+      socket.addEventListener('open', (event) => {
+        socket.send('Hello Server!');
+        console.log('Conectado al servidor')
+      });
+      
+      // Listen for messages
+      socket.addEventListener('message', (event) => {
+          console.log('Message from server ', event.data);
+          let json = JSON.parse(event.data);
+          console.log(json.number)
+          socket.send('Gotcha!')
+      });
+  
+      // Connection closed
+      socket.addEventListener('close', (event) => {
+          console.log('Server closed connection ', event);
+      });
+  
+      // Connection error
+      socket.addEventListener('error', (event) => {
+          console.log('Error: ', event);
       });
     }
   }
