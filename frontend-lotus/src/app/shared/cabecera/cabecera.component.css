@@ -11,6 +11,10 @@ main {
     align-content: center;
 }
 
+.inicio_header {
+    position: relative; /* Add this line */
+}
+
 .inicio_header,
 .div_usuario_header,
 .div_monedas_header {
@@ -23,15 +27,12 @@ main {
 }
 
 .div_titulo_header {
-    position: absolute;
+    position: absolute; /* Add this line */
+    left: 50%; /* Add this line */
+    transform: translateX(-50%); /* Add this line */
     font-size: 50px;
     font-family: var(--title-font);
     color: var(--color-secundario);
-
-    /*Centrar el titulo en el header*/
-    left: 50%;
-    transform: translate(-50%, 0%);
-
 }
 
 a {

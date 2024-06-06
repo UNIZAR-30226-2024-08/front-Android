@@ -39,8 +39,12 @@ main{
     top: 0;
 }
 
+.perfil>div>img{
+    width: 70%;
+    height: 70%;
+}
+
 .nombreUsuario{
-    margin: 10px;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -48,16 +52,42 @@ main{
 
 #nombreinput{
     width: 200px;
-    height: 20px;
-    font-size: medium;
+    height: 30px;
+    font-size: large;
     align-items: center;
+    color: var(--color-principal);
+    background-color: var(--color-secundario);
+    border: 2px solid var(--color-principal);
+    border-radius: 10px;
+    font-weight: bold;
+    padding-left: 2%;
 }
 
-#fotoguardado{
+#botonguardado{
+    padding: 0;
     margin-left: 10px;
+    background-color: transparent;
+    border-style: none;
+}
+
+
+#fotoguardado{
     align-self: center;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+#botonguardado:hover{
+    transform: scale(1.1);
+    transition: 0.2s;
+}
+
+#mensajeOculto{
+    display: none;
+    color: red;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-weight: bold;
 }
 
 /*----------------------------------------------------*/
@@ -91,6 +121,7 @@ main{
     border-color: var(--color-secundario);
     border-style: solid;
     border-width: 4px;
+    border-radius: 5px;
     color: var(--color-secundario);
     font-size: large;
     cursor: pointer;
@@ -148,13 +179,24 @@ main{
 }
 
 .listaCondicion>.seleccionado{
-    border-color: black;
-    border-width: 6px;
+    width: 120px;
+    height: 120px;
+    margin: 5px;
+    border: black;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 5px;
+    background-color: var(--color-principal);
+    padding: 0px;
 }
 
 .imagenLista{
     width: 90%;
     height: 90%;
+    margin:0;
+}
+.imagenLista2{
+    height: 80%;
     margin:0;
 }
 /*----------------------------------------------------*/

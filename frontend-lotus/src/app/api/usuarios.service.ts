@@ -5,8 +5,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UsuariosService {
+
   private url = 'https://casino-backend.azurewebsites.net';
   // private url = 'http://localhost:3001';
+
 
   constructor(private httpClient: HttpClient) {}
   

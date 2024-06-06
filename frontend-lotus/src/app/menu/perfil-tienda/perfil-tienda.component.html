@@ -1,4 +1,54 @@
 <main class="main">
-    <app-cabecera></app-cabecera>
+    <app-cabecera saldoUsuario={{saldoUsuario}}></app-cabecera>
     <app-navegacion-perfil></app-navegacion-perfil>
+
+    <div class="pantalla">
+        <div class="avatares">
+            <p class="titulo">Avatares</p>
+            <div class="lista">
+                <ul>
+                    @for (avatar of listaAvataresComprar; track avatar.nombre) {
+                        <li>
+                            <button class="img" (click)="seleccionarAvatar(avatar.nombre)" [class.selected]="avatarSeleccionado === avatar.nombre">
+                                <img [src]="crearRutaAvatar(avatar.nombre)" alt="avatar">
+                                <p class="precio">
+                                    Precio: {{avatar.precio}}
+                                </p>
+                            </button>  
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="cartas">
+            <p class="titulo">Cartas</p>
+            <div class="lista">
+                <ul>
+                    @for (carta of listaCartasComprar; track carta.nombre) {
+                        <li>
+                            <button class="img2" (click)="seleccionarCarta(carta.nombre)" [class.selected]="avatarSeleccionado === carta.nombre">
+                                <img [src]="crearRutaAvatar(carta.nombre)" alt="carta">
+                                <p class="precio">
+                                    Precio: {{carta.precio}}
+                                </p>
+                            </button>  
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="mensaje">
+        <p>¿Seguro que quieres comprar este avatar?</p>
+        <div class="botones">
+            <button (click)="comprarAvatar()">Si</button>
+            <button (click)="cancelarCompra()">No</button>
+        </div>
+    </div>
+    <div class="mensaje2">
+        <p> No tiene suficiente saldo </p>
+        <div class="botones">
+            <button (click)="mensajeSaldo()">Okey</button>
+        </div>
+    </div>
 </main>

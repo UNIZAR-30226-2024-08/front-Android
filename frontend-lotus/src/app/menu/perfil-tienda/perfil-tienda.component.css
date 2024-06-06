@@ -7,4 +7,153 @@ main{
     background-color: #00433D;
     width: 100vw;
     height: 100vh;
+    
+}
+
+.pantalla{
+    display: flex;
+    justify-content: space-around;
+    height: 70%;
+    padding: 0;
+}
+
+.titulo{
+    color: var(--color-secundario);
+    font-size: xx-large;
+    height: 10%;
+    margin: 10px;
+    text-align: center;
+}
+
+.avatares, .cartas{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+
+.lista{
+    overflow-y: scroll;
+    height: 80%;
+    margin: 0px;
+    padding: 0;
+    width: 80%;
+    padding:0;
+}
+
+.lista>ul{
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+}
+
+.lista>ul>li{
+    padding: 0;
+    display: inline-block;
+    margin: 5px;
+}
+
+.img,.img2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 180px;
+    padding: 0;
+    padding-top: 2vh;
+    border: var(--color-secundario) 5px solid;
+    border-radius: 5px;
+    background-color: var(--color-principal);
+    margin: 10px;
+}
+
+/*cambiar de color el borde si img Avatar esta selecionada */
+.selected{
+    border: black 5px solid;
+}
+.img>img{
+    width: 60%;
+    height: 60%;
+    margin: 0;
+}
+.img2>img{
+    height: 60%;
+    margin: 0;
+}
+
+.img>p, .img2>p{
+    height: 30%;
+    text-align: center;
+    color: var(--color-secundario);
+    font-size: x-large;
+    margin: 2vh;
+}
+
+.lista::-webkit-scrollbar{
+    width: 12px;
+}
+
+.lista::-webkit-scrollbar-thumb{
+    background-color: var(--color-secundario);
+    border-radius: 10px;
+}
+
+.mensaje, .mensaje2{
+    z-index: 100;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 35vw;
+    height: 35vh;
+    background-color: var(--color-secundario);
+    border: var(--color-secundario) 2px solid;
+    display: flex;
+    display: none;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+}
+.comprado,.errorComprado{
+    display: block;
+}
+
+.mensaje>p , .mensaje2>p{
+    color: var(--color-principal);
+    font-size: xx-large;
+    margin-top: 10%;
+    padding: 0;
+    text-align: center;  
+}
+
+.mensaje>.botones, .mensaje2>.botones{
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    padding: 0;
+    gap: 20px;
+    text-align: center;
+}
+
+.botones>button {
+    margin: 5px; 
+    width: 8vw; 
+    padding: 10px 20px; 
+    font-size: x-large;
+    background-color: var(--color-principal);
+    color: var(--color-secundario);
+    border: none;
+    border-radius: 15px; 
+    
+}
+
+.precio{
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
 }
