@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Constantes } from '../../constants/constantes';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GestorSalasService {
 
-   private url = 'https://casino-backend.azurewebsites.net';
-  // private url = 'http://localhost:3001';
+  //private constantes.url = 'https://casino-backend.azurewebsites.net';
+  // private constantes.url = 'http://localhost:3001';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private constantes: Constantes) {}
   
   crearSalaPrivada(gmail: string, tipoDeSala: boolean): any {
     let body = {
@@ -17,8 +18,8 @@ export class GestorSalasService {
       tipo: tipoDeSala
     };
     
-    // Realizar la solicitud GET con la URL que contiene los parámetros
-    return this.httpClient.post(`${this.url}/BJ/crearSala`, body);
+    // Realizar la solicitud GET con la constantes.url que contiene los parámetros
+    return this.httpClient.post(`${this.constantes.url}/BJ/crearSala`, body);
   }
 
   unirseSala(codigo: string, gmail: string): any {
@@ -26,21 +27,21 @@ export class GestorSalasService {
       gmail: gmail,
       codigo: codigo,
     };
-    return this.httpClient.put(`${this.url}/BJ/unirseSala`, body);
+    return this.httpClient.put(`${this.constantes.url}/BJ/unirseSala`, body);
   }
 
   iniciarSala(codigo: string): any {
     let params = {
       codigo: codigo
     };
-    return this.httpClient.get(`${this.url}/BJ/iniciarSala/${codigo}`, {params : params});
+    return this.httpClient.get(`${this.constantes.url}/BJ/iniciarSala/${codigo}`, {params : params});
   }
 
   pausarSala(codigo: string) {
     let body = {
       codigo: codigo
     }
-    return this.httpClient.put(`${this.url}/BJ/pausarSala`, body);
+    return this.httpClient.put(`${this.constantes.url}/BJ/pausarSala`, body);
   }
   
   
@@ -52,6 +53,6 @@ export class GestorSalasService {
     //   gmail: gmail,
     //   codigo: codigo,
     // };
-    return this.httpClient.delete(`${this.url}/BJ/abandonarSala`,{params:params});
+    return this.httpClient.delete(`${this.constantes.url}/BJ/abandonarSala`,{params:params});
   }
 }

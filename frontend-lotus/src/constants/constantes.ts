@@ -14,8 +14,5 @@ export class Constantes{
   public tienda = false;
   public historial = false;
 
-
-
-
-
+  public url: string = 'https://casino-backend.azurewebsites.net';
 }
