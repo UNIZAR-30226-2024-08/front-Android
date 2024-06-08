@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -10,12 +11,6 @@ export class bjJuegoService {
 
     constructor(private _httpClient: HttpClient) { }
 
-    iniciarPartida(idPartida: number): any {
-        let body = {
-          idPartida: idPartida
-        };
-        return this._httpClient.post(`${this.baseUrl}/BJ/iniciarPartida`, body);
-      }
 
     pedirNombresJugadores(idPartida: any): any {
         console.log("Pidiendo nombres de jugadores de la partida " + idPartida + "...")
