@@ -40,17 +40,6 @@ export class CreandoSalaPrivadaComponent {
         this.tipo.iniciarSala(data.codigo).subscribe({
           next: (data: any) => {
             console.log("Sala iniciada con éxito");
-            // Obtener el idPartida al iniciar la sala
-            localStorage.setItem("idPartida", data.idPartida);
-            this.bj.iniciarPartida(data.idPartida).subscribe({
-              next: (data: any) => {
-                console.log("Partida iniciada con éxito");
-              },
-              error: (error: any) => {
-                console.log("Error al iniciar partida");
-                console.log(error);
-              }
-            });
           },
           error: (error: any) => {
             console.log("Error al iniciar sala");
@@ -62,7 +51,6 @@ export class CreandoSalaPrivadaComponent {
         console.log("Error al crear sala privada");
         console.log(error);
       }
-      
     })
   }
 }
