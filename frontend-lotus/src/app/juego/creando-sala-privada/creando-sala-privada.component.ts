@@ -2,6 +2,8 @@ import { Component, Inject, NgZone, PLATFORM_ID, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { GestorSalasService } from '../../api/gestor-salas.service';
+import { bjJuegoService } from '../../api/bj-juego.service';
+
 @Component({
   selector: 'app-creando-sala-privada',
   standalone: true,
@@ -16,7 +18,7 @@ export class CreandoSalaPrivadaComponent {
   
   private tipoSala: boolean = false;
 
-  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object,private tipo: GestorSalasService) {
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object,private tipo: GestorSalasService, private bj: bjJuegoService) {
     if(isPlatformBrowser(this.platformId)){
       this.usuarioActivo = localStorage.getItem("usuarioActivo");
       
@@ -38,6 +40,17 @@ export class CreandoSalaPrivadaComponent {
         this.tipo.iniciarSala(data.codigo).subscribe({
           next: (data: any) => {
             console.log("Sala iniciada con éxito");
+            // Obtener el idPartida al iniciar la sala
+            localStorage.setItem("idPartida", data.idPartida);
+            this.bj.iniciarPartida(data.idPartida).subscribe({
+              next: (data: any) => {
+                console.log("Partida iniciada con éxito");
+              },
+              error: (error: any) => {
+                console.log("Error al iniciar partida");
+                console.log(error);
+              }
+            });
           },
           error: (error: any) => {
             console.log("Error al iniciar sala");
