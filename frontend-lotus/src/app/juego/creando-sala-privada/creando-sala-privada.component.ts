@@ -37,15 +37,6 @@ export class CreandoSalaPrivadaComponent {
         localStorage.setItem("codigoSala", data.codigo);
         console.log(data.codigo);
         this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
-        this.tipo.iniciarSala(data.codigo).subscribe({
-          next: (data: any) => {
-            console.log("Sala iniciada con éxito");
-          },
-          error: (error: any) => {
-            console.log("Error al iniciar sala");
-            console.log(error);
-          }
-        });
       },
       error: (error: any) => {
         console.log("Error al crear sala privada");
