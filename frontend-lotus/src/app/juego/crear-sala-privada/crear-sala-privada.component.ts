@@ -21,7 +21,7 @@ export class CrearSalaPrivadaComponent {
   }
   
   iniciarSala() {
-    console.log("[+] Iniciando partida en sala con codigo: " + this.codigoSala +"...");
+    console.log("[+] Iniciando partida en sala con código: " + this.codigoSala +"...");
     this.tipo.iniciarSala(this.codigoSala).subscribe({
       next: (data: number) => {
         data as number
