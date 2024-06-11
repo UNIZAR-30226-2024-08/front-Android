@@ -38,7 +38,7 @@ export class LoginComponent{
 
   ngOnInit(): void {
   }
-
+/*
   ngAfterViewInit(): void {
     if (typeof window !== 'undefined'){
       google.accounts.id.initialize({
@@ -74,6 +74,7 @@ export class LoginComponent{
       });
     }
   }
+  */
   private generarNombreUsuario(gmail: string) : string{
     return gmail.split('@')[0];
   }
