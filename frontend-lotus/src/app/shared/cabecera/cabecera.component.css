@@ -45,7 +45,7 @@ a {
     gap: 20px;
 }
 
-.img_usuario_header {
+.img_usuario_header, .cierre_sesion_header {
     height: 4rem;
     border-radius: 100px;
     transition: transform 0.3s ease;
@@ -59,3 +59,8 @@ a {
 .img_monedas_header {
     height: 70px;
 }
+
+.div_cierre_sesion_header{
+    background: none;
+    border: none;
+} 
