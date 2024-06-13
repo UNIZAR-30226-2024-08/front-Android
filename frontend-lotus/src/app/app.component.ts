@@ -33,8 +33,8 @@ export class AppComponent {
     
     }
     
-    @HostListener('window:unload', ['$event'])
-    handleKeyDown(event: KeyboardEvent) {
+    @HostListener('window:beforeunload', ['$event'])
+    handleKeyDown(event: any) {
       this.usuarioActivo = localStorage.getItem('usuarioActivo');
       if(this.usuarioActivo != null){
         this.cabeceraService.cerrarSesion(this.usuarioActivo).subscribe({
