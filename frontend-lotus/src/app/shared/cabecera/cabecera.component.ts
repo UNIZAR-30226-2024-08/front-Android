@@ -1,10 +1,13 @@
-import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, Input, NgZone, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { CabeceraService } from '../../api/cabecera.service';
 import { Usuario } from '../../models/usuario';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { Personalizable } from '../../models/personalizables';
 import { PersonalizablesService } from '../../api/personalizables.service';
+
+
+declare var google: any;
 
 @Component({
   selector: 'app-cabecera',
@@ -14,7 +17,6 @@ import { PersonalizablesService } from '../../api/personalizables.service';
   styleUrl: './cabecera.component.css'
 })
   
-
  
 export class CabeceraComponent implements OnInit{
 
@@ -31,6 +33,11 @@ export class CabeceraComponent implements OnInit{
       this.usuarioActivo = localStorage.getItem("usuarioActivo");
     }
   }
+
+
+  private router = inject(Router);
+  ngZone: NgZone = inject(NgZone);
+
   
   ngOnInit(): void {
     this.obtenerUsuario()
@@ -69,8 +76,26 @@ export class CabeceraComponent implements OnInit{
     })
 
   }
+  
 
   obtenerRutaAvatar(avatar: string){
     return "../../../assets/sources/avatares/" + avatar + ".png";
+  }
+
+  cerrarSesion(){
+    console.log("Cerrando sesión...");
+    sessionStorage.removeItem("clave");
+    google.accounts.id.disableAutoSelect();
+    this.cabeceraService.cerrarSesion(this.usuarioActivo)
+    .subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.ngZone.run(() => this.router.navigate(['/']));
+      },
+      error: (error: any) => {
+        console.log("Error al cerrar la sesión");
+        console.log(error);
+      }
+    })
   }
 }

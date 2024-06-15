@@ -15,4 +15,12 @@ export class CabeceraService {
     obtenerUsuario(usuarioActivo: string): Observable<JSON> {
     return this.httpClient.get<JSON>(`${this.constantes.url}/obtenerUsuario/${usuarioActivo}`);
     }
+
+    cerrarSesion(usuarioActivo: string): any {
+        let body = {
+            'gmail': usuarioActivo
+        }
+        sessionStorage.clear();
+        return this.httpClient.post(`${this.constantes.url}/cerrarSesion`, body);
+    }
 }

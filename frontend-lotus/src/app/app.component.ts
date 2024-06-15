@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MiApiService } from './api/mi-api.service';
+import { CabeceraService } from './api/cabecera.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,10 @@ import { MiApiService } from './api/mi-api.service';
 export class AppComponent {
   title = 'frontend_lotus';
 
-  constructor(private miApiService: MiApiService) {}
+  usuarioActivo: string | null = null;
+
+  constructor(private miApiService: MiApiService, private cabeceraService: CabeceraService) {
+  }
 
   ngOnInit(): void {
     // console.log('AppComponent ngOnInit()');
@@ -24,9 +29,29 @@ export class AppComponent {
     //     console.log(err);
     //   }
     // });
-  }
-
+    
+    
+    }
+    
+    @HostListener('window:beforeunload', ['$event'])
+    handleKeyDown(event: any) {
+      this.usuarioActivo = localStorage.getItem('usuarioActivo');
+      if(this.usuarioActivo != null){
+        this.cabeceraService.cerrarSesion(this.usuarioActivo).subscribe({
+          next : (res:any) => {
+            console.log('Usuario cerrando sesion...');
+            
+          },
+          error : (err:any) => {
+            console.log(err);
+          }
+        })
+      }
+    }
+    
+    
 
   getHolaMundo() {}
 }
+
 
