@@ -2,6 +2,7 @@ import { Component, Inject, NgZone, PLATFORM_ID, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { GestorSalasService } from '../../api/gestor-salas.service';
+import { Socket } from 'node:dgram';
 @Component({
   selector: 'app-creando-sala-privada',
   standalone: true,
@@ -11,36 +12,57 @@ import { GestorSalasService } from '../../api/gestor-salas.service';
 })
 export class CreandoSalaPrivadaComponent {
 
+  private rutaCrearSala: string = 'wss://casino-backend.azurewebsites.net/BJ/crearSala'
+  private aforo: number = 4;
+  private tipoSala: string = "privada";
 
   private usuarioActivo: any;
+
   
-  private tipoSala: boolean = false;
+  // private tipoSala: boolean = false;
 
   constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object,private tipo: GestorSalasService) {
     if(isPlatformBrowser(this.platformId)){
-      this.usuarioActivo = localStorage.getItem("usuarioActivo");
-      
+      this.usuarioActivo = localStorage.getItem("usuarioActivo"); 
     }
-  }
+  } 
   ngZone: NgZone = inject(NgZone);
   ngAfterViewInit(): void {
-    this.crearSalaPrivada();
-    
-  }
-  crearSalaPrivada(){
-    console.log("Creando sala privada...");
-
-    this.tipo.crearSalaPrivada(this.usuarioActivo, this.tipoSala).subscribe({
-      next: (data: any) => {
-        localStorage.setItem("codigoSala", data.codigo);
-        console.log(data.codigo);
-        this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
-      },
-      error: (error: any) => {
-        console.log("Error al crear sala privada");
-        console.log(error);
-      }
+    if (typeof window !== 'undefined'){
+      const self = this;
+      const socketCrearSala = new WebSocket(`${this.rutaCrearSala}/${this.usuarioActivo}/${this.tipoSala}/${this.aforo}`);
       
-    })
+      socketCrearSala.addEventListener('open', function (event) {
+        console.log('Conexión establecida para crear sala la sala');
+      });
+      
+      socketCrearSala.addEventListener('message', function (res) {  
+        console.log('Mensaje del servidor:', res.data);
+        //Gestionar la respuesta del servidor
+        if(res.data.accion == 'crear'){
+          console.log('sala creada')
+          localStorage.setItem("codigoSala", res.data.codigo);
+          self.ngZone.run(() => self.router.navigate(['/juego/crear-sala-privada']));
+        }
+
+
+      });
+
+      socketCrearSala.addEventListener('close', function (event) {
+        console.log('Conexión cerrada');
+      });
+
+      socketCrearSala.addEventListener('error', function (event) {
+        console.log('Error:', event);
+      });
+
+
+    }
+
+
+  }
+  navegarASala(){
+    //Aqui se crea la sala
+    
   }
 }

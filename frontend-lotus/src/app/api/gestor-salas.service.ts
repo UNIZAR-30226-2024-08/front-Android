@@ -12,9 +12,11 @@ export class GestorSalasService {
 
   constructor(private httpClient: HttpClient, private constantes: Constantes) {}
   
-  crearSalaPrivada(gmail: string, salaPublica: boolean): any {    
+  crearSalaPrivada(gmail: string, salaPublica: boolean, webSocket: WebSocket): any {    
     // Realizar la solicitud GET con la constantes.url que contiene los parámetros
-    return this.httpClient.post(`${this.constantes.url}/BJ/crearSala/${gm}`, {});
+
+    webSocket.send
+    return this.httpClient.post(`${this.constantes.url}/BJ/crearSala/${gmail}`, {});
   }
 
   unirseSala(codigo: string, gmail: string): any {
