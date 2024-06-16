@@ -38,10 +38,11 @@ export class CreandoSalaPrivadaComponent {
       
       socketCrearSala.addEventListener('message', function (res) {  
         console.log('Mensaje del servidor:', res.data);
+        let data = JSON.parse(res.data);
         //Gestionar la respuesta del servidor
-        if(res.data.accion == 'crear'){
+        if(data.accion == 'crear'){
           console.log('sala creada')
-          localStorage.setItem("codigoSala", res.data.codigo);
+          localStorage.setItem("codigoSala",data.codigo);
           self.ngZone.run(() => self.router.navigate(['/juego/crear-sala-privada']));
         }
 
