@@ -1,5 +1,5 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, NgZone, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import {  FormControl, FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
@@ -17,6 +17,9 @@ export class UnirseSalaPrivadaComponent implements OnInit{
   form !: FormGroup;
   tipoJuego !: any;
   usuarioActivo !: any;
+  codigoSala !: any;
+  private rutaCrearSala: string = 'wss://casino-backend.azurewebsites.net/BJ/unirseSala';
+
   constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: Object,private tipo: GestorSalasService) {
     this.buildForm();
     if(isPlatformBrowser(this.platformId)){
@@ -33,6 +36,8 @@ export class UnirseSalaPrivadaComponent implements OnInit{
     });
   }
 
+  ngZone: NgZone = inject(NgZone);
+
   private buildForm() {
     this.form = new FormGroup({
       codigo: new FormControl('', [Validators.required]),
@@ -43,20 +48,36 @@ export class UnirseSalaPrivadaComponent implements OnInit{
     event.preventDefault();
     /*Cambiar a las rutas de juego correspondientes*/
     if (this.form.valid) {
-      const value = this.form.value.codigo;
-      console.log(value);
+      this.codigoSala = this.form.value.codigo;
+      console.log(this.codigoSala);
       console.log(this.tipoJuego);
-      this.tipo.unirseSala(value,this.usuarioActivo).subscribe({
-        next: (data: any) => {
-          console.log(data);
-          localStorage.setItem("codigoSala",value);
-          this.router.navigate(['/juego/abandonar-sala']);
-        },
-        error: (error: any) => {
-          console.log("Error al unirse a sala privada");
-          console.log(error);
-        }
-      })
+      if (typeof window !== 'undefined'){
+        const self = this;
+        console.log(this.usuarioActivo, this.codigoSala);
+        const socketCrearSala = new WebSocket(`${this.rutaCrearSala}/${this.codigoSala}/${this.usuarioActivo}}`);
+        
+        socketCrearSala.addEventListener('open', function (event) {
+          console.log('Conexión establecida para unirse a la sala');
+        });
+        
+        socketCrearSala.addEventListener('message', function (res) {  
+          console.log('Mensaje del servidor:', res.data);
+          let data = JSON.parse(res.data);
+          //Gestionar la respuesta del servidor
+          if(data.accion == 'unirse'){
+            console.log('unirse a sala')
+            this.close();
+            self.ngZone.run(() => self.router.navigate(['/juego/abandonar-sala']));
+          }
+  
+        });
+        socketCrearSala.addEventListener('close', function (event) {
+          console.log('Conexión cerrada');
+        });
+        socketCrearSala.addEventListener('error', function (event) {
+          console.log('Error:', event);
+        });
+      }
     }else {
       console.log('Formulario no valido');
     }   

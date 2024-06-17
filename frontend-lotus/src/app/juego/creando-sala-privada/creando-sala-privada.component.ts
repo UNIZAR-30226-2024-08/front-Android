@@ -43,27 +43,17 @@ export class CreandoSalaPrivadaComponent {
         if(data.accion == 'crear'){
           console.log('sala creada')
           localStorage.setItem("codigoSala",data.codigo);
+          this.close();
           self.ngZone.run(() => self.router.navigate(['/juego/crear-sala-privada']));
         }
 
-
       });
-
       socketCrearSala.addEventListener('close', function (event) {
         console.log('Conexión cerrada');
       });
-
       socketCrearSala.addEventListener('error', function (event) {
         console.log('Error:', event);
       });
-
-
     }
-
-
-  }
-  navegarASala(){
-    //Aqui se crea la sala
-    
   }
 }
