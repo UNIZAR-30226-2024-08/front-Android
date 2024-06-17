@@ -20,7 +20,7 @@ export class UnirseSalaPrivadaComponent implements OnInit{
   codigoSala !: any;
   private rutaCrearSala: string = 'wss://casino-backend.azurewebsites.net/BJ/unirseSala';
 
-  constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: Object,private tipo: GestorSalasService) {
+  constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: Object) {
     this.buildForm();
     if(isPlatformBrowser(this.platformId)){
       this.tipoJuego = localStorage.getItem("tipoDeJuego");
