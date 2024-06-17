@@ -54,7 +54,7 @@ export class UnirseSalaPrivadaComponent implements OnInit{
       if (typeof window !== 'undefined'){
         const self = this;
         console.log(this.usuarioActivo, this.codigoSala);
-        const socketCrearSala = new WebSocket(`${this.rutaCrearSala}/${this.codigoSala}/${this.usuarioActivo}}`);
+        const socketCrearSala = new WebSocket(`${this.rutaCrearSala}/${this.codigoSala}/${this.usuarioActivo}`);
         
         socketCrearSala.addEventListener('open', function (event) {
           console.log('Conexión establecida para unirse a la sala');
