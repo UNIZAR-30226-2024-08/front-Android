@@ -5,19 +5,18 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class SalasService {
-  private socket: WebSocket | null = null;
-
+  private socketDeCrear: WebSocket | null = null;
 
   constructor(private ngZone: NgZone, private router: Router) { } // Inyecta el Router aquí
 
   connect(rutaCrearSala: string, usuarioActivo: string, tipoSala: string, aforo: number): void {
-    this.socket = new WebSocket(`${rutaCrearSala}/${usuarioActivo}/${tipoSala}/${aforo}`);
+    this.socketDeCrear = new WebSocket(`${rutaCrearSala}/${usuarioActivo}/${tipoSala}/${aforo}`);
 
-    this.socket.addEventListener('open', () => {
+    this.socketDeCrear.addEventListener('open', () => {
       console.log('Conexión establecida para crear la sala');
     });
 
-    this.socket.addEventListener('message', (res) => {
+    this.socketDeCrear.addEventListener('message', (res) => {
       console.log('Mensaje del servidor:', res.data);
         let data = JSON.parse(res.data);
         //Gestionar la respuesta del servidor
@@ -28,20 +27,22 @@ export class SalasService {
         }
     });
 
-    this.socket.addEventListener('close', () => {
-      console.log('Conexión cerrada');
+    this.socketDeCrear.addEventListener('close', (event) => {
+      console.log('Conexión cerrada:', event);
     });
 
-    this.socket.addEventListener('error', (event) => {
+    this.socketDeCrear.addEventListener('error', (event) => {
       console.log('Error:', event);
     });
   }
 
   sendMessage(message: any): void {
-    this.socket?.send(JSON.stringify(message));
+    this.socketDeCrear?.send(JSON.stringify(message));
   }
 
   close(): void {
-    this.socket?.close();
+    this.socketDeCrear?.close();
   }
+
+
 }
