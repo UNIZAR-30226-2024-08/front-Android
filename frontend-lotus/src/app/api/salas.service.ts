@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
+import e from 'express';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,9 @@ export class SalasService {
           console.log('sala creada')
           localStorage.setItem("codigoSala",data.codigo);
           this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
+        }else if(data.accion == 'abandonar'){
+          this.socket?.close(1000, 'El usuario ha abandonado la sala');
+          console.log('sala abandonada')
         }
     });
 
@@ -50,6 +54,8 @@ export class SalasService {
       if(data.accion == 'unirse'){
         console.log('unirse a sala')
         this.ngZone.run(() => this.router.navigate(['/juego/abandonar-sala']));
+      } else if(data.accion == 'abandonar' && usuarioActivo == data.jugador){
+        this.socket?.close(1000, 'El usuario ha abandonado la sala');
       }
     });
 
