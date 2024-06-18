@@ -40,8 +40,10 @@ export class SalasService {
     this.socketDeCrear?.send(JSON.stringify(message));
   }
 
-  close(): void {
-    this.socketDeCrear?.close();
+  abandonarSala(): void {
+    const mensaje = { "accion": "abandonar" };
+    this.socketDeCrear?.send(JSON.stringify(mensaje));
+    this.ngZone.run(() => this.router.navigate(['/menu']));
   }
 
 

@@ -26,5 +26,9 @@ export class CrearSalaPrivadaComponent {
     this.salasService.sendMessage(mensaje);
 
   }
+
+  abandonarSala() {
+    this.salasService.abandonarSala();
+  }
   
 }
