@@ -5,18 +5,18 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class SalasService {
-  private socketDeCrear: WebSocket | null = null;
+  private socket: WebSocket | null = null;
 
   constructor(private ngZone: NgZone, private router: Router) { } // Inyecta el Router aquí
 
-  connect(rutaCrearSala: string, usuarioActivo: string, tipoSala: string, aforo: number): void {
-    this.socketDeCrear = new WebSocket(`${rutaCrearSala}/${usuarioActivo}/${tipoSala}/${aforo}`);
+  crearSalaSocket(rutaCrearSala: string, usuarioActivo: string, tipoSala: string, aforo: number): void {
+    this.socket = new WebSocket(`${rutaCrearSala}/${usuarioActivo}/${tipoSala}/${aforo}`);
 
-    this.socketDeCrear.addEventListener('open', () => {
+    this.socket.addEventListener('open', () => {
       console.log('Conexión establecida para crear la sala');
     });
 
-    this.socketDeCrear.addEventListener('message', (res) => {
+    this.socket.addEventListener('message', (res) => {
       console.log('Mensaje del servidor:', res.data);
         let data = JSON.parse(res.data);
         //Gestionar la respuesta del servidor
@@ -27,22 +27,48 @@ export class SalasService {
         }
     });
 
-    this.socketDeCrear.addEventListener('close', (event) => {
+    this.socket.addEventListener('close', (event) => {
       console.log('Conexión cerrada:', event);
     });
 
-    this.socketDeCrear.addEventListener('error', (event) => {
+    this.socket.addEventListener('error', (event) => {
       console.log('Error:', event);
     });
   }
 
-  sendMessage(message: any): void {
-    this.socketDeCrear?.send(JSON.stringify(message));
-  }
+  unirseASalasSocket(rutaUnirseSala: string, codigoSala: string, usuarioActivo: string): void {
+    this.socket = new WebSocket(`${rutaUnirseSala}/${codigoSala}/${usuarioActivo}`);
 
+    this.socket.addEventListener('open', () => {
+      console.log('Conexión establecida para unirse a la sala');
+    });
+
+    this.socket.addEventListener('message', (res) => {
+      console.log('Mensaje del servidor:', res.data);
+      let data = JSON.parse(res.data);
+      //Gestionar la respuesta del servidor
+      if(data.accion == 'unirse'){
+        console.log('unirse a sala')
+        this.ngZone.run(() => this.router.navigate(['/juego/abandonar-sala']));
+      }
+    });
+
+    this.socket.addEventListener('close', (event) => {
+      console.log('Conexión cerrada:', event);
+    });
+
+    this.socket.addEventListener('error', (event) => {
+      console.log('Error:', event);
+    });
+  }
+  iniciarSala(): void {
+    const mensaje = { "accion": "iniciar" };
+    this.socket?.send(JSON.stringify(mensaje));
+    this.ngZone.run(() => this.router.navigate(['/juego/bj-multiplayer']));
+  }
   abandonarSala(): void {
     const mensaje = { "accion": "abandonar" };
-    this.socketDeCrear?.send(JSON.stringify(mensaje));
+    this.socket?.send(JSON.stringify(mensaje));
     this.ngZone.run(() => this.router.navigate(['/menu']));
   }
 

@@ -22,8 +22,7 @@ export class CrearSalaPrivadaComponent {
   
   iniciarSala() {
     console.log("[+] Iniciando partida en sala con código: " + this.codigoSala +"...");
-    const mensaje = { "accion": "iniciar" };
-    this.salasService.sendMessage(mensaje);
+    this.salasService.iniciarSala();
 
   }
 

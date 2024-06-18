@@ -29,7 +29,7 @@ export class CreandoSalaPrivadaComponent {
   
   ngAfterViewInit(): void {
     if (typeof window !== 'undefined' && this.usuarioActivo) {
-      this.salasService.connect(this.rutaCrearSala, this.usuarioActivo, this.tipoSala, this.aforo);
+      this.salasService.crearSalaSocket(this.rutaCrearSala, this.usuarioActivo, this.tipoSala, this.aforo);
     }
   }
 }

@@ -4,7 +4,7 @@ import {  FormControl, FormGroup,ReactiveFormsModule,Validators } from '@angular
 import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
 import { RouterModule } from '@angular/router';
-import { UnirseASalasService } from '../../api/unirse-asalas.service';
+import { SalasService } from '../../api/salas.service';
 
 @Component({
   selector: 'app-unirse-sala-privada',
@@ -20,7 +20,7 @@ export class UnirseSalaPrivadaComponent implements OnInit{
   codigoSala !: any;
   private rutaUnirseSala: string = 'wss://casino-backend.azurewebsites.net/BJ/unirseSala';
 
-  constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: Object, private unirseASalasService: UnirseASalasService) {
+  constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: Object, private unirseASalasService: SalasService) {
     this.buildForm();
     if(isPlatformBrowser(this.platformId)){
       this.tipoJuego = localStorage.getItem("tipoDeJuego");
@@ -51,7 +51,7 @@ export class UnirseSalaPrivadaComponent implements OnInit{
       this.codigoSala = this.form.value.codigo;
       console.log(this.codigoSala);
       console.log(this.tipoJuego);
-      this.unirseASalasService.unirseASala(this.rutaUnirseSala, this.codigoSala, this.usuarioActivo);
+      this.unirseASalasService.unirseASalasSocket(this.rutaUnirseSala, this.codigoSala, this.usuarioActivo);
     }else {
       console.log('Formulario no valido');
     }   
