@@ -25,9 +25,12 @@ export class SalasService {
           console.log('sala creada')
           localStorage.setItem("codigoSala",data.codigo);
           this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
-        }else if(data.accion == 'abandonar'){
+        }else if(data.accion == 'abandonar' && usuarioActivo === data.jugador){
           this.socket?.close(1000, 'El usuario ha abandonado la sala');
           console.log('sala abandonada')
+        } else if ( data.accion == 'iniciar'){
+          console.log('iniciar partida')
+          this.ngZone.run(() => this.router.navigate(['/juego/bj-multiplayer']));
         }
     });
 
@@ -53,9 +56,12 @@ export class SalasService {
       //Gestionar la respuesta del servidor
       if(data.accion == 'unirse'){
         console.log('unirse a sala')
-        this.ngZone.run(() => this.router.navigate(['/juego/abandonar-sala']));
-      } else if(data.accion == 'abandonar' && usuarioActivo == data.jugador){
+        this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
+      } else if(data.accion == 'abandonar' && usuarioActivo === data.jugador){
         this.socket?.close(1000, 'El usuario ha abandonado la sala');
+      } else if ( data.accion == 'iniciar'){
+        console.log('iniciar partida')
+        this.ngZone.run(() => this.router.navigate(['/juego/bj-multiplayer']));
       }
     });
 

@@ -51,6 +51,7 @@ export class UnirseSalaPrivadaComponent implements OnInit{
       this.codigoSala = this.form.value.codigo;
       console.log(this.codigoSala);
       console.log(this.tipoJuego);
+      localStorage.setItem("codigoSala",this.codigoSala);
       this.unirseASalasService.unirseASalasSocket(this.rutaUnirseSala, this.codigoSala, this.usuarioActivo);
     }else {
       console.log('Formulario no valido');
