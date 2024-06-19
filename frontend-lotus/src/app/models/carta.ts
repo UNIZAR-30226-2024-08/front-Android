@@ -1,9 +1,10 @@
+
 export class Carta {
-    id: number;
-    src: string;
+    puntos: number;
+    palo: string;
     
-    constructor(id: number, src: string) {
-        this.id = id;
-        this.src = src;
+    constructor(puntos: number, palo: string) {
+        this.puntos = puntos;
+        this.palo = palo;
     }
 }

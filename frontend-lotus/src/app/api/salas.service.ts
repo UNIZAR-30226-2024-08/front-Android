@@ -1,12 +1,16 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import e from 'express';
+import { Subject } from 'rxjs';
+import { BjMultiplayerComponent } from '../juego/bj-multiplayer/bj-multiplayer.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SalasService {
   private socket: WebSocket | null = null;
+  
+  private mensajeSubject = new Subject<any>();
+  mensaje = this.mensajeSubject.asObservable();
 
   constructor(private ngZone: NgZone, private router: Router) { } // Inyecta el Router aquí
 
@@ -56,6 +60,7 @@ export class SalasService {
     });
   }
   gestionarMensaje(data: any,usuarioActivo :string): void {
+    
     if(data.accion == 'crear'){
       console.log('sala creada')
       localStorage.setItem("codigoSala",data.codigo);
@@ -78,6 +83,8 @@ export class SalasService {
           localStorage.setItem("mensajeError","LA SALA NO EXISTE");
         }
         this.ngZone.run(() => this.router.navigate(['/juego/mensaje-error.salas']));
+    } else if(data.accion == 'estado'){
+      this.mensajeSubject.next(data);
     }
   }
   iniciarSala(): void {
@@ -91,5 +98,36 @@ export class SalasService {
     this.ngZone.run(() => this.router.navigate(['/menu']));
   }
 
+  apostar(cantidad: number): void {
+    const mensaje = { 
+      "accion": "apostar",
+      "cantidad": cantidad
+     };
+    this.socket?.send(JSON.stringify(mensaje));
+  }
 
+  pedirCarta(): void {
+    const mensaje = { "accion": "pedirCarta" };
+    this.socket?.send(JSON.stringify(mensaje));
+  }
+
+  plantarse(): void {
+    const mensaje = { "accion": "plantarse" };
+    this.socket?.send(JSON.stringify(mensaje));
+  }
+
+  retirarse(): void {
+    const mensaje = { "accion": "retirarse" };
+    this.socket?.send(JSON.stringify(mensaje));
+  }
+
+  nuevaRonda(): void {
+    const mensaje = { "accion": "nuevaRonda" };
+    this.socket?.send(JSON.stringify(mensaje));
+  }
+
+  pausarPartida(): void {
+    const mensaje = { "accion": "pausarPartida" };
+    this.socket?.send(JSON.stringify(mensaje));
+  }
 }
