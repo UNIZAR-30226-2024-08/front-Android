@@ -1,10 +1,10 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, NgZone, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import {  FormControl, FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
-import { GestorSalasService } from '../../api/gestor-salas.service';
 import { RouterModule } from '@angular/router';
+import { SalasService } from '../../api/salas.service';
 
 @Component({
   selector: 'app-unirse-sala-privada',
@@ -17,7 +17,10 @@ export class UnirseSalaPrivadaComponent implements OnInit{
   form !: FormGroup;
   tipoJuego !: any;
   usuarioActivo !: any;
-  constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: Object,private tipo: GestorSalasService) {
+  codigoSala !: any;
+  private rutaUnirseSala: string = 'wss://casino-backend.azurewebsites.net/BJ/unirseSala';
+
+  constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: Object, private unirseASalasService: SalasService) {
     this.buildForm();
     if(isPlatformBrowser(this.platformId)){
       this.tipoJuego = localStorage.getItem("tipoDeJuego");
@@ -33,6 +36,8 @@ export class UnirseSalaPrivadaComponent implements OnInit{
     });
   }
 
+  ngZone: NgZone = inject(NgZone);
+
   private buildForm() {
     this.form = new FormGroup({
       codigo: new FormControl('', [Validators.required]),
@@ -43,20 +48,11 @@ export class UnirseSalaPrivadaComponent implements OnInit{
     event.preventDefault();
     /*Cambiar a las rutas de juego correspondientes*/
     if (this.form.valid) {
-      const value = this.form.value.codigo;
-      console.log(value);
+      this.codigoSala = this.form.value.codigo;
+      console.log(this.codigoSala);
       console.log(this.tipoJuego);
-      this.tipo.unirseSala(value,this.usuarioActivo).subscribe({
-        next: (data: any) => {
-          console.log(data);
-          localStorage.setItem("codigoSala",value);
-          this.router.navigate(['/juego/abandonar-sala']);
-        },
-        error: (error: any) => {
-          console.log("Error al unirse a sala privada");
-          console.log(error);
-        }
-      })
+      localStorage.setItem("codigoSala",this.codigoSala);
+      this.unirseASalasService.unirseASalasSocket(this.rutaUnirseSala, this.codigoSala, this.usuarioActivo);
     }else {
       console.log('Formulario no valido');
     }   

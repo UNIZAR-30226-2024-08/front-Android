@@ -140,6 +140,7 @@ export class LoginComponent{
         error: (err: any) => {
           console.log('Error al iniciar sesion');
           console.log(err);
+          window.location.reload();
         }
       })
       localStorage.setItem('mostarCartas', 'false');

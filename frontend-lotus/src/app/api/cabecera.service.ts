@@ -21,6 +21,6 @@ export class CabeceraService {
             'gmail': usuarioActivo
         }
         sessionStorage.clear();
-        return this.httpClient.post(`${this.constantes.url}/cerrarSesion`, body);
+        return this.httpClient.delete(`${this.constantes.url}/cerrarSesion`, {body: body});
     }
 }
