@@ -1,0 +1,55 @@
+div{
+    padding: 3vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-secundario);
+    color: var(--color-txt-secundario);
+    border-radius: 10px;
+}
+div>p{
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+div>a{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+div>p>strong{
+    font-size: 1.3rem;
+}
+
+div>a>button {
+    border: 0;
+    margin-top: 10px;
+    width: 10vw;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--color-secundario);
+    border-radius: 10px;
+    background-color: var(--color-txt-secundario);
+    box-shadow:
+        inset 2px 2px 3px rgba(242, 196, 168, 0.4),
+        inset -2px -2px 3px rgba(43, 34, 29, 0.8);
+}
+
+div>a>button:hover {
+    background-color: var(--color-acento);
+    color: var(--color-txt-secundario);
+}
+
+div>a>button:active {
+    box-shadow:
+        inset 2px 2px 3px rgba(43, 34, 29, 0.8),
+        inset -2px -2px 3px rgba(126, 99, 82, 0.4);
+}
