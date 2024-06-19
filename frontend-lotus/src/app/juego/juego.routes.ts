@@ -5,6 +5,7 @@ import { UnirseSalaPrivadaComponent } from "./unirse-sala-privada/unirse-sala-pr
 import { BjMultiplayerComponent } from "./bj-multiplayer/bj-multiplayer.component";
 import { BjOnePlayerComponent } from "./bj-one-player/bj-one-player.component";
 import { PruebaAbandonarSalaComponent } from "./prueba-abandonar-sala/prueba-abandonar-sala.component";
+import { MensajeErrorSalasComponent } from "./mensaje-error-salas/mensaje-error-salas.component";
 
 export const JUEGO_ROUTES: Routes = [
     { 
@@ -31,5 +32,9 @@ export const JUEGO_ROUTES: Routes = [
     {
         path:'abandonar-sala',  
         component:PruebaAbandonarSalaComponent
+    }, 
+    {
+        path:'mensaje-error.salas',
+        component:MensajeErrorSalasComponent
     }
 ];

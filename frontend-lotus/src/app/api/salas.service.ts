@@ -21,17 +21,7 @@ export class SalasService {
       console.log('Mensaje del servidor:', res.data);
         let data = JSON.parse(res.data);
         //Gestionar la respuesta del servidor
-        if(data.accion == 'crear'){
-          console.log('sala creada')
-          localStorage.setItem("codigoSala",data.codigo);
-          this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
-        }else if(data.accion == 'abandonar' && usuarioActivo === data.jugador){
-          this.socket?.close(1000, 'El usuario ha abandonado la sala');
-          console.log('sala abandonada')
-        } else if ( data.accion == 'iniciar'){
-          console.log('iniciar partida')
-          this.ngZone.run(() => this.router.navigate(['/juego/bj-multiplayer']));
-        }
+        this.gestionarMensaje(data,usuarioActivo);
     });
 
     this.socket.addEventListener('close', (event) => {
@@ -54,15 +44,7 @@ export class SalasService {
       console.log('Mensaje del servidor:', res.data);
       let data = JSON.parse(res.data);
       //Gestionar la respuesta del servidor
-      if(data.accion == 'unirse'){
-        console.log('unirse a sala')
-        this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
-      } else if(data.accion == 'abandonar' && usuarioActivo === data.jugador){
-        this.socket?.close(1000, 'El usuario ha abandonado la sala');
-      } else if ( data.accion == 'iniciar'){
-        console.log('iniciar partida')
-        this.ngZone.run(() => this.router.navigate(['/juego/bj-multiplayer']));
-      }
+      this.gestionarMensaje(data,usuarioActivo);
     });
 
     this.socket.addEventListener('close', (event) => {
@@ -72,6 +54,31 @@ export class SalasService {
     this.socket.addEventListener('error', (event) => {
       console.log('Error:', event);
     });
+  }
+  gestionarMensaje(data: any,usuarioActivo :string): void {
+    if(data.accion == 'crear'){
+      console.log('sala creada')
+      localStorage.setItem("codigoSala",data.codigo);
+      this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
+    }if(data.accion == 'unirse'){
+      console.log('unirse a sala')
+      this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
+    }else if(data.accion == 'abandonar' && usuarioActivo === data.jugador){
+      this.socket?.close(1000, 'El usuario ha abandonado la sala');
+      console.log('sala abandonada')
+    } else if ( data.accion == 'iniciar'){
+      console.log('iniciar partida')
+      this.ngZone.run(() => this.router.navigate(['/juego/bj-multiplayer']));
+    } else if (data.accion == 'error'){
+        if(data.mensaje.includes("está en otras salas")){
+          localStorage.setItem("mensajeError","EL USUARIO YA ESTÁ EN OTRA SALA");
+        } else if(data.mensaje.includes("debe ser mayor que 0")){
+          localStorage.setItem("mensajeError","EL USUARIO NO TIENE SUFICIENTE SALDO");
+        } else if(data.mensaje.includes("no existe")){
+          localStorage.setItem("mensajeError","LA SALA NO EXISTE");
+        }
+        this.ngZone.run(() => this.router.navigate(['/juego/mensaje-error.salas']));
+    }
   }
   iniciarSala(): void {
     const mensaje = { "accion": "iniciar" };
