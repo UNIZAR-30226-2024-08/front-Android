@@ -12,8 +12,24 @@ main {
     font-family: var(--text-font);
     background-color: #00433D;
     width: 100vw;
-    height: 100vh;
 }
+
+.historial{
+    height: 70%;
+    overflow-y: scroll;
+    padding: 0;
+}
+
+.historial::-webkit-scrollbar{
+    width: 12px;
+}
+
+.historial::-webkit-scrollbar-thumb{
+    background-color: var(--color-secundario);
+    border-radius: 10px;
+}
+
+
 .div_partida {
     /* Bordes redondeados y de color blanco */
     border: 1px solid var(--color-secundario);

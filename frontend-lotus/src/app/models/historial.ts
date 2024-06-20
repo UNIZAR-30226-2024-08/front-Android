@@ -1,7 +1,7 @@
 export interface Partida {
     inicio: string;
     juego: string;
-    monto: number;
+    cantidadGanada: number;
 }
 export interface Historial {
     partidas : Partida[];
