@@ -6,8 +6,8 @@
             <h2>Elija el tipo de Sala</h2>
         </div>
         <div class="modos_juegos">
-            <a [routerLink]="['/juego/bj-one-player']">
-                <div class="modo">
+            <a>
+                <div class="modo" (click)="crearSalaOneplayer()">
                     <img class="modo-img-top" src="../../../assets/sources/modo-juego/Un_Jugador1.png" alt="Cartas de póker">
                     <div class="modo-body">
                         <p class="modo-text">1 Jugador</p>

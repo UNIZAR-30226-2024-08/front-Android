@@ -171,6 +171,6 @@ export class BjMultiplayerComponent {
     this.salsaService.abandonarSala();
   }
   pausarPartida() {
-    throw new Error('Method not implemented.');
+    this.salsaService.pausarPartida();
   }
 }
