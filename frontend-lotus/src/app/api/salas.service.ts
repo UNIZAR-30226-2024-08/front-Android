@@ -11,11 +11,13 @@ export class SalasService {
   
   private mensajeSubject = new Subject<any>();
   mensaje = this.mensajeSubject.asObservable();
+  private tipoSala: string = "multiplayer";
 
   constructor(private ngZone: NgZone, private router: Router) { } // Inyecta el Router aquí
 
   crearSalaSocket(rutaCrearSala: string, usuarioActivo: string, tipoSala: string, aforo: number): void {
     this.socket = new WebSocket(`${rutaCrearSala}/${usuarioActivo}/${tipoSala}/${aforo}`);
+    this.tipoSala = aforo > 1 ? "multiplayer" : "oneplayer";
 
     this.socket.addEventListener('open', () => {
       console.log('Conexión establecida para crear la sala');
@@ -64,7 +66,11 @@ export class SalasService {
     if(data.accion == 'crear'){
       console.log('sala creada')
       localStorage.setItem("codigoSala",data.codigo);
-      this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
+      if(this.tipoSala === "multiplayer"){
+        this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
+      } else{
+        this.iniciarSala();
+      }
     }if(data.accion == 'unirse'){
       console.log('unirse a sala')
       this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
@@ -85,6 +91,12 @@ export class SalasService {
         this.ngZone.run(() => this.router.navigate(['/juego/mensaje-error.salas']));
     } else if(data.accion == 'estado'){
       this.mensajeSubject.next(data);
+    } else if(data.accion == 'pausar'){
+      console.log('partida pausada')
+      this.socket?.close(1000, 'El usuario ha pausado la sala');
+      if(data.mensaje.includes(usuarioActivo)){
+        this.ngZone.run(() => this.router.navigate(['/menu']));
+      }
     }
   }
   iniciarSala(): void {
@@ -102,7 +114,7 @@ export class SalasService {
     const mensaje = { 
       "accion": "apostar",
       "cantidad": cantidad
-     };
+    };
     this.socket?.send(JSON.stringify(mensaje));
   }
 
@@ -127,7 +139,7 @@ export class SalasService {
   }
 
   pausarPartida(): void {
-    const mensaje = { "accion": "pausarPartida" };
+    const mensaje = { "accion": "pausar" };
     this.socket?.send(JSON.stringify(mensaje));
   }
 }
