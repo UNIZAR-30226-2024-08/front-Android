@@ -1,6 +1,7 @@
 <main class="main">
     <app-cabecera></app-cabecera>
     <app-navegacion-perfil></app-navegacion-perfil>
+    <div class="historial">
     @for(partida of partidas; track partida.inicio){
         <div class="div_partida">
             <div class="div_img_partida">
@@ -17,13 +18,14 @@
                 {{partida.inicio}}
             </div>
             <div>
-                @if(partida.monto > 0){
-                    Fichas ganadas : <strong>+{{partida.monto}}</strong>
+                @if(partida.cantidadGanada > 0){
+                    Fichas ganadas : <strong>+{{partida.cantidadGanada}}</strong>
                 }@else {
-                    Fichas perdidas : <strong>{{partida.monto}}</strong>
+                    Fichas perdidas : <strong>{{partida.cantidadGanada}}</strong>
                 }
                 
             </div>
         </div>
     }
+    </div>
 </main>

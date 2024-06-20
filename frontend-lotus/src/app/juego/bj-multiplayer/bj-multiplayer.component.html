@@ -1,19 +1,17 @@
 <main class="main">
     
     <div class="div_jugadores">
-        <ul>
+        <ul class="listaJugadores">
             <li>
                 <div class="div_banca">
                     <div class="div_banca_texto">
                             <p>BANCA</p>
                     </div>
-                    <div>
-                        <ul>
+                        <ul class="cartasOponentes">
                             <li *ngFor="let carta of cartasCrupier" class="div_formato_carta">
                                 <img class="imagenLista" [src]="crearRutaCarta(carta)" alt={{crearRutaCarta(carta)}}>
                             </li>
                         </ul>
-                    </div>
                 </div>
             </li>
             @for (jugador of listaJugadores; track $index) {
@@ -86,7 +84,7 @@
 
     <div class="div_jugador">
         <div>
-            <ul>
+            <ul class="cartasJugador">
                 @for (carta of cartasUsuarioActivo; track $index) {
                 <li class="div_formato_carta_jugador">
                     <img class="imagenLista_jugador" [src]="crearRutaCarta(carta)" alt="Carta del jugador">
