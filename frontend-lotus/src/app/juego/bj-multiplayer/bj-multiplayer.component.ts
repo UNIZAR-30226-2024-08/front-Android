@@ -43,31 +43,16 @@ export class BjMultiplayerComponent {
   form!: FormGroup;
   apuesta : number = 0;
   saldo: number = 0;
-  
-  urlsCartasJugadorActivo: String[] = [];
+  haApostado: boolean = false;
+
   cartasUsuarioActivo: Carta[] = [];
-  numeroJugadores: number = 0;
   cartasCrupier: Carta[] = [];
   listaJugadores: Jugador[] = [];
-  listaJugadoresSinBanca: Jugador[] = [];
-  bancaJugador!: Jugador;
-  listaGanadores: string[] = []
   
-  noEsFinPartida: boolean = true;
   noEsMiTurno: boolean = true;
-  ganador: any;
+
   
-  correosJugadores: string[] = []
   
-  jugadores: Usuario | undefined;
-  
-  url!: string;
-  
-  nuevaCarta: Carta | undefined;
-  numeroCarta: number = 1;
-  ElUserHaPerdido: String = ""
-  
-  cartasDeUsuario: Carta[] = []
   
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private salsaService: SalasService) {
     this.buildForm();
@@ -114,6 +99,7 @@ export class BjMultiplayerComponent {
       this.mostrarApuesta = false;
       this.apuesta = Number(this.form.value.apuesta);
       this.salsaService.apostar(this.apuesta);
+      this.haApostado = true;
     }
   }
   
@@ -130,7 +116,10 @@ export class BjMultiplayerComponent {
     //Actualizamos el crupier
     this.actulizarCuprier(data.manoCrupier);
     
-    this.mostrarApuesta = (data.fase == this.estado.apuestas && this.mostrarApuesta === false) ? true : false;
+    this.mostrarApuesta = (data.fase == this.estado.apuestas && this.haApostado === false) ? true : false;
+    if(data.fase != this.estado.apuestas){
+      this.haApostado = false;
+    }
     this.noEsMiTurno = (data.fase == this.estado.jugar && data.turno == this.usuarioActivo) ? false : true;
     this.mostrarMensajeFinal = (data.fase == this.estado.final) ? true : false;
   }
@@ -141,6 +130,7 @@ export class BjMultiplayerComponent {
       if(jugador.gmail == this.usuarioActivo){
         this.cartasUsuarioActivo = jugador.cartas;
         this.saldo = jugador.saldo;
+
       }
     })
   }
