@@ -2,20 +2,40 @@
     
     <div class="div_jugadores">
         <ul>
-            <li *ngFor="let jugador of listaJugadores">
+            <li>
                 <div class="div_banca">
                     <div class="div_banca_texto">
-                        <p>{{ jugador.nombreJugador }}</p>
+                            <p>BANCA</p>
                     </div>
                     <div>
                         <ul>
-                            <li *ngFor="let carta of jugador.cartasJugador" class="div_formato_carta">
-                                <img class="imagenLista" [src]="carta.src" alt="Imagen de la carta">
+                            <li *ngFor="let carta of cartasCrupier" class="div_formato_carta">
+                                <img class="imagenLista" [src]="crearRutaCarta(carta)" alt={{crearRutaCarta(carta)}}>
                             </li>
                         </ul>
                     </div>
                 </div>
             </li>
+            @for (jugador of listaJugadores; track $index) {
+                @if(jugador.gmail !== usuarioActivo) {
+                <li>
+                    <div class="div_banca">
+                        <div class="div_banca_texto">
+                            <p>{{ jugador.gmail }}</p>
+                        </div>
+                        <div>
+                            <ul>
+                                <li *ngFor="let carta of jugador.cartas" class="div_formato_carta">
+                                    @if(jugador.gmail !== usuarioActivo) {
+                                        <img class="imagenLista" [src]="crearRutaCarta(carta)" alt="Imagen de la carta">
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                }
+            }
         </ul>
     </div>
 
@@ -24,7 +44,7 @@
     <div class="div_apuesta">
         <div class="div_apuesta1">
             <img class="imagen_apuesta" src="../../../assets/sources/juego/ficha-de-saldo.png">
-            <h1 class="texto_apuesta"> Saldo: XXXX</h1>
+            <h1 class="texto_apuesta"> Saldo: {{saldo}}</h1>
         </div>
         <div class="div_apuesta1">
             <img class="imagen_apuesta" src="../../../assets/sources/juego/ficha-de-poker.png">
@@ -45,7 +65,7 @@
                     La apuesta minima es de 10 fichas
                 </span>
             </div>
-            <button type="submit" class="boton_apostar" (click)="apostar()">Apostar</button>
+            <button type="submit" class="boton_apostar">Apostar</button>
         </div>
     </form>
     }
@@ -53,12 +73,10 @@
     @if (mostrarMensajeFinal) {
     <form [formGroup]="form" (ngSubmit)="saveMensajeFinal($event)">
         <div class="div_mensaje_final">
-            <h1>Los ganadores son:</h1>
-            <p> Lista de ganadores...{{ listaGanadores }} </p>
             <h2>¿Quiere volver a jugar?</h2>
             <div>
                 <button class="boton_mensaje_final" type="button" (click)="abandonar()">Abandonar</button>
-                <button  class="boton_mensaje_final" type="submit" (click)="resetearPartida()">Jugar</button>
+                <button  class="boton_mensaje_final" type="submit" (click)="resetearPartida()">Jugar Otra Ronda</button>
             </div>
         </div>
     </form>
@@ -69,9 +87,9 @@
     <div class="div_jugador">
         <div>
             <ul>
-                @for (carta of cartasUsuarioActivo; track carta.id) {
+                @for (carta of cartasUsuarioActivo; track $index) {
                 <li class="div_formato_carta_jugador">
-                    <img class="imagenLista_jugador" [src]="carta.src" alt="Carta del jugador">
+                    <img class="imagenLista_jugador" [src]="crearRutaCarta(carta)" alt="Carta del jugador">
                 </li>
                 }
             </ul>
@@ -83,6 +101,7 @@
         <div id="div_botones">
             <button (click)="pedirCarta()">Pedir Carta</button>
             <button (click)="plantarse()">Plantarse</button>
+            <button (click)="retirarse()">Retirarse</button>
         </div>
     }
 

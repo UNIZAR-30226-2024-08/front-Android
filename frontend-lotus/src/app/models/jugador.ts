@@ -1,40 +1,36 @@
+import { Carta } from "./carta";
+import { PersonalizablesService } from "../api/personalizables.service";
+
 export class Jugador {
-    id: number;
-    correoJugador: string;
-    nombreJugador: string;
-    cartasJugador: any[] = []; //URLS completas de las cartas
-    
-    constructor(id: number, correoJugador: string, nombreJugador: string, cartas: String[]) {
-        this.id = id;
-        this.correoJugador = correoJugador;
-        this.nombreJugador = nombreJugador;
 
-        for (let i = 0; cartas.length; i++){
-            this.cartasJugador.push({
-                id: i + 1,
-                src: cartas[i]
-            });
-        }            
-    }
+    constructor(private personalizablesService: PersonalizablesService) {}
+
+    gmail: string = "";
+    saldo: number = 0;
+    apuesta: number = 0;
+    estaRetirado: boolean = false;
+    cartas: Carta[] = [];
+
+
 
     
-    establecerCartas(cartas: String[]) {
-        this.cartasJugador = cartas;
+    establecerCartas(cartas: Carta[]) {
+        this.cartas = cartas;
     }
 
     ocultarDosPrimerasCartas() {
-        this.cartasJugador[0] = "../../../assets/sources/juego/reverso.jpg";
-        this.cartasJugador[1] = "../../../assets/sources/juego/reverso.jpg";
+        this.cartas[0].palo = "../../../assets/sources/juego/reverso.jpg";
+        this.cartas[1].palo = "../../../assets/sources/juego/reverso.jpg";
     }
 
     mostrarTodasLasCartas(): any {
-        return this.cartasJugador;
+        return this.cartas;
     }
 
     mostrarSoloCartasPedidas():any {
-        var cartasPedidas = this.cartasJugador;
-        cartasPedidas[0] = "../../../assets/sources/juego/reverso.jpg";
-        cartasPedidas[1] = "../../../assets/sources/juego/reverso.jpg";
+        var cartasPedidas = this.cartas;
+        cartasPedidas[0].palo = "../../../assets/sources/juego/reverso.jpg";
+        cartasPedidas[1].palo = "../../../assets/sources/juego/reverso.jpg";
         return cartasPedidas;
     }
 }

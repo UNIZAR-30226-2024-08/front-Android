@@ -207,3 +207,7 @@ main {
         inset 2px 2px 3px rgba(43, 34, 29, 0.8),
         inset -2px -2px 3px rgba(126, 99, 82, 0.4);
 }
+
+.imagenLista_jugador{
+    height: 120px;
+}
