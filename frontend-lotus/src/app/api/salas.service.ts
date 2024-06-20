@@ -87,6 +87,8 @@ export class SalasService {
           localStorage.setItem("mensajeError","EL USUARIO NO TIENE SUFICIENTE SALDO");
         } else if(data.mensaje.includes("no existe")){
           localStorage.setItem("mensajeError","LA SALA NO EXISTE");
+        } else if (data.mensaje.includes("La sala está llena")){
+          localStorage.setItem("mensajeError","LA SALA ESTÁ LLENA");
         }
         this.ngZone.run(() => this.router.navigate(['/juego/mensaje-error.salas']));
     } else if(data.accion == 'estado'){
@@ -94,7 +96,7 @@ export class SalasService {
     } else if(data.accion == 'pausar'){
       console.log('partida pausada')
       this.socket?.close(1000, 'El usuario ha pausado la sala');
-      if(data.mensaje.includes(usuarioActivo)){
+      if(data.jugadores.includes(usuarioActivo)){
         this.ngZone.run(() => this.router.navigate(['/menu']));
       }
     }

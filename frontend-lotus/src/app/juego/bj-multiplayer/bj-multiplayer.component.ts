@@ -112,7 +112,7 @@ export class BjMultiplayerComponent {
   
   nuevoMensaje(data: any){
     //Actualizamos usuarios
-    this.actulaizarJugadores(data.jugadores);
+    this.actualizarJugadores(data.jugadores);
     //Actualizamos el crupier
     this.actulizarCuprier(data.manoCrupier);
     
@@ -124,7 +124,7 @@ export class BjMultiplayerComponent {
     this.mostrarMensajeFinal = (data.fase == this.estado.final) ? true : false;
   }
   
-  actulaizarJugadores(lista: Jugador[]){
+  actualizarJugadores(lista: Jugador[]){
     this.listaJugadores = lista;
     lista.forEach(jugador => {
       if(jugador.gmail == this.usuarioActivo){
