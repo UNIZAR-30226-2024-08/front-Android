@@ -21,15 +21,13 @@
                         <div class="div_banca_texto">
                             <p>{{ jugador.gmail }}</p>
                         </div>
-                        <div>
-                            <ul>
+                        <ul class="cartasOponentes">
                                 <li *ngFor="let carta of jugador.cartas" class="div_formato_carta">
                                     @if(jugador.gmail !== usuarioActivo) {
                                         <img class="imagenLista" [src]="crearRutaCarta(carta)" alt="Imagen de la carta">
                                     }
                                 </li>
-                            </ul>
-                        </div>
+                        </ul>
                     </div>
                 </li>
                 }
