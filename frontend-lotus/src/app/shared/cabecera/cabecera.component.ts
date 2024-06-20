@@ -61,6 +61,7 @@ export class CabeceraComponent implements OnInit{
     this.cabeceraService.obtenerUsuario(this.usuarioActivo)
     .subscribe({
       next: (data: any) => {
+        
         data as Usuario;
         if(this.nombreUsuario == null){
           this.nombreUsuario = data.nombre;

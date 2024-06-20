@@ -3,12 +3,10 @@ import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Usuario } from '../../models/usuario';
 import { Carta } from '../../models/carta';
-import { UsuariosService } from '../../api/usuarios.service';
 import { Jugador } from '../../models/jugador';
 import { Subscription, debounceTime } from 'rxjs';
 import { SalasService } from '../../api/salas.service';
-import e from 'express';
-import { log } from 'console';
+import { CabeceraService } from '../../api/cabecera.service';
 
 enum Fase {
 	apuestas = 'apuestas', // apostar
@@ -37,6 +35,9 @@ export class BjMultiplayerComponent {
   
   estado = Fase;
   
+  jugaoresObservados: boolean = false;
+  listaNombreJugadores: string[] = [];
+
   mostrarApuesta: boolean = true;
   mostrarMensajeFinal: boolean = false;
   
@@ -54,7 +55,7 @@ export class BjMultiplayerComponent {
   
   
   
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private salsaService: SalasService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private salsaService: SalasService, private usuariosService: CabeceraService) {
     this.buildForm();
     //Obener el usuario actual
     if(isPlatformBrowser(this.platformId)){
@@ -126,13 +127,24 @@ export class BjMultiplayerComponent {
   
   actualizarJugadores(lista: Jugador[]){
     this.listaJugadores = lista;
-    lista.forEach(jugador => {
+    lista.forEach((jugador, indice) => {
       if(jugador.gmail == this.usuarioActivo){
         this.cartasUsuarioActivo = jugador.cartas;
         this.saldo = jugador.saldo;
-
       }
+      else if(this.jugaoresObservados === false){
+        this.usuariosService.obtenerUsuario(jugador.gmail).subscribe({
+          next: (data: any) => {
+            this.listaNombreJugadores[indice] = data.nombre;
+          },
+          error: (error) => {
+            console.error('Error:', error);
+          }
+        })
+      }
+
     })
+    this.jugaoresObservados = true;
   }
 
   crearRutaCarta(carta: Carta){

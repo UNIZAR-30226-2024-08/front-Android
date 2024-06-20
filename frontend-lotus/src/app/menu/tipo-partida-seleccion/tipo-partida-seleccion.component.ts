@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 })
 export class TipoPartidaSeleccionComponent {
 
+  rutaReanudar!: string
   ruta!: string;
   tipoJuego: any;
   constructor() {}
@@ -21,6 +22,7 @@ export class TipoPartidaSeleccionComponent {
       this.ruta="/menu/poker_seleccion";
     } else if(this.tipoJuego=="blackjack"){
       this.ruta="/menu/bj_seleccion";
+      this.rutaReanudar="/menu/partidas_BJ_pausadas";
     }
     console.log(this.ruta);
   }

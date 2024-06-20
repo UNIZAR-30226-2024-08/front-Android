@@ -6,6 +6,7 @@ import { PerfilPersonalComponent } from "./perfil-personal/perfil-personal.compo
 import { PerfilHistorialComponent } from "./perfil-historial/perfil-historial.component";
 import { PerfilTiendaComponent } from "./perfil-tienda/perfil-tienda.component";
 import { TipoPartidaSeleccionComponent } from "./tipo-partida-seleccion/tipo-partida-seleccion.component";
+import { PartidasPausadasBJComponent } from "./partidas-pausadas-bj/partidas-pausadas-bj.component";
 
 export const MENU_ROUTES: Routes = [
     
@@ -43,4 +44,9 @@ export const MENU_ROUTES: Routes = [
         path:'tipo_partida_seleccion',
         component: TipoPartidaSeleccionComponent
     },
+    {
+        path: 'partidas_BJ_pausadas',
+        title: 'partidas_BJ_pausadas',
+        component: PartidasPausadasBJComponent
+    }
 ];
