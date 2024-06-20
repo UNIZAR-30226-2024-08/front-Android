@@ -95,9 +95,11 @@ export class SalasService {
       this.mensajeSubject.next(data);
     } else if(data.accion == 'pausar'){
       console.log('partida pausada')
-      this.socket?.close(1000, 'El usuario ha pausado la sala');
       if(data.jugadores.includes(usuarioActivo)){
         this.ngZone.run(() => this.router.navigate(['/menu']));
+        this.socket?.close(1000, 'El usuario ha pausado la sala');
+      }else{
+        this.ngZone.run(() => this.router.navigate(['/juego/mensaje-partidas-pausadas']));
       }
     }
   }
