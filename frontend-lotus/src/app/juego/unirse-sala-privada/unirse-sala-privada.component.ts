@@ -18,13 +18,16 @@ export class UnirseSalaPrivadaComponent implements OnInit{
   tipoJuego !: any;
   usuarioActivo !: any;
   codigoSala !: any;
-  private rutaUnirseSala: string = 'wss://casino-backend.azurewebsites.net/BJ/unirseSala';
+  juego !: any;
+  private rutaUnirseSala!: string;
 
   constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: Object, private unirseASalasService: SalasService) {
     this.buildForm();
     if(isPlatformBrowser(this.platformId)){
       this.tipoJuego = localStorage.getItem("tipoDeJuego");
       this.usuarioActivo = localStorage.getItem("usuarioActivo");
+      this.juego = localStorage.getItem("tipoJuego");
+      this.rutaUnirseSala = (this.juego === "poker") ? 'wss://casino-backend.azurewebsites.net/poker/unirseSala' : 'wss://casino-backend.azurewebsites.net/BJ/unirseSala';
     }
   }
 

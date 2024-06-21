@@ -30,7 +30,7 @@ export class PersonalizablesService {
   obtenerAvatarUsuario(gmail: string): any{
     return this.httpClient.get(`${this.constantes.url}/obtenerAvatar/${gmail}`)
   }
-  obtenerCartasUsuario(gmail: string): any{
+  obtenerCartasUsuario(gmail: any): any{
     return this.httpClient.get(`${this.constantes.url}/obtenerCartas/${gmail}`)
   }
 

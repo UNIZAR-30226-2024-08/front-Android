@@ -6,6 +6,8 @@ import { Carta } from '../../models/carta';
 import { Jugador } from '../../models/jugador';
 import { Subscription, debounceTime } from 'rxjs';
 import { SalasService } from '../../api/salas.service';
+import { CabeceraService } from '../../api/cabecera.service';
+import { PersonalizablesService } from '../../api/personalizables.service';
 
 
 enum Fase {
@@ -33,39 +35,26 @@ export class PokerMultiplayerComponent {
   
   estado = Fase;
   
+  jugaoresObservados: boolean = false;
+  listaNombreJugadores: string[] = [];
+
   mostrarApuesta: boolean = true;
   mostrarMensajeFinal: boolean = false;
+
+  reversoCarta!: string
   
   form!: FormGroup;
   apuesta : number = 0;
   saldo: number = 0;
-  
-  urlsCartasJugadorActivo: String[] = [];
+  haApostado: boolean = false;
+
   cartasUsuarioActivo: Carta[] = [];
-  numeroJugadores: number = 0;
   cartasCrupier: Carta[] = [];
   listaJugadores: Jugador[] = [];
-  listaJugadoresSinBanca: Jugador[] = [];
-  bancaJugador!: Jugador;
-  listaGanadores: string[] = []
   
-  noEsFinPartida: boolean = true;
   noEsMiTurno: boolean = true;
-  ganador: any;
   
-  correosJugadores: string[] = []
-  
-  jugadores: Usuario | undefined;
-  
-  url!: string;
-  
-  nuevaCarta: Carta | undefined;
-  numeroCarta: number = 1;
-  ElUserHaPerdido: String = ""
-  
-  cartasDeUsuario: Carta[] = []
-  
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private salsaService: SalasService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private salsaService: SalasService, private usuariosService: CabeceraService, private personalizablesService: PersonalizablesService ) {
     this.buildForm();
     //Obener el usuario actual
     if(isPlatformBrowser(this.platformId)){
@@ -89,6 +78,16 @@ export class PokerMultiplayerComponent {
       console.log("Nuevo mensaje recibido");
       this.nuevoMensaje(data);
     });
+
+    this.personalizablesService.obtenerCartasUsuario(this.usuarioActivo).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.reversoCarta = data.reverso;
+      },
+      error: (error: any) => {
+        console.error('Error:', error);
+      }
+    })
   }
   
   ngOnDestroy(): void {
@@ -122,40 +121,49 @@ export class PokerMultiplayerComponent {
   
   nuevoMensaje(data: any){
     //Actualizamos usuarios
-    this.actulaizarJugadores(data.jugadores);
-    //Actualizamos el crupier
-    this.actulizarCuprier(data.manoCrupier);
+    this.actualizarJugadores(data.jugadores);
     
     //Actualizamos la fase
   }
   
-  actulaizarJugadores(lista: Jugador[]){
+  actualizarJugadores(lista: Jugador[]){
     this.listaJugadores = lista;
-    lista.forEach(jugador => {
+    lista.forEach((jugador, indice) => {
       if(jugador.gmail == this.usuarioActivo){
         this.cartasUsuarioActivo = jugador.cartas;
         this.saldo = jugador.saldo;
       }
+      else if(this.jugaoresObservados === false){
+        this.usuariosService.obtenerUsuario(jugador.gmail).subscribe({
+          next: (data: any) => {
+            this.listaNombreJugadores[indice] = data.nombre;
+          },
+          error: (error) => {
+            console.error('Error:', error);
+          }
+        })
+      }
+
     })
+    this.jugaoresObservados = true;
   }
 
   crearRutaCarta(carta: Carta){
-    return `../../../assets/sources/juego/cartas/${carta.palo}/${carta.puntos}.png`
+    return carta == undefined ? `../../../assets/sources/avatares/${this.reversoCarta}.png` : `../../../assets/sources/juego/cartas/${carta.palo}/${carta.puntos}.png`;
   }
 
-  actulizarCuprier(cartas: Carta[]){
-    this.cartasCrupier = cartas;
-  }
 
-  
+  subirApuesta(cantidad: number){
+
+  }
+  igualarApuesta(){
+    this.salsaService.igualarApuesta();
+  }
   retirarse() {
     this.salsaService.retirarse();
   }
   plantarse() {
     this.salsaService.plantarse();
-  }
-  pedirCarta() {
-    this.salsaService.pedirCarta();
   }
 
   resetearPartida() {
@@ -167,4 +175,6 @@ export class PokerMultiplayerComponent {
   pausarPartida() {
     this.salsaService.pausarPartida();
   }
+
+
 }
