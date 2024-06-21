@@ -34,11 +34,11 @@ export class UsuariosService {
     return this.httpClient.get(`${this.url}/obtenerUsuario/${gmail}`, {params: params});
   }
   
-  obtenerPartidasPausadas(gmail: string): any {
+  obtenerPartidasPausadas(gmail: string,juego:string): any {
     let params = {
       gmail: gmail
     };
-    return this.httpClient.get(`${this.url}/BJ/obtenerPausadas/${gmail}`);
+    return this.httpClient.get(`${this.url}/${juego}/obtenerPausadas/${gmail}`);
   }
 
   obtenerReverso(gmail: string): any {

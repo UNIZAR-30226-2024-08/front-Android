@@ -139,6 +139,8 @@ export class SalasService {
           localStorage.setItem("mensajeError","LA SALA NO EXISTE");
         } else if (data.mensaje.includes("La sala está llena")){
           localStorage.setItem("mensajeError","LA SALA ESTÁ LLENA");
+        } else if (data.mensaje.includes("Hay 1 jugadores en la sala")){
+          localStorage.setItem("mensajeError","NO HAY SUFICIENTES JUGADORES MINIMO 2 JUGADORES");
         }
         this.ngZone.run(() => this.router.navigate(['/juego/mensaje-error.salas']));
       }
