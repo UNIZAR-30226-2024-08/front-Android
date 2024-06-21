@@ -1,0 +1,65 @@
+main {
+    padding: 0;
+    margin: 0;
+    background-color: var(--color-principal);
+    color: var(--color-secundario);
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    font-family: var(--text-font);
+}
+a{
+    text-decoration: none;
+    color: var(--color-secundario);
+}
+.div_sala_creada {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.div_sala_creada>h1 {
+    font-size: 50px;
+    margin: 0;
+}
+
+.div_sala_creada>p,.div_codigo_sala>p {
+    margin:3vh;
+    font-size: 30px;
+}
+.div_sala_creada>p>em{
+    color:var(--color-acento);
+}
+.div_botones>button,.div_botones>a>button{
+    border: 0;
+    margin:3vh;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--color-principal);
+    border-radius: 10px;
+    background-color: var(--color-secundario); 
+    background-image: linear-gradient(
+        to top left,
+        var(--color-secundario),
+        var(--color-secundario)30%,
+        var(--color-secundario) ,
+    );
+    box-shadow:
+        inset 2px 2px 3px rgba(255, 255, 255, 0.6),
+        inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.div_botones>button:hover,.div_botones>a>button:hover{
+    background-color: var(--color-secundario); 
+}
+
+.div_botones>button:active,.div_botones>a>button:active{
+    box-shadow:
+    inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}

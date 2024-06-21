@@ -12,6 +12,7 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrl: './bj-seleccion-modo.component.css'
 })
 export class BjSeleccionModoComponent {
+
   private rutaCrearSala: string = 'wss://casino-backend.azurewebsites.net/BJ/crearSala'
   private aforo: number = 1;
   private tipoSala: string = "privada";
@@ -29,5 +30,8 @@ export class BjSeleccionModoComponent {
   crearSalaOneplayer(){
     console.log("Crear sala one player");
     this.salasService.crearSalaSocket(this.rutaCrearSala, this.usuarioActivo, this.tipoSala, this.aforo);
+  }
+  crearSalaPublica() {
+    this.salasService.crearSalaSocket(this.rutaCrearSala, this.usuarioActivo, "publica", 7);
   }
 }
