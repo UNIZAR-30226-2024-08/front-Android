@@ -20,6 +20,7 @@ export class TipoPartidaSeleccionComponent {
     console.log(this.tipoJuego);
     if(this.tipoJuego=="poker"){
       this.ruta="/menu/poker_seleccion";
+      this.rutaReanudar="/menu/partidas_BJ_pausadas";
     } else if(this.tipoJuego=="blackjack"){
       this.ruta="/menu/bj_seleccion";
       this.rutaReanudar="/menu/partidas_BJ_pausadas";

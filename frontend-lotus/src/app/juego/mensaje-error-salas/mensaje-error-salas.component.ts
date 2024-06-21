@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -10,8 +11,11 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class MensajeErrorSalasComponent {
   mensajeError: string | null = null;
-  constructor() { 
-    this.mensajeError = localStorage.getItem("mensajeError"); 
+  
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if(isPlatformBrowser(this.platformId)){
+      this.mensajeError = localStorage.getItem("mensajeError"); 
+    }
   }
 
 }
