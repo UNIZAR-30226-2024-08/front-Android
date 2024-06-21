@@ -11,6 +11,7 @@ export class SalasService {
   private mensajeSubject = new Subject<any>();
   mensaje = this.mensajeSubject.asObservable();
   private tipoSala: string = "multiplayer";
+  private esPublica: boolean = false;
 
   constructor(private ngZone: NgZone, private router: Router) { } // Inyecta el Router aquí
 
@@ -18,6 +19,7 @@ export class SalasService {
   crearSalaSocket(rutaCrearSala: string, usuarioActivo: string, tipoSala: string, aforo: number): void {
     this.socket = new WebSocket(`${rutaCrearSala}/${usuarioActivo}/${tipoSala}/${aforo}`);
     this.tipoSala = aforo > 1 ? "multiplayer" : "oneplayer";
+    this.esPublica = tipoSala === "publica";
     this.socket.addEventListener('open', () => {
       console.log('Conexión establecida para crear la sala');
     });
@@ -92,14 +94,22 @@ export class SalasService {
     if(data.accion == 'crear'){
       console.log('sala creada')
       localStorage.setItem("codigoSala",data.codigo);
-      if(this.tipoSala === "multiplayer"){
+      if(this.tipoSala === "multiplayer" && !this.esPublica){
         this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
-      } else{
+      } else if(this.tipoSala === "multiplayer" && this.esPublica){
+        console.log('sala publica creada')
+        this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-publica']));
+      }
+      else{
         this.iniciarSala();
       }
     }if(data.accion == 'unirse'){
       console.log('unirse a sala')
-      this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
+      if(this.esPublica){
+        this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-publica']));
+      } else{
+       this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
+      }
     }else if(data.accion == 'abandonar' && usuarioActivo === data.jugador){
       this.socket?.close(1000, 'El usuario ha abandonado la sala');
       console.log('sala abandonada')
