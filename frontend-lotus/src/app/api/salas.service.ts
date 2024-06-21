@@ -52,6 +52,7 @@ export class SalasService {
   unirseASalasSocket(rutaUnirseSala: string, codigoSala: string, usuarioActivo: string): void {
     this.socket = new WebSocket(`${rutaUnirseSala}/${codigoSala}/${usuarioActivo}`);
     this.rutaJuego = rutaUnirseSala.includes('BJ') ? '/juego/bj-multiplayer' : '/juego/poker-multiplayer';
+    this.esPublica=false;
     this.socket.addEventListener('open', () => {
       console.log('Conexión establecida para unirse a la sala');
     });
@@ -112,11 +113,12 @@ export class SalasService {
         this.iniciarSala();
       }
     }if(data.accion == 'unirse'){
-      console.log('unirse a sala')
+      console.log(this.esPublica)
+
       if(this.esPublica){
         this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-publica']));
       } else{
-       this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
+        this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
       }
     }else if(data.accion == 'abandonar' && usuarioActivo === data.jugador){
       this.socket?.close(1000, 'El usuario ha abandonado la sala');
