@@ -40,4 +40,8 @@ export class UsuariosService {
     };
     return this.httpClient.get(`${this.url}/BJ/obtenerPausadas/${gmail}`);
   }
+
+  obtenerReverso(gmail: string): any {
+    return this.httpClient.get(`${this.url}/obtenerCartas/${gmail}`);
+  }
 }

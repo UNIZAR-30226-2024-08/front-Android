@@ -11,7 +11,11 @@ export class SalasService {
   private mensajeSubject = new Subject<any>();
   mensaje = this.mensajeSubject.asObservable();
   private tipoSala: string = "multiplayer";
+
+  private rutaJuego: string = '';
+
   private esPublica: boolean = false;
+
 
   constructor(private ngZone: NgZone, private router: Router) { } // Inyecta el Router aquí
 
@@ -19,7 +23,11 @@ export class SalasService {
   crearSalaSocket(rutaCrearSala: string, usuarioActivo: string, tipoSala: string, aforo: number): void {
     this.socket = new WebSocket(`${rutaCrearSala}/${usuarioActivo}/${tipoSala}/${aforo}`);
     this.tipoSala = aforo > 1 ? "multiplayer" : "oneplayer";
+
+    this.rutaJuego = rutaCrearSala.includes('BJ') ? '/juego/bj-multiplayer' : '/juego/poker-multiplayer';
+
     this.esPublica = tipoSala === "publica";
+
     this.socket.addEventListener('open', () => {
       console.log('Conexión establecida para crear la sala');
     });
@@ -28,7 +36,7 @@ export class SalasService {
       console.log('Mensaje del servidor:', res.data);
         let data = JSON.parse(res.data);
         //Gestionar la respuesta del servidor
-        this.gestionarMensaje(data,usuarioActivo);
+        this.gestionarMensaje(data,usuarioActivo, this.rutaJuego);
     });
 
     this.socket.addEventListener('close', (event) => {
@@ -43,7 +51,7 @@ export class SalasService {
   /* Socket para unirse a una sala ya creada */
   unirseASalasSocket(rutaUnirseSala: string, codigoSala: string, usuarioActivo: string): void {
     this.socket = new WebSocket(`${rutaUnirseSala}/${codigoSala}/${usuarioActivo}`);
-
+    this.rutaJuego = rutaUnirseSala.includes('BJ') ? '/juego/bj-multiplayer' : '/juego/poker-multiplayer';
     this.socket.addEventListener('open', () => {
       console.log('Conexión establecida para unirse a la sala');
     });
@@ -52,7 +60,7 @@ export class SalasService {
       console.log('Mensaje del servidor:', res.data);
       let data = JSON.parse(res.data);
       //Gestionar la respuesta del servidor
-      this.gestionarMensaje(data,usuarioActivo);
+      this.gestionarMensaje(data,usuarioActivo, this.rutaJuego);
     });
 
     this.socket.addEventListener('close', (event) => {
@@ -66,7 +74,7 @@ export class SalasService {
 
   reanudarSocket(rutaReanudar: string, codigoSala: string, usuarioActivo: string): void {
     this.socket = new WebSocket(`${rutaReanudar}/${codigoSala}/${usuarioActivo}`);
-
+    this.rutaJuego = rutaReanudar.includes('BJ') ? '/juego/bj-multiplayer' : '/juego/poker-multiplayer';
     this.socket.addEventListener('open', () => {
       console.log('Conexión establecida para pausar la partida');
     });
@@ -75,9 +83,9 @@ export class SalasService {
       console.log('Mensaje del servidor:', res.data);
       let data = JSON.parse(res.data);
       if(data.accion === "reanudar"){
-        this.ngZone.run(() => this.router.navigate(['/juego/bj-multiplayer']));
+        this.ngZone.run(() => this.router.navigate([this.rutaJuego]));
       } else {
-        this.gestionarMensaje(data,usuarioActivo);
+        this.gestionarMensaje(data,usuarioActivo, this.rutaJuego);
       }
     });
 
@@ -90,7 +98,7 @@ export class SalasService {
     });
   }
   /* funcion para gestionar los mensajes del servidor */
-  gestionarMensaje(data: any,usuarioActivo :string): void {
+  gestionarMensaje(data: any,usuarioActivo :string, ruta: string): void {
     if(data.accion == 'crear'){
       console.log('sala creada')
       localStorage.setItem("codigoSala",data.codigo);
@@ -115,7 +123,7 @@ export class SalasService {
       console.log('sala abandonada')
     } else if ( data.accion == 'iniciar'){
       console.log('iniciar partida')
-      this.ngZone.run(() => this.router.navigate(['/juego/bj-multiplayer']));
+      this.ngZone.run(() => this.router.navigate([ruta]));
     } else if (data.accion == 'error'){
       if(data.mensaje.includes("no puedes apostar tanto")){
         this.mensajeSubject.next(data);
@@ -148,7 +156,7 @@ export class SalasService {
   iniciarSala(): void {
     const mensaje = { "accion": "iniciar" };
     this.socket?.send(JSON.stringify(mensaje));
-    this.ngZone.run(() => this.router.navigate(['/juego/bj-multiplayer']));
+    this.ngZone.run(() => this.router.navigate([this.rutaJuego]));
   }
   abandonarSala(): void {
     const mensaje = { "accion": "abandonar" };
@@ -191,6 +199,19 @@ export class SalasService {
 
   reanudarPartida(): void {
     const mensaje = { "accion": "reanudar" };
+    this.socket?.send(JSON.stringify(mensaje));
+  }
+
+  subirApuesta(cantidad: number): void {
+    const mensaje = {
+      "accion": "subirApuesta",
+      "cantidad": cantidad
+    };
+    this.socket?.send(JSON.stringify(mensaje));
+  }
+
+  igualarApuesta(): void {
+    const mensaje = { "accion": "igualarApuesta" };
     this.socket?.send(JSON.stringify(mensaje));
   }
 }

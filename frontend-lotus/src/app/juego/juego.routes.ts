@@ -7,7 +7,9 @@ import { BjOnePlayerComponent } from "./bj-one-player/bj-one-player.component";
 import { PruebaAbandonarSalaComponent } from "./prueba-abandonar-sala/prueba-abandonar-sala.component";
 import { MensajeErrorSalasComponent } from "./mensaje-error-salas/mensaje-error-salas.component";
 import { MensajePartidasPausadasComponent } from "./mensaje-partidas-pausadas/mensaje-partidas-pausadas.component";
+import { PokerMultiplayerComponent } from "./poker-multiplayer/poker-multiplayer.component";
 import { CrearSalaPublicaComponent } from "./crear-sala-publica/crear-sala-publica.component";
+
 
 export const JUEGO_ROUTES: Routes = [
     { 
@@ -30,6 +32,11 @@ export const JUEGO_ROUTES: Routes = [
         path: 'bj-multiplayer',
         title: 'BJ Multijugador',
         component: BjMultiplayerComponent
+    },
+    {
+        path : 'poker-multiplayer',
+        title: 'Poker Multijugador',
+        component: PokerMultiplayerComponent
     },
     {
         path:'abandonar-sala',  
