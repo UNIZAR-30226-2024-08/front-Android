@@ -154,6 +154,8 @@ export class SalasService {
       }else{
         this.ngZone.run(() => this.router.navigate(['/juego/mensaje-partidas-pausadas']));
       }
+    } else if(data.accion == 'esperar'){
+      this.ngZone.run(() => this.router.navigate(['/juego/pantalla-carga-reanudar']));
     }
   }
 

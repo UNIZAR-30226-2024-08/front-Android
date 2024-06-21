@@ -9,6 +9,7 @@ import { MensajeErrorSalasComponent } from "./mensaje-error-salas/mensaje-error-
 import { MensajePartidasPausadasComponent } from "./mensaje-partidas-pausadas/mensaje-partidas-pausadas.component";
 import { PokerMultiplayerComponent } from "./poker-multiplayer/poker-multiplayer.component";
 import { CrearSalaPublicaComponent } from "./crear-sala-publica/crear-sala-publica.component";
+import { PantallaCargaReanudarComponent } from "./pantalla-carga-reanudar/pantalla-carga-reanudar.component";
 
 
 export const JUEGO_ROUTES: Routes = [
@@ -53,5 +54,9 @@ export const JUEGO_ROUTES: Routes = [
     {
         path:'crear-sala-publica',
         component:CrearSalaPublicaComponent
+    },
+    {
+        path:'pantalla-carga-reanudar',
+        component:PantallaCargaReanudarComponent
     }
 ];
