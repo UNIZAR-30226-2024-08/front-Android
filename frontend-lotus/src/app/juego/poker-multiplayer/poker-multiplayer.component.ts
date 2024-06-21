@@ -6,62 +6,72 @@ import { Carta } from '../../models/carta';
 import { Jugador } from '../../models/jugador';
 import { Subscription, debounceTime } from 'rxjs';
 import { SalasService } from '../../api/salas.service';
-import { CabeceraService } from '../../api/cabecera.service';
 
 
 enum Fase {
-	apuestas = 'apuestas', // apostar
-	reparto = 'reparto',
-	jugar = 'jugar', // pedirCarta, retirarse, plantarse
-	final = 'final' // nuevaRonda
+	apuesta1 = "Pre-Flop",
+	apuesta2 = "Flop", // flop
+	apuesta3 = "Turn", // turn
+	apuesta4 = "River", // river
+	showdown = "Showdown",
 }
 
 @Component({
-  selector: 'app-bj-multiplayer',
+  selector: 'app-poker-multiplayer',
   standalone: true,
   imports: [ReactiveFormsModule,CommonModule],
-  templateUrl: './bj-multiplayer.component.html',
-  styleUrl: './bj-multiplayer.component.css'
+  templateUrl: './poker-multiplayer.component.html',
+  styleUrl: './poker-multiplayer.component.css'
 })
+export class PokerMultiplayerComponent {
 
-
-
-export class BjMultiplayerComponent {
-  
   usuarioActivo: string | null = null;
   idPartida: string | null = null;
   idSala: string | null = null;
+  
   private sub!: Subscription;
   
   estado = Fase;
   
-  jugaoresObservados: boolean = false;
-  listaNombreJugadores: string[] = [];
-
   mostrarApuesta: boolean = true;
   mostrarMensajeFinal: boolean = false;
   
   form!: FormGroup;
   apuesta : number = 0;
   saldo: number = 0;
-  haApostado: boolean = false;
-
+  
+  urlsCartasJugadorActivo: String[] = [];
   cartasUsuarioActivo: Carta[] = [];
+  numeroJugadores: number = 0;
   cartasCrupier: Carta[] = [];
   listaJugadores: Jugador[] = [];
+  listaJugadoresSinBanca: Jugador[] = [];
+  bancaJugador!: Jugador;
+  listaGanadores: string[] = []
   
+  noEsFinPartida: boolean = true;
   noEsMiTurno: boolean = true;
-
+  ganador: any;
   
+  correosJugadores: string[] = []
   
+  jugadores: Usuario | undefined;
   
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private salsaService: SalasService, private usuariosService: CabeceraService) {
+  url!: string;
+  
+  nuevaCarta: Carta | undefined;
+  numeroCarta: number = 1;
+  ElUserHaPerdido: String = ""
+  
+  cartasDeUsuario: Carta[] = []
+  
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private salsaService: SalasService) {
     this.buildForm();
     //Obener el usuario actual
     if(isPlatformBrowser(this.platformId)){
       this.usuarioActivo = localStorage.getItem("usuarioActivo");
       this.idPartida = localStorage.getItem("codigoPartida");
-      this.idSala = localStorage.getItem("codigoSala");
+      this.idSala = localStorage.getItem("codigoSala")
     }
   }
   
@@ -89,9 +99,8 @@ export class BjMultiplayerComponent {
   
   // Creacion del formulario de apuesta
   private buildForm() {
-    console.log(this.saldo);
     this.form = new FormGroup({
-      apuesta: new FormControl('10', [Validators.required, Validators.min(1), ])
+      apuesta: new FormControl('10', [Validators.required, Validators.min(10)])
     });
   }
   
@@ -101,7 +110,6 @@ export class BjMultiplayerComponent {
       this.mostrarApuesta = false;
       this.apuesta = Number(this.form.value.apuesta);
       this.salsaService.apostar(this.apuesta);
-      this.haApostado = true;
     }
   }
   
@@ -113,43 +121,22 @@ export class BjMultiplayerComponent {
   }
   
   nuevoMensaje(data: any){
-    if(data.accion == 'error'){
-      this.mostrarApuesta = true;
-    }else {
-      //Actualizamos usuarios
-      this.actualizarJugadores(data.jugadores);
-      //Actualizamos el crupier
-      this.actulizarCuprier(data.manoCrupier);
-      
-      this.mostrarApuesta = (data.fase == this.estado.apuestas && this.haApostado === false) ? true : false;
-      if(data.fase != this.estado.apuestas){
-        this.haApostado = false;
-      }
-      this.noEsMiTurno = (data.fase == this.estado.jugar && data.turno == this.usuarioActivo) ? false : true;
-      this.mostrarMensajeFinal = (data.fase == this.estado.final) ? true : false;
-    }
+    //Actualizamos usuarios
+    this.actulaizarJugadores(data.jugadores);
+    //Actualizamos el crupier
+    this.actulizarCuprier(data.manoCrupier);
+    
+    //Actualizamos la fase
   }
   
-  actualizarJugadores(lista: Jugador[]){
+  actulaizarJugadores(lista: Jugador[]){
     this.listaJugadores = lista;
-    lista.forEach((jugador, indice) => {
+    lista.forEach(jugador => {
       if(jugador.gmail == this.usuarioActivo){
         this.cartasUsuarioActivo = jugador.cartas;
         this.saldo = jugador.saldo;
       }
-      else if(this.jugaoresObservados === false){
-        this.usuariosService.obtenerUsuario(jugador.gmail).subscribe({
-          next: (data: any) => {
-            this.listaNombreJugadores[indice] = data.nombre;
-          },
-          error: (error) => {
-            console.error('Error:', error);
-          }
-        })
-      }
-
     })
-    this.jugaoresObservados = true;
   }
 
   crearRutaCarta(carta: Carta){

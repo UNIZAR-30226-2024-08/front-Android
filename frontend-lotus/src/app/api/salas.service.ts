@@ -89,7 +89,6 @@ export class SalasService {
   }
   /* funcion para gestionar los mensajes del servidor */
   gestionarMensaje(data: any,usuarioActivo :string): void {
-    
     if(data.accion == 'crear'){
       console.log('sala creada')
       localStorage.setItem("codigoSala",data.codigo);
