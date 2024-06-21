@@ -1,7 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { BjMultiplayerComponent } from '../juego/bj-multiplayer/bj-multiplayer.component';
 
 @Injectable({
   providedIn: 'root',
@@ -62,7 +61,6 @@ export class SalasService {
     });
   }
   gestionarMensaje(data: any,usuarioActivo :string): void {
-    
     if(data.accion == 'crear'){
       console.log('sala creada')
       localStorage.setItem("codigoSala",data.codigo);

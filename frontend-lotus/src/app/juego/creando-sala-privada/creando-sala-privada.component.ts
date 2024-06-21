@@ -13,10 +13,11 @@ import { SalasService } from '../../api/salas.service';
 })
 export class CreandoSalaPrivadaComponent {
 
-  private rutaCrearSala: string = 'wss://casino-backend.azurewebsites.net/BJ/crearSala'
+  private rutaCrearSala!: string;
   private aforo: number = 4;
   private tipoSala: string = "privada";
   private usuarioActivo: any;
+  private juego!: string | null;
   ngZone: NgZone = inject(NgZone);
   
   // private tipoSala: boolean = false;
@@ -24,6 +25,8 @@ export class CreandoSalaPrivadaComponent {
   constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object,private salasService : SalasService) {
     if(isPlatformBrowser(this.platformId)){
       this.usuarioActivo = localStorage.getItem("usuarioActivo"); 
+      this.juego = localStorage.getItem("tipoJuego");
+      this.rutaCrearSala = (this.juego === "poker") ? 'wss://casino-backend.azurewebsites.net/poker/crearSala' : 'wss://casino-backend.azurewebsites.net/BJ/crearSala';
     }
   } 
   
