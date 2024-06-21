@@ -13,7 +13,7 @@ export class CabeceraService {
     constructor(private httpClient: HttpClient, private constantes: Constantes) { }
     
     obtenerUsuario(usuarioActivo: string): Observable<JSON> {
-    return this.httpClient.get<JSON>(`${this.constantes.url}/obtenerUsuario/${usuarioActivo}`);
+        return this.httpClient.get<JSON>(`${this.constantes.url}/obtenerUsuario/${usuarioActivo}`);
     }
 
     cerrarSesion(usuarioActivo: string): any {

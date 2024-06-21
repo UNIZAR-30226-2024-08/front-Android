@@ -28,10 +28,16 @@ export class UsuariosService {
   }
 
   obtenerUsuario(gmail: string): any {
-        let params = {
-            gmail: gmail
-        };
-        return this.httpClient.get(`${this.url}/obtenerUsuario/${gmail}`, {params: params});
-    }
+    let params = {
+        gmail: gmail
+    };
+    return this.httpClient.get(`${this.url}/obtenerUsuario/${gmail}`, {params: params});
+  }
   
+  obtenerPartidasPausadas(gmail: string): any {
+    let params = {
+      gmail: gmail
+    };
+    return this.httpClient.get(`${this.url}/BJ/obtenerPausadas/${gmail}`);
+  }
 }
