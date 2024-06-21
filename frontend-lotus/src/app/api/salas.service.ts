@@ -125,7 +125,7 @@ export class SalasService {
       console.log('iniciar partida')
       this.ngZone.run(() => this.router.navigate([ruta]));
     } else if (data.accion == 'error'){
-      if(data.mensaje.includes("no puedes apostar tanto")){
+      if(data.mensaje.includes("no puedes apostar tanto")|| data.mensaje.includes("no es mayor")||data.mensaje.includes("no tiene suficiente")){
         this.mensajeSubject.next(data);
       } else{
         if(data.mensaje.includes("está en otras salas")){

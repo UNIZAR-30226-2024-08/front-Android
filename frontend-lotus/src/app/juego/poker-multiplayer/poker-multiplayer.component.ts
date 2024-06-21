@@ -101,7 +101,7 @@ export class PokerMultiplayerComponent {
   // Creacion del formulario de apuesta
   private buildForm() {
     this.form = new FormGroup({
-      apuesta: new FormControl('10', [Validators.required, Validators.min(10)])
+      apuesta: new FormControl('10', [Validators.required, Validators.min(1)])
     });
   }
   
@@ -122,14 +122,21 @@ export class PokerMultiplayerComponent {
   }
   
   nuevoMensaje(data: any){
-    //Actualizamos usuarios
-    this.actualizarJugadores(data.jugadores);
-    //Actualizamos cartas centrales de la mesa
-    this.listaCartasMesa = data.cartasComunitarias;
-    //Actualizamos la fase
-    this.noEsMiTurno = data.turno != this.usuarioActivo;
-    this.mostrarMensajeFinal = (data.fase === this.estado.showdown) ? true : false;
-    
+    if(data.accion == 'error'){
+      if(data.mensaje.includes("no tiene suficiente")){
+        this.abandonar();
+      }else {
+        this.mostrarApuesta = true;
+      }
+    }else{
+        //Actualizamos usuarios
+      this.actualizarJugadores(data.jugadores);
+      //Actualizamos cartas centrales de la mesa
+      this.listaCartasMesa = data.cartasComunitarias;
+      //Actualizamos la fase
+      this.noEsMiTurno = data.turno != this.usuarioActivo;
+      this.mostrarMensajeFinal = (data.fase === this.estado.showdown) ? true : false;
+      }
   }
   
   actualizarJugadores(lista: Jugador[]){
@@ -138,6 +145,7 @@ export class PokerMultiplayerComponent {
       if(jugador.gmail == this.usuarioActivo){
         this.cartasUsuarioActivo = jugador.cartas;
         this.saldo = jugador.saldo;
+        this.apuesta=jugador.apuesta;
       }
       else if(this.jugaoresObservados === false){
         this.usuariosService.obtenerUsuario(jugador.gmail).subscribe({

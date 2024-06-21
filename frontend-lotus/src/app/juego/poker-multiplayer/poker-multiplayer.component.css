@@ -262,8 +262,9 @@ main {
 .apuesta{
     color: var(--color-secundario);
     height: auto;
-    font-size: 20px;
+    font-size: 40px;
     align-items: center;
     display: flex;
     justify-content: center;
+
 }
