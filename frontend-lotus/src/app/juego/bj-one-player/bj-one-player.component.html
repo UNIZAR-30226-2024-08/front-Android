@@ -28,14 +28,14 @@
     @if (mostrarApuesta) {
         <form [formGroup]="form" (ngSubmit)="save($event)">
             <div class="div_apuesta_inicial">
-                <h1>¿Cual va a ser su apuesta?</h1>
+                <h1>¿Cuál va a ser su apuesta?</h1>
                 <input type="number" formControlName="apuesta">
                 <div *ngIf="form.get('apuesta')?.errors ">
                     <span class="div_mensaje_error" *ngIf="form.get('apuesta')?.hasError('required')">
                         Campo requerido
                     </span>
                     <span class="div_mensaje_error" *ngIf="form.get('apuesta')?.hasError('min')">
-                        La apuesta minima es de 10 fichas
+                        La apuesta mínima es de 10 fichas
                     </span>
                 </div>
                 <button type="submit">Apostar</button>

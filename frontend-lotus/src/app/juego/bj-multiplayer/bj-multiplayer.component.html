@@ -53,7 +53,7 @@
     @if (mostrarApuesta) {
     <form [formGroup]="form" (ngSubmit)="save($event)">
         <div class="div_apuesta_inicial">
-            <h1>¿Cual va a ser su apuesta?</h1>
+            <h1>¿Cuál va a ser su apuesta?</h1>
             <input type="number" formControlName="apuesta">
             <div *ngIf="form.get('apuesta')?.errors ">
                 <span class="div_mensaje_error" *ngIf="form.get('apuesta')?.hasError('required')">
