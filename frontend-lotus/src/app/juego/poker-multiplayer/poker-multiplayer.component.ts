@@ -51,6 +51,7 @@ export class PokerMultiplayerComponent {
   cartasUsuarioActivo: Carta[] = [];
   cartasCrupier: Carta[] = [];
   listaJugadores: Jugador[] = [];
+  listaCartasMesa: Carta[] = [];
   
   noEsMiTurno: boolean = true;
   
@@ -81,8 +82,7 @@ export class PokerMultiplayerComponent {
 
     this.personalizablesService.obtenerCartasUsuario(this.usuarioActivo).subscribe({
       next: (data: any) => {
-        console.log(data);
-        this.reversoCarta = data.reverso;
+        this.reversoCarta = data.nombre;
       },
       error: (error: any) => {
         console.error('Error:', error);
@@ -122,8 +122,10 @@ export class PokerMultiplayerComponent {
   nuevoMensaje(data: any){
     //Actualizamos usuarios
     this.actualizarJugadores(data.jugadores);
-    
+    //Actualizamos cartas centrales de la mesa
+    this.listaCartasMesa = data.cartasComunitarias;
     //Actualizamos la fase
+    
   }
   
   actualizarJugadores(lista: Jugador[]){
@@ -148,8 +150,8 @@ export class PokerMultiplayerComponent {
     this.jugaoresObservados = true;
   }
 
-  crearRutaCarta(carta: Carta){
-    return carta == undefined ? `../../../assets/sources/avatares/${this.reversoCarta}.png` : `../../../assets/sources/juego/cartas/${carta.palo}/${carta.puntos}.png`;
+  crearRutaCarta(carta: Carta | null){
+    return carta == null ? `../../../assets/sources/avatares/${this.reversoCarta}.png` : `../../../assets/sources/juego/cartas/${carta.palo}/${carta.puntos}.png`;
   }
 
 

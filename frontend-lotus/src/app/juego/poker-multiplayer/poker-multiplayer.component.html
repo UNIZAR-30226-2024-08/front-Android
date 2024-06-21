@@ -2,18 +2,6 @@
     
     <div class="div_jugadores">
         <ul class="listaJugadores">
-            <li>
-                <div class="div_banca">
-                    <div class="div_banca_texto">
-                            <p>BANCA</p>
-                    </div>
-                        <ul class="cartasOponentes">
-                            <li *ngFor="let carta of cartasCrupier" class="div_formato_carta">
-                                <img class="imagenLista" [src]="crearRutaCarta(carta)" alt={{crearRutaCarta(carta)}}>
-                            </li>
-                        </ul>
-                </div>
-            </li>
             @for (jugador of listaJugadores; track $index) {
                 @if(jugador.gmail !== usuarioActivo) {
                 <li>
@@ -22,11 +10,15 @@
                             <p>{{ listaNombreJugadores[$index] }}</p>
                         </div>
                         <ul class="cartasOponentes">
+                            @if (jugador.cartas.length == 0) {
+                                <li><img class="imagenLista" [src]="crearRutaCarta(null)" alt="Reverso de la carta"></li>
+                                <li><img class="imagenLista" [src]="crearRutaCarta(null)" alt="Reverso de la carta"></li>
+                            }
+                            @else {
                                 <li *ngFor="let carta of jugador.cartas" class="div_formato_carta">
-                                    @if(jugador.gmail !== usuarioActivo) {
-                                        <img class="imagenLista" [src]="crearRutaCarta(carta)" alt="Imagen de la carta">
-                                    }
+                                    <img class="imagenLista" [src]="crearRutaCarta(carta)" [alt]="crearRutaCarta(carta)">
                                 </li>
+                            }
                         </ul>
                     </div>
                 </li>
@@ -103,5 +95,18 @@
         <button (click)="abandonar()">Abandonar Partida</button>
         <button (click)="pausarPartida()">Pausar Partida</button>
     </div>
+
+    <ul class="cartasComunes">
+        @if(listaCartasMesa.length == 0){
+            <li><img class="imagenLista" [src]="crearRutaCarta(null)" [alt]="crearRutaCarta(null)"></li>
+            <li><img class="imagenLista" [src]="crearRutaCarta(null)" [alt]="crearRutaCarta(null)"></li>
+            <li><img class="imagenLista" [src]="crearRutaCarta(null)" [alt]="crearRutaCarta(null)"></li>
+        }
+        @for(carta of listaCartasMesa; track $index) {
+            <li>
+                <img class="imagenLista" [src]="crearRutaCarta(carta)" [alt]="crearRutaCarta(carta)">
+            </li>
+        }
+    </ul>
 
 </main>

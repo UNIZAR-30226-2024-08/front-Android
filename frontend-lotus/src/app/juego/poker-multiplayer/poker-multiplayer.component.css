@@ -39,6 +39,11 @@ main {
     align-items: center;
     gap: 16px;
     height: auto;
+    list-style: none;
+}
+
+.cartasOponentes>li {
+    list-style: none;
 }
 
 .div_formato_carta {
@@ -230,4 +235,14 @@ main {
     justify-content: center;
     align-items: center;
     gap: 16px;
+}
+
+.cartasComunes{
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
