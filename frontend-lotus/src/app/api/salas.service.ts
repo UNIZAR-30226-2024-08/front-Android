@@ -1,7 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { BjMultiplayerComponent } from '../juego/bj-multiplayer/bj-multiplayer.component';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +14,7 @@ export class SalasService {
 
   constructor(private ngZone: NgZone, private router: Router) { } // Inyecta el Router aquí
 
+  /* Socket para crear una sala de cero */
   crearSalaSocket(rutaCrearSala: string, usuarioActivo: string, tipoSala: string, aforo: number): void {
     this.socket = new WebSocket(`${rutaCrearSala}/${usuarioActivo}/${tipoSala}/${aforo}`);
     this.tipoSala = aforo > 1 ? "multiplayer" : "oneplayer";
@@ -39,6 +39,7 @@ export class SalasService {
     });
   }
 
+  /* Socket para unirse a una sala ya creada */
   unirseASalasSocket(rutaUnirseSala: string, codigoSala: string, usuarioActivo: string): void {
     this.socket = new WebSocket(`${rutaUnirseSala}/${codigoSala}/${usuarioActivo}`);
 
@@ -61,6 +62,33 @@ export class SalasService {
       console.log('Error:', event);
     });
   }
+
+  reanudarSocket(rutaReanudar: string, codigoSala: string, usuarioActivo: string): void {
+    this.socket = new WebSocket(`${rutaReanudar}/${codigoSala}/${usuarioActivo}`);
+
+    this.socket.addEventListener('open', () => {
+      console.log('Conexión establecida para pausar la partida');
+    });
+
+    this.socket.addEventListener('message', (res) => {
+      console.log('Mensaje del servidor:', res.data);
+      let data = JSON.parse(res.data);
+      if(data.accion === "reanudar"){
+        this.ngZone.run(() => this.router.navigate(['/juego/bj-multiplayer']));
+      } else {
+        this.gestionarMensaje(data,usuarioActivo);
+      }
+    });
+
+    this.socket.addEventListener('close', (event) => {
+      console.log('Conexión cerrada:', event);
+    });
+
+    this.socket.addEventListener('error', (event) => {
+      console.log('Error:', event);
+    });
+  }
+  /* funcion para gestionar los mensajes del servidor */
   gestionarMensaje(data: any,usuarioActivo :string): void {
     
     if(data.accion == 'crear'){
@@ -103,6 +131,8 @@ export class SalasService {
       }
     }
   }
+
+  /* Funciones auxiliares para enviar mensajes al servidor */
   iniciarSala(): void {
     const mensaje = { "accion": "iniciar" };
     this.socket?.send(JSON.stringify(mensaje));
@@ -144,6 +174,11 @@ export class SalasService {
 
   pausarPartida(): void {
     const mensaje = { "accion": "pausar" };
+    this.socket?.send(JSON.stringify(mensaje));
+  }
+
+  reanudarPartida(): void {
+    const mensaje = { "accion": "reanudar" };
     this.socket?.send(JSON.stringify(mensaje));
   }
 }

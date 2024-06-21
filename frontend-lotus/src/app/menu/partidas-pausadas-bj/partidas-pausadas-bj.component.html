@@ -3,8 +3,8 @@
     <ul>
         @for (partida of listaPartidasPausadas; track $index) {
             <li>
-                <p><strong>Codigo de partida: {{partida.codigo}}</strong></p>
-                <button (click)="reanudar(partida.codigo)">Reanudar</button>
+                <p><strong>Codigo de partida: {{partida}}</strong></p>
+                <button (click)="reanudar(partida)">Reanudar</button>
             </li>
         }
     </ul>

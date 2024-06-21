@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SalasService } from '../../api/salas.service';
 import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
+import { UsuariosService } from '../../api/usuarios.service';
 
 
 @Component({
@@ -13,24 +14,17 @@ import { CabeceraComponent } from '../../shared/cabecera/cabecera.component';
 export class PartidasPausadasBJComponent {
   
   private usuarioActivo: string = localStorage.getItem('usuarioActivo') || '';
-  listaPartidasPausadas: any[] = [
-    {
-      codigo: '1'
-    },
-    {
-      codigo: '2'
-    },
-    {
-      codigo: '3'
-    }
-  ];
+  listaPartidasPausadas: any[] = [];
   
-  constructor(private sockeService: SalasService) {}
-  
-  ngOnInit(){
+  constructor(private usuarioService: UsuariosService,private salasService: SalasService) {
+    this.usuarioService.obtenerPartidasPausadas(this.usuarioActivo).subscribe((res: any) => {
+      this.listaPartidasPausadas = res;
+      console.log(res);
+    });
   }
   
+  
   reanudar(codigo: string) {
-    throw new Error('Method not implemented.');
+    this.salasService.reanudarSocket('wss://casino-backend.azurewebsites.net/BJ/reanudarSala/', codigo, this.usuarioActivo);
   }
 }
