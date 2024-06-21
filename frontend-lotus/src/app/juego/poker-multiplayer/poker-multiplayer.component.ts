@@ -52,6 +52,8 @@ export class PokerMultiplayerComponent {
   cartasCrupier: Carta[] = [];
   listaJugadores: Jugador[] = [];
   listaCartasMesa: Carta[] = [];
+  apuestasJugadores: number[] = [];
+  estaRetirado: boolean[] = [];
   
   noEsMiTurno: boolean = true;
   
@@ -99,7 +101,7 @@ export class PokerMultiplayerComponent {
   // Creacion del formulario de apuesta
   private buildForm() {
     this.form = new FormGroup({
-      apuesta: new FormControl('10', [Validators.required, Validators.min(10)])
+      apuesta: new FormControl('10', [Validators.required, Validators.min(1)])
     });
   }
   
@@ -108,7 +110,7 @@ export class PokerMultiplayerComponent {
     if(this.form.valid){
       this.mostrarApuesta = false;
       this.apuesta = Number(this.form.value.apuesta);
-      this.salsaService.apostar(this.apuesta);
+      this.salsaService.subirApuesta(this.apuesta);
     }
   }
   
@@ -120,12 +122,21 @@ export class PokerMultiplayerComponent {
   }
   
   nuevoMensaje(data: any){
-    //Actualizamos usuarios
-    this.actualizarJugadores(data.jugadores);
-    //Actualizamos cartas centrales de la mesa
-    this.listaCartasMesa = data.cartasComunitarias;
-    //Actualizamos la fase
-    
+    if(data.accion == 'error'){
+      if(data.mensaje.includes("no tiene suficiente")){
+        this.abandonar();
+      }else {
+        this.mostrarApuesta = true;
+      }
+    }else{
+        //Actualizamos usuarios
+      this.actualizarJugadores(data.jugadores);
+      //Actualizamos cartas centrales de la mesa
+      this.listaCartasMesa = data.cartasComunitarias;
+      //Actualizamos la fase
+      this.noEsMiTurno = data.turno != this.usuarioActivo;
+      this.mostrarMensajeFinal = (data.fase === this.estado.showdown) ? true : false;
+      }
   }
   
   actualizarJugadores(lista: Jugador[]){
@@ -134,6 +145,7 @@ export class PokerMultiplayerComponent {
       if(jugador.gmail == this.usuarioActivo){
         this.cartasUsuarioActivo = jugador.cartas;
         this.saldo = jugador.saldo;
+        this.apuesta=jugador.apuesta;
       }
       else if(this.jugaoresObservados === false){
         this.usuariosService.obtenerUsuario(jugador.gmail).subscribe({
@@ -145,7 +157,8 @@ export class PokerMultiplayerComponent {
           }
         })
       }
-
+      this.estaRetirado[indice] = jugador.estaRetirado;
+      this.apuestasJugadores[indice] = jugador.apuesta;
     })
     this.jugaoresObservados = true;
   }
@@ -154,10 +167,12 @@ export class PokerMultiplayerComponent {
     return carta == null ? `../../../assets/sources/avatares/${this.reversoCarta}.png` : `../../../assets/sources/juego/cartas/${carta.palo}/${carta.puntos}.png`;
   }
 
-
-  subirApuesta(cantidad: number){
-
+  mostrarFormulario(){
+    this.mostrarApuesta = true;
   }
+  // subirApuesta(cantidad: number){
+  //   this.salsaService.subirApuesta(cantidad);
+  // }
   igualarApuesta(){
     this.salsaService.igualarApuesta();
   }

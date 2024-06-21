@@ -15,6 +15,7 @@ main {
 .div_banca {
     display: flex;
     align-content: center;
+    gap: 20px;
 }
 
 .listaJugadores{
@@ -91,6 +92,7 @@ main {
 
 .div_apuesta_inicial, .div_mensaje_final {
     /*recuadro en el medio de la pantalla*/
+    z-index: 1000;
     padding: 1vh;
     position: fixed;
     top: 50%;
@@ -103,6 +105,10 @@ main {
     background-color: var(--color-secundario);
     color: var(--color-principal);
     border-radius: 10px;
+}
+
+.div_mensaje_final{
+    top: 30%;
 }
 
 .div_mensaje_final>h1, 
@@ -245,4 +251,20 @@ main {
     position: absolute;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    width: fit-content;
+}
+
+.cartasComunes>li>img {
+    height: 150px;
+}
+.apuesta{
+    color: var(--color-secundario);
+    height: auto;
+    font-size: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
 }

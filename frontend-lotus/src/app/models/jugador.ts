@@ -6,10 +6,10 @@ export class Jugador {
     constructor(private personalizablesService: PersonalizablesService) {}
 
     gmail: string = "";
+    cartas: Carta[] = [];
     saldo: number = 0;
     apuesta: number = 0;
     estaRetirado: boolean = false;
-    cartas: Carta[] = [];
 
 
 

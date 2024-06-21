@@ -20,6 +20,14 @@
                                 </li>
                             }
                         </ul>
+                        <div class="apuesta">
+                            @if(estaRetirado[$index]) {
+                                <p>Retirado</p>
+                            }
+                            @else {
+                                <p>+{{ apuestasJugadores[$index] }} $</p>
+                            }
+                        </div>
                     </div>
                 </li>
                 }
@@ -86,7 +94,8 @@
 
     @if (!noEsMiTurno) {
         <div id="div_botones">
-            <button (click)="plantarse()">Plantarse</button>
+            <button (click)="mostrarFormulario()">Apostar</button>
+            <button (click)="igualarApuesta()">Igualar</button>
             <button (click)="retirarse()">Retirarse</button>
         </div>
     }
