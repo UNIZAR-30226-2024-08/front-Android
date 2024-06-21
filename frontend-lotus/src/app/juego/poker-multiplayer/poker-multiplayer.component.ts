@@ -52,6 +52,8 @@ export class PokerMultiplayerComponent {
   cartasCrupier: Carta[] = [];
   listaJugadores: Jugador[] = [];
   listaCartasMesa: Carta[] = [];
+  apuestasJugadores: number[] = [];
+  estaRetirado: boolean[] = [];
   
   noEsMiTurno: boolean = true;
   
@@ -108,7 +110,7 @@ export class PokerMultiplayerComponent {
     if(this.form.valid){
       this.mostrarApuesta = false;
       this.apuesta = Number(this.form.value.apuesta);
-      this.salsaService.apostar(this.apuesta);
+      this.salsaService.subirApuesta(this.apuesta);
     }
   }
   
@@ -125,6 +127,8 @@ export class PokerMultiplayerComponent {
     //Actualizamos cartas centrales de la mesa
     this.listaCartasMesa = data.cartasComunitarias;
     //Actualizamos la fase
+    this.noEsMiTurno = data.turno != this.usuarioActivo;
+    this.mostrarMensajeFinal = (data.fase === this.estado.showdown) ? true : false;
     
   }
   
@@ -145,7 +149,8 @@ export class PokerMultiplayerComponent {
           }
         })
       }
-
+      this.estaRetirado[indice] = jugador.estaRetirado;
+      this.apuestasJugadores[indice] = jugador.apuesta;
     })
     this.jugaoresObservados = true;
   }
@@ -154,10 +159,12 @@ export class PokerMultiplayerComponent {
     return carta == null ? `../../../assets/sources/avatares/${this.reversoCarta}.png` : `../../../assets/sources/juego/cartas/${carta.palo}/${carta.puntos}.png`;
   }
 
-
-  subirApuesta(cantidad: number){
-
+  mostrarFormulario(){
+    this.mostrarApuesta = true;
   }
+  // subirApuesta(cantidad: number){
+  //   this.salsaService.subirApuesta(cantidad);
+  // }
   igualarApuesta(){
     this.salsaService.igualarApuesta();
   }
