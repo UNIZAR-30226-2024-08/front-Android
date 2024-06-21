@@ -121,6 +121,7 @@ export class SalasService {
     }else if(data.accion == 'abandonar' && usuarioActivo === data.jugador){
       this.socket?.close(1000, 'El usuario ha abandonado la sala');
       console.log('sala abandonada')
+      this.ngZone.run(() => this.router.navigate(['/menu']));
     } else if ( data.accion == 'iniciar'){
       console.log('iniciar partida')
       this.ngZone.run(() => this.router.navigate([ruta]));
