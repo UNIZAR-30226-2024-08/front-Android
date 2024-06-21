@@ -1,0 +1,11 @@
+<app-cabecera></app-cabecera>
+<main>
+    <ul>
+        @for (partida of listaPartidasPausadas; track $index) {
+            <li>
+                <p><strong>Codigo de partida: {{partida}}</strong></p>
+                <button (click)="reanudar(partida)">Reanudar</button>
+            </li>
+        }
+    </ul>
+</main>

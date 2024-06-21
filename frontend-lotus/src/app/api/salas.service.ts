@@ -14,10 +14,10 @@ export class SalasService {
 
   constructor(private ngZone: NgZone, private router: Router) { } // Inyecta el Router aquí
 
+  /* Socket para crear una sala de cero */
   crearSalaSocket(rutaCrearSala: string, usuarioActivo: string, tipoSala: string, aforo: number): void {
     this.socket = new WebSocket(`${rutaCrearSala}/${usuarioActivo}/${tipoSala}/${aforo}`);
     this.tipoSala = aforo > 1 ? "multiplayer" : "oneplayer";
-
     this.socket.addEventListener('open', () => {
       console.log('Conexión establecida para crear la sala');
     });
@@ -38,6 +38,7 @@ export class SalasService {
     });
   }
 
+  /* Socket para unirse a una sala ya creada */
   unirseASalasSocket(rutaUnirseSala: string, codigoSala: string, usuarioActivo: string): void {
     this.socket = new WebSocket(`${rutaUnirseSala}/${codigoSala}/${usuarioActivo}`);
 
@@ -60,6 +61,33 @@ export class SalasService {
       console.log('Error:', event);
     });
   }
+
+  reanudarSocket(rutaReanudar: string, codigoSala: string, usuarioActivo: string): void {
+    this.socket = new WebSocket(`${rutaReanudar}/${codigoSala}/${usuarioActivo}`);
+
+    this.socket.addEventListener('open', () => {
+      console.log('Conexión establecida para pausar la partida');
+    });
+
+    this.socket.addEventListener('message', (res) => {
+      console.log('Mensaje del servidor:', res.data);
+      let data = JSON.parse(res.data);
+      if(data.accion === "reanudar"){
+        this.ngZone.run(() => this.router.navigate(['/juego/bj-multiplayer']));
+      } else {
+        this.gestionarMensaje(data,usuarioActivo);
+      }
+    });
+
+    this.socket.addEventListener('close', (event) => {
+      console.log('Conexión cerrada:', event);
+    });
+
+    this.socket.addEventListener('error', (event) => {
+      console.log('Error:', event);
+    });
+  }
+  /* funcion para gestionar los mensajes del servidor */
   gestionarMensaje(data: any,usuarioActivo :string): void {
     if(data.accion == 'crear'){
       console.log('sala creada')
@@ -79,24 +107,34 @@ export class SalasService {
       console.log('iniciar partida')
       this.ngZone.run(() => this.router.navigate(['/juego/bj-multiplayer']));
     } else if (data.accion == 'error'){
+      if(data.mensaje.includes("no puedes apostar tanto")){
+        this.mensajeSubject.next(data);
+      } else{
         if(data.mensaje.includes("está en otras salas")){
           localStorage.setItem("mensajeError","EL USUARIO YA ESTÁ EN OTRA SALA");
         } else if(data.mensaje.includes("debe ser mayor que 0")){
           localStorage.setItem("mensajeError","EL USUARIO NO TIENE SUFICIENTE SALDO");
         } else if(data.mensaje.includes("no existe")){
           localStorage.setItem("mensajeError","LA SALA NO EXISTE");
+        } else if (data.mensaje.includes("La sala está llena")){
+          localStorage.setItem("mensajeError","LA SALA ESTÁ LLENA");
         }
         this.ngZone.run(() => this.router.navigate(['/juego/mensaje-error.salas']));
+      }
     } else if(data.accion == 'estado'){
       this.mensajeSubject.next(data);
     } else if(data.accion == 'pausar'){
       console.log('partida pausada')
-      this.socket?.close(1000, 'El usuario ha pausado la sala');
-      if(data.mensaje.includes(usuarioActivo)){
+      if(data.jugadores.includes(usuarioActivo)){
         this.ngZone.run(() => this.router.navigate(['/menu']));
+        this.socket?.close(1000, 'El usuario ha pausado la sala');
+      }else{
+        this.ngZone.run(() => this.router.navigate(['/juego/mensaje-partidas-pausadas']));
       }
     }
   }
+
+  /* Funciones auxiliares para enviar mensajes al servidor */
   iniciarSala(): void {
     const mensaje = { "accion": "iniciar" };
     this.socket?.send(JSON.stringify(mensaje));
@@ -138,6 +176,11 @@ export class SalasService {
 
   pausarPartida(): void {
     const mensaje = { "accion": "pausar" };
+    this.socket?.send(JSON.stringify(mensaje));
+  }
+
+  reanudarPartida(): void {
+    const mensaje = { "accion": "reanudar" };
     this.socket?.send(JSON.stringify(mensaje));
   }
 }
