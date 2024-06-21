@@ -7,6 +7,7 @@ import { BjOnePlayerComponent } from "./bj-one-player/bj-one-player.component";
 import { PruebaAbandonarSalaComponent } from "./prueba-abandonar-sala/prueba-abandonar-sala.component";
 import { MensajeErrorSalasComponent } from "./mensaje-error-salas/mensaje-error-salas.component";
 import { MensajePartidasPausadasComponent } from "./mensaje-partidas-pausadas/mensaje-partidas-pausadas.component";
+import { CrearSalaPublicaComponent } from "./crear-sala-publica/crear-sala-publica.component";
 
 export const JUEGO_ROUTES: Routes = [
     { 
@@ -41,5 +42,9 @@ export const JUEGO_ROUTES: Routes = [
     {
         path:'mensaje-partidas-pausadas',
         component:MensajePartidasPausadasComponent
+    },
+    {
+        path:'crear-sala-publica',
+        component:CrearSalaPublicaComponent
     }
 ];

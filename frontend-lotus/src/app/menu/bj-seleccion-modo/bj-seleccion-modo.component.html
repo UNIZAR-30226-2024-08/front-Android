@@ -14,8 +14,8 @@
                     </div>
                 </div>
             </a>
-            <a [routerLink]="['/juego/bj-multiplayer']">
-                <div class="modo">
+            <a>
+                <div class="modo" (click)="crearSalaPublica()">
                     <img class="modo-img-top" src="../../../assets/sources/modo-juego/partida_online.png" alt="Cartas de póker">
                     <div class="modo-body">
                         <p class="modo-text">Sala Pública</p>
