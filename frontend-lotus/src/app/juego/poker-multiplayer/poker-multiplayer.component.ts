@@ -7,25 +7,24 @@ import { Jugador } from '../../models/jugador';
 import { Subscription, debounceTime } from 'rxjs';
 import { SalasService } from '../../api/salas.service';
 
+
 enum Fase {
-	apuestas = 'apuestas', // apostar
-	reparto = 'reparto',
-	jugar = 'jugar', // pedirCarta, retirarse, plantarse
-	final = 'final' // nuevaRonda
+	apuesta1 = "Pre-Flop",
+	apuesta2 = "Flop", // flop
+	apuesta3 = "Turn", // turn
+	apuesta4 = "River", // river
+	showdown = "Showdown",
 }
 
 @Component({
-  selector: 'app-bj-multiplayer',
+  selector: 'app-poker-multiplayer',
   standalone: true,
   imports: [ReactiveFormsModule,CommonModule],
-  templateUrl: './bj-multiplayer.component.html',
-  styleUrl: './bj-multiplayer.component.css'
+  templateUrl: './poker-multiplayer.component.html',
+  styleUrl: './poker-multiplayer.component.css'
 })
+export class PokerMultiplayerComponent {
 
-
-
-export class BjMultiplayerComponent {
-  
   usuarioActivo: string | null = null;
   idPartida: string | null = null;
   idSala: string | null = null;
@@ -127,9 +126,7 @@ export class BjMultiplayerComponent {
     //Actualizamos el crupier
     this.actulizarCuprier(data.manoCrupier);
     
-    this.mostrarApuesta = (data.fase == this.estado.apuestas && this.mostrarApuesta === false) ? true : false;
-    this.noEsMiTurno = (data.fase == this.estado.jugar && data.turno == this.usuarioActivo) ? false : true;
-    this.mostrarMensajeFinal = (data.fase == this.estado.final) ? true : false;
+    //Actualizamos la fase
   }
   
   actulaizarJugadores(lista: Jugador[]){

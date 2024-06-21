@@ -1,0 +1,111 @@
+<main class="main">
+    
+    <div class="div_jugadores">
+        <ul class="listaJugadores">
+            <li>
+                <div class="div_banca">
+                    <div class="div_banca_texto">
+                            <p>BANCA</p>
+                    </div>
+                        <ul class="cartasOponentes">
+                            <li *ngFor="let carta of cartasCrupier" class="div_formato_carta">
+                                <img class="imagenLista" [src]="crearRutaCarta(carta)" alt={{crearRutaCarta(carta)}}>
+                            </li>
+                        </ul>
+                </div>
+            </li>
+            @for (jugador of listaJugadores; track $index) {
+                @if(jugador.gmail !== usuarioActivo) {
+                <li>
+                    <div class="div_banca">
+                        <div class="div_banca_texto">
+                            <p>{{ jugador.gmail }}</p>
+                        </div>
+                        <div>
+                            <ul>
+                                <li *ngFor="let carta of jugador.cartas" class="div_formato_carta">
+                                    @if(jugador.gmail !== usuarioActivo) {
+                                        <img class="imagenLista" [src]="crearRutaCarta(carta)" alt="Imagen de la carta">
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                }
+            }
+        </ul>
+    </div>
+
+
+    
+    <div class="div_apuesta">
+        <div class="div_apuesta1">
+            <img class="imagen_apuesta" src="../../../assets/sources/juego/ficha-de-saldo.png">
+            <h1 class="texto_apuesta"> Saldo: {{saldo}}</h1>
+        </div>
+        <div class="div_apuesta1">
+            <img class="imagen_apuesta" src="../../../assets/sources/juego/ficha-de-poker.png">
+            <h1 class="texto_apuesta"> Apuesta:{{apuesta}}</h1>
+        </div>
+    </div>
+
+    @if (mostrarApuesta) {
+    <form [formGroup]="form" (ngSubmit)="save($event)">
+        <div class="div_apuesta_inicial">
+            <h1>¿Cuál va a ser su apuesta?</h1>
+            <input type="number" formControlName="apuesta">
+            <div *ngIf="form.get('apuesta')?.errors ">
+                <span class="div_mensaje_error" *ngIf="form.get('apuesta')?.hasError('required')">
+                    Campo requerido
+                </span>
+                <span class="div_mensaje_error" *ngIf="form.get('apuesta')?.hasError('min')">
+                    La apuesta minima es de 10 fichas
+                </span>
+            </div>
+            <button type="submit" class="boton_apostar">Apostar</button>
+        </div>
+    </form>
+    }
+
+    @if (mostrarMensajeFinal) {
+    <form [formGroup]="form" (ngSubmit)="saveMensajeFinal($event)">
+        <div class="div_mensaje_final">
+            <h2>¿Quiere volver a jugar?</h2>
+            <div>
+                <button class="boton_mensaje_final" type="button" (click)="abandonar()">Abandonar</button>
+                <button  class="boton_mensaje_final" type="submit" (click)="resetearPartida()">Jugar Otra Ronda</button>
+            </div>
+        </div>
+    </form>
+    }
+
+
+
+    <div class="div_jugador">
+        <div>
+            <ul class="cartasJugador">
+                @for (carta of cartasUsuarioActivo; track $index) {
+                <li class="div_formato_carta_jugador">
+                    <img class="imagenLista_jugador" [src]="crearRutaCarta(carta)" alt="Carta del jugador">
+                </li>
+                }
+            </ul>
+            {{ ElUserHaPerdido }}
+        </div>
+    </div>
+
+    @if (!noEsMiTurno) {
+        <div id="div_botones">
+            <button (click)="pedirCarta()">Pedir Carta</button>
+            <button (click)="plantarse()">Plantarse</button>
+            <button (click)="retirarse()">Retirarse</button>
+        </div>
+    }
+
+    <div id="div_botones_izda">
+        <button (click)="abandonar()">Abandonar Partida</button>
+        <button (click)="pausarPartida()">Pausar Partida</button>
+    </div>
+
+</main>
