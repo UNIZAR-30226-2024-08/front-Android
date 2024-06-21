@@ -33,6 +33,6 @@ export class PartidasPausadasBJComponent {
   
   reanudar(codigo: string) {
     this.ruta = this.rutaSocket + '/' + this.juego + '/reanudarSala/'; 
-    this.salasService.reanudarSocket('wss://casino-backend.azurewebsites.net/BJ/reanudarSala/', codigo, this.usuarioActivo);
+    this.salasService.reanudarSocket(this.ruta, codigo, this.usuarioActivo);
   }
 }
