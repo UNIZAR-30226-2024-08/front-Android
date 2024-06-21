@@ -18,7 +18,6 @@ export class SalasService {
   crearSalaSocket(rutaCrearSala: string, usuarioActivo: string, tipoSala: string, aforo: number): void {
     this.socket = new WebSocket(`${rutaCrearSala}/${usuarioActivo}/${tipoSala}/${aforo}`);
     this.tipoSala = aforo > 1 ? "multiplayer" : "oneplayer";
-
     this.socket.addEventListener('open', () => {
       console.log('Conexión establecida para crear la sala');
     });
@@ -109,6 +108,9 @@ export class SalasService {
       console.log('iniciar partida')
       this.ngZone.run(() => this.router.navigate(['/juego/bj-multiplayer']));
     } else if (data.accion == 'error'){
+      if(data.mensaje.includes("no puedes apostar tanto")){
+        this.mensajeSubject.next(data);
+      } else{
         if(data.mensaje.includes("está en otras salas")){
           localStorage.setItem("mensajeError","EL USUARIO YA ESTÁ EN OTRA SALA");
         } else if(data.mensaje.includes("debe ser mayor que 0")){
@@ -119,6 +121,7 @@ export class SalasService {
           localStorage.setItem("mensajeError","LA SALA ESTÁ LLENA");
         }
         this.ngZone.run(() => this.router.navigate(['/juego/mensaje-error.salas']));
+      }
     } else if(data.accion == 'estado'){
       this.mensajeSubject.next(data);
     } else if(data.accion == 'pausar'){

@@ -30,7 +30,6 @@ export class BjMultiplayerComponent {
   usuarioActivo: string | null = null;
   idPartida: string | null = null;
   idSala: string | null = null;
-  
   private sub!: Subscription;
   
   estado = Fase;
@@ -61,7 +60,7 @@ export class BjMultiplayerComponent {
     if(isPlatformBrowser(this.platformId)){
       this.usuarioActivo = localStorage.getItem("usuarioActivo");
       this.idPartida = localStorage.getItem("codigoPartida");
-      this.idSala = localStorage.getItem("codigoSala")
+      this.idSala = localStorage.getItem("codigoSala");
     }
   }
   
@@ -89,8 +88,9 @@ export class BjMultiplayerComponent {
   
   // Creacion del formulario de apuesta
   private buildForm() {
+    console.log(this.saldo);
     this.form = new FormGroup({
-      apuesta: new FormControl('10', [Validators.required, Validators.min(10)])
+      apuesta: new FormControl('10', [Validators.required, Validators.min(1), ])
     });
   }
   
@@ -112,17 +112,21 @@ export class BjMultiplayerComponent {
   }
   
   nuevoMensaje(data: any){
-    //Actualizamos usuarios
-    this.actualizarJugadores(data.jugadores);
-    //Actualizamos el crupier
-    this.actulizarCuprier(data.manoCrupier);
-    
-    this.mostrarApuesta = (data.fase == this.estado.apuestas && this.haApostado === false) ? true : false;
-    if(data.fase != this.estado.apuestas){
-      this.haApostado = false;
+    if(data.accion == 'error'){
+      this.mostrarApuesta = true;
+    }else {
+      //Actualizamos usuarios
+      this.actualizarJugadores(data.jugadores);
+      //Actualizamos el crupier
+      this.actulizarCuprier(data.manoCrupier);
+      
+      this.mostrarApuesta = (data.fase == this.estado.apuestas && this.haApostado === false) ? true : false;
+      if(data.fase != this.estado.apuestas){
+        this.haApostado = false;
+      }
+      this.noEsMiTurno = (data.fase == this.estado.jugar && data.turno == this.usuarioActivo) ? false : true;
+      this.mostrarMensajeFinal = (data.fase == this.estado.final) ? true : false;
     }
-    this.noEsMiTurno = (data.fase == this.estado.jugar && data.turno == this.usuarioActivo) ? false : true;
-    this.mostrarMensajeFinal = (data.fase == this.estado.final) ? true : false;
   }
   
   actualizarJugadores(lista: Jugador[]){
