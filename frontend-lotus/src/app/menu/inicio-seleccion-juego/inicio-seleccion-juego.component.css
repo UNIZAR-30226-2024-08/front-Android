@@ -96,3 +96,45 @@ a{
     text-decoration: none;
     color: var(--color-secundario);
 }
+
+.recompensa{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    border: var(--color-secundario) 2px solid;
+    border-radius: 10px;
+    background-color: var(--color-secundario);
+    padding: 20px;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.recompensa>img{
+    width: 200px;
+    aspect-ratio: 1/1;
+
+}
+
+.recompensa>h3, .recompensa>p{
+    color: var(--color-principal);
+    text-align: center;
+    font-size: 30px;
+    margin: 0;
+}
+
+.recompensa>button{
+    background-color: var(--color-principal);
+    color: var(--color-secundario);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.recompensa>button:hover{
+    background-color: var(--color-acento);
+}
