@@ -25,4 +25,12 @@
             </a>
         </div>
     </div>
+    @if(hayRecompensa){
+        <div class="recompensa">
+            <h3>¡Felicidades! Has ganado una recompensa</h3>
+            <p>Se te ha recompensado con:</p>
+            <img [src]="crearRuta()" alt="Recompensa">
+            <button (click)="aceptarRecompensa()">Aceptar</button>
+        </div>
+    }
 </main>

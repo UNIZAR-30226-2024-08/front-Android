@@ -7,6 +7,9 @@ import { Subject } from 'rxjs';
 })
 export class SalasService {
   private socket: WebSocket | null = null;
+
+  private recompensaSubject = new Subject<any>();
+  mensajeRecompensa = this.recompensaSubject.asObservable();
   
   private mensajeSubject = new Subject<any>();
   mensaje = this.mensajeSubject.asObservable();
@@ -120,7 +123,10 @@ export class SalasService {
       } else{
         this.ngZone.run(() => this.router.navigate(['/juego/crear-sala-privada']));
       }
-    }else if(data.accion == 'abandonar' && usuarioActivo === data.jugador){
+    } else if(data.accion == 'premio'){
+      console.log('premio')
+      this.recompensaSubject.next(data);
+    } else if(data.accion == 'abandonar' && usuarioActivo === data.jugador){
       this.socket?.close(1000, 'El usuario ha abandonado la sala');
       console.log('sala abandonada')
       this.ngZone.run(() => this.router.navigate(['/menu']));
